@@ -1,0 +1,35 @@
+::placeholder {
+  @apply text-blue-300;
+  opacity: 1;
+}
+
+.field {
+  @apply text-xl text-primary w-full h-10 ml-2 bg-transparent outline-0;
+}
+
+.field-container {
+  @apply h-10 w-2/3 flex items-center border-solid border-b-2 border-primary;
+}
+
+.form {
+  @apply flex flex-1 text-primary bg-white border-blue-300 border-2 rounded-xl flex-col items-center h-full justify-evenly;
+}
+
+.input-container {
+  @apply flex rounded mt-10;
+  height: 50%;
+  width: 100%;
+}
+
+.login-button {
+  @apply py-3 px-12 bg-transparent outline-primary outline-2 outline text-primary rounded-xl font-bold transition duration-300 ease-in-out transform  hover:text-primary  hover:scale-125;
+  letter-spacing: 1px;
+}
+
+.login-icon {
+  @apply w-5 h-5 drop-shadow-lg;
+}
+
+.page {
+  @apply flex justify-center items-center ;
+}

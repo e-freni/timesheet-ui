@@ -1,1 +1,16 @@
-/* You can add global styles to this file, and also import other style files */
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@font-face {
+  font-family: "open-sans";
+  src: local("OpenSans"), url(./assets/fonts/open-sans.ttf) format("truetype");
+}
+
+body {
+  font-family: 'OpenSans', open-sans, sans-serif;
+}
+
+.page {
+  @apply h-screen bg-gray-50
+}
