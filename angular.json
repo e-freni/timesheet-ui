@@ -74,7 +74,8 @@
               "browserTarget": "timesheet-ui:build:production"
             },
             "development": {
-              "browserTarget": "timesheet-ui:build:development"
+              "browserTarget": "timesheet-ui:build:development",
+              "proxyConfig": "./proxy.conf.json"
             }
           },
           "defaultConfiguration": "development"

@@ -2,12 +2,15 @@
   <div class="flex flex-col h-full pt-20">
     <img alt="logo" class="justify-start" src="assets/img/logo_app.png">
     <div class="input-container" id="input-container">
-      <form class="form" id="credentials-form">
+      <form (submit)="login()" [formGroup]="loginForm" class="form" id="credentials-form">
         <div class="field-container" id="username-field">
           <svg class="login-icon" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
             <path clip-rule="evenodd" d="M10 9a3 3 0 100-6 3 3 0 000 6zm-7 9a7 7 0 1114 0H3z" fill-rule="evenodd"/>
           </svg>
-          <input class="field" placeholder="Username">
+          <input class="field"
+                 formControlName="username"
+                 placeholder="Username">
+          >
         </div>
         <div class="field-container" id="password-field">
           <svg class="login-icon" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
@@ -21,7 +24,11 @@
                   d="M10 10a1 1 0 011 1c0 2.236-.46 4.368-1.29 6.304a1 1 0 01-1.838-.789A13.952 13.952 0 009 11a1 1 0 011-1z"
                   fill-rule="evenodd"/>
           </svg>
-          <input [type]="hidePassword? 'password' : 'text'" class="field" placeholder="Password">
+          <input [type]="hidePassword? 'password' : 'text'"
+                 class="field"
+                 formControlName="password"
+                 placeholder="Password"
+          >
           <div (click)="hidePassword = false" *ngIf="hidePassword; else showPassword" id="hide-password">
             <svg class="h-6 w-6" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"
                  xmlns="http://www.w3.org/2000/svg">
@@ -44,7 +51,11 @@
             </div>
           </ng-template>
         </div>
-        <button class="login-button">Login</button>
+        <button [disabled]="this.loginForm.invalid"
+                class="login-button"
+                type="submit"
+        >Login
+        </button>
       </form>
     </div>
   </div>

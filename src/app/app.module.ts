@@ -7,7 +7,9 @@ import {AppRoutingModule} from "./app-routing.module";
 import {RouterModule} from "@angular/router";
 import {FormsModule, ReactiveFormsModule} from "@angular/forms";
 import {NgSelectModule} from '@ng-select/ng-select';
-import {HttpClientModule} from "@angular/common/http";
+import {HTTP_INTERCEPTORS, HttpClientModule} from "@angular/common/http";
+import {NgxWebstorageModule} from "ngx-webstorage";
+import {AuthInterceptor} from "app/interceptor/auth.interceptor.service";
 
 @NgModule({
   declarations: [
@@ -22,9 +24,19 @@ import {HttpClientModule} from "@angular/common/http";
     FormsModule,
     NgSelectModule,
     HttpClientModule,
-
+    NgxWebstorageModule.forRoot({
+      prefix: 'timesheet',
+      separator: '_'
+    }),
   ],
-  providers: [],
+  providers: [
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: AuthInterceptor,
+      multi: true,
+    },
+  ],
   bootstrap: [AppComponent]
 })
-export class AppModule { }
+export class AppModule {
+}

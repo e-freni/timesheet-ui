@@ -1,5 +1,10 @@
-import {Component, OnInit} from '@angular/core';
+import {Component} from '@angular/core';
 import {HttpClient} from "@angular/common/http";
+import {LocalStorageService} from "ngx-webstorage";
+import {FormBuilder} from "@angular/forms";
+import {JwtToken} from "app/models/jwt-token.model";
+import {JWT_STORAGE_KEY} from "app.constants";
+import {AccountService} from "app/services/account.service";
 
 
 @Component({
@@ -7,19 +12,33 @@ import {HttpClient} from "@angular/common/http";
   templateUrl: './login.component.html',
   styleUrls: ['./login.component.css'],
 })
-export class LoginComponent implements OnInit {
+export class LoginComponent {
   hidePassword: boolean = true;
+  loginForm = this.formBuilder.group({
+    username: [''],
+    password: [''],
+  });
 
-  constructor(private httpClient: HttpClient) {
+  constructor(
+    private formBuilder: FormBuilder,
+    private httpClient: HttpClient,
+    private localStorageService: LocalStorageService,
+    private accountService: AccountService,
+  ) {
   }
 
-  ngOnInit(): void {
-    // const db = getFirestore();
-    // const usersRef = collection(db, 'user');
-    // const users = query(usersRef);
+  login(): void {
+    this.accountService
+      .login({
+        username: this.loginForm.get('username')!.value,
+        password: this.loginForm.get('password')!.value
+      })
+      .subscribe({
+        next: (jwtToken: JwtToken) => {
+          this.localStorageService.store(JWT_STORAGE_KEY, jwtToken.token);
 
-    // this.httpClient
-    //   .get('http://localhost:5000')
-    //   .subscribe((users) => console.log(users));
+          this.accountService.load();
+        }
+      });
   }
 }
