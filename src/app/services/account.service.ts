@@ -6,6 +6,7 @@ import {LocalStorageService} from "ngx-webstorage";
 import {Account} from "app/models/account.model";
 import {Login} from "app/models/login.model";
 import {JwtToken} from "app/models/jwt-token.model";
+import {Router} from "@angular/router";
 
 @Injectable({
   providedIn: 'root'
@@ -17,7 +18,8 @@ export class AccountService {
 
   constructor(
     private httpClient: HttpClient,
-    private localStorageService: LocalStorageService
+    private localStorageService: LocalStorageService,
+    private router: Router,
   ) {
   }
 
@@ -35,6 +37,11 @@ export class AccountService {
   getAccount(): Account | null {
     return this.account;
   }
+
+  getObservableAccount(): Observable<Account | null> {
+    return this.accountSubject.asObservable();
+  }
+
 
   hasRole(role: string): boolean {
     return this.account?.authorities.includes(role);
@@ -55,5 +62,13 @@ export class AccountService {
         }
       );
   }
+
+  redirect() {
+    if (!this.account) {
+      return;
+    }
+    this.router.navigateByUrl("/dashboard");
+  }
+
 
 }

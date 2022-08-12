@@ -10,11 +10,17 @@ import {NgSelectModule} from '@ng-select/ng-select';
 import {HTTP_INTERCEPTORS, HttpClientModule} from "@angular/common/http";
 import {NgxWebstorageModule} from "ngx-webstorage";
 import {AuthInterceptor} from "app/interceptor/auth.interceptor.service";
+import {DashboardComponent} from './components/dashboard/dashboard.component';
+import {NavbarComponent} from './components/navbar/navbar.component';
+import {DropdownComponent} from './components/menu-elements/dropdown/dropdown.component';
 
 @NgModule({
   declarations: [
     AppComponent,
-    LoginComponent
+    LoginComponent,
+    DashboardComponent,
+    NavbarComponent,
+    DropdownComponent
   ],
   imports: [
     BrowserModule,
