@@ -13,6 +13,9 @@ import {AuthInterceptor} from "app/interceptor/auth.interceptor.service";
 import {DashboardComponent} from './components/dashboard/dashboard.component';
 import {NavbarComponent} from './components/navbar/navbar.component';
 import {DropdownComponent} from './components/menu-elements/dropdown/dropdown.component';
+import {LeftarrowComponent} from './components/menu-elements/icons/leftarrow/leftarrow.component';
+import {RightarrowComponent} from './components/menu-elements/icons/rightarrow/rightarrow.component';
+import {TimeComponent} from './components/menu-elements/icons/time/time.component';
 
 @NgModule({
   declarations: [
@@ -20,7 +23,10 @@ import {DropdownComponent} from './components/menu-elements/dropdown/dropdown.co
     LoginComponent,
     DashboardComponent,
     NavbarComponent,
-    DropdownComponent
+    DropdownComponent,
+    LeftarrowComponent,
+    RightarrowComponent,
+    TimeComponent
   ],
   imports: [
     BrowserModule,

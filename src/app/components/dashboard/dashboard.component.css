@@ -1,0 +1,3 @@
+.arrow-button {
+  @apply bg-primary text-white h-20 flex justify-center items-center
+}

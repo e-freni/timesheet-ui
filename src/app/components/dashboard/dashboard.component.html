@@ -1,3 +1,19 @@
-<div class="min-h-full bg-secondary px-10 py-5">
-  TODO!
+<div class="min-h-full px-10 py-8">
+  <div class="w-full" id="calendar-container">
+    <div class="w-full grid grid-cols-10" id="calendar-header">
+      <div (click)="previousMonth()" class="arrow-button col-start-1 col-end-3"
+           id="left-arrow">
+        <icon-leftarrow [height]="12" [width]="12"></icon-leftarrow>
+      </div>
+      <div class="flex justify-center items-center text-7xl col-start-3 col-end-9" id="month-year">
+        <h1>{{displayMonth() + " - " + displayYear()}}</h1>
+      </div>
+      <div (click)="nextMonth()" class="arrow-button col-start-9 col-end-11" id="right-arrow">
+        <icon-rightarrow [height]="12" [width]="12"></icon-rightarrow>
+      </div>
+    </div>
+    <div id="calendar-body">
+
+    </div>
+  </div>
 </div>
