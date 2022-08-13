@@ -1,3 +1,15 @@
 .arrow-button {
-  @apply bg-primary text-white h-20 flex justify-center items-center
+  @apply text-white bg-primary h-20 flex justify-center items-center
+}
+
+.not-working-day {
+  @apply py-4 text-red-300 bg-red-50 flex flex-col justify-center items-center rounded-xl
+}
+
+.working-day {
+  @apply py-4 bg-amber-50 flex flex-col justify-center items-center rounded-xl
+}
+
+.outer-months {
+  @apply py-4 text-gray-300  bg-gray-50 flex flex-col justify-center items-center rounded-xl
 }

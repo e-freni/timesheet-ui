@@ -12,8 +12,16 @@
         <icon-rightarrow [height]="12" [width]="12"></icon-rightarrow>
       </div>
     </div>
-    <div id="calendar-body">
-
+    <div class="grid grid-cols-7 gap-2 mt-5" id="calendar-body">
+      <div *ngFor="let day of getMonthDays()" id="calendar-day-cell">
+        <div [ngClass]="
+        day.outerMonths ? 'outer-months' :
+        isNotWorkingDay(day) ? 'not-working-day' :
+        'working-day'" id="single-day-cell">
+          <p>{{day.dayName}}</p>
+          <p>{{day.monthDayNumber}}</p>
+        </div>
+      </div>
     </div>
   </div>
 </div>
