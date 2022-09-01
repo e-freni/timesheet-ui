@@ -9,7 +9,13 @@ export class RightarrowComponent {
   @Input() height: number = 6
   @Input() width: number = 6
 
-  getClass() {
-    return "h-" + this.height + " " + "w-" + this.width;
+  get heightFromTailwindUnitsToPx() {
+    return this.height * 4;
   }
+
+  get widthFromTailwindUnitsToPx() {
+    return this.height * 4;
+  }
+
+
 }
