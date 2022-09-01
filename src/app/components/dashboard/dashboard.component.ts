@@ -1,36 +1,10 @@
 import {Component, OnInit} from '@angular/core';
 import {WeekDay} from "@angular/common";
-
-class Day {
-  monthDayNumber: number;
-  weekdayValue: WeekDay;
-  outerMonths: boolean = false;
-
-  constructor(monthDayNumber: number, dayValue: number, outerMonths?: boolean) {
-    this.monthDayNumber = monthDayNumber;
-    this.weekdayValue = dayValue;
-    this.outerMonths = outerMonths
-  }
-
-  get dayName(): string {
-    switch (this.weekdayValue) {
-      case WeekDay.Sunday:
-        return "Domenica"
-      case WeekDay.Monday:
-        return "Lunedì"
-      case WeekDay.Tuesday:
-        return "Martedì"
-      case WeekDay.Wednesday:
-        return "Mercoledì"
-      case WeekDay.Thursday:
-        return "Giovedì"
-      case WeekDay.Friday:
-        return "Venerdì"
-      case WeekDay.Saturday:
-        return "Sabato"
-    }
-  }
-}
+import {Day} from "app/models/day";
+import {Account} from "app/models/account.model";
+import {AccountService} from "app/services/account.service";
+import {WorkdayService} from "app/services/workday.service";
+import {Workday} from "app/models/workday.model";
 
 @Component({
   selector: 'app-dashboard',
@@ -41,7 +15,13 @@ export class DashboardComponent implements OnInit {
   date: Date;
   monthDays: Day[] = []
 
-  constructor() {
+  account: Account = null;
+  workdays: Workday[] = [];
+
+  constructor(
+    private accountService: AccountService,
+    private workdayService: WorkdayService,
+  ) {
   }
 
   private static getTodaysDate() {
@@ -53,27 +33,34 @@ export class DashboardComponent implements OnInit {
     return date;
   }
 
-  ngOnInit(): void {
-    this.date = DashboardComponent.getTodaysDate()
-  }
-
-  displayMonth(): string {
+  get month(): string {
     return new Intl.DateTimeFormat("it-IT", {month: "long"}).format(this.date).toUpperCase();
   }
 
-  displayYear(): string {
+  get year(): string {
     return new Intl.DateTimeFormat("it-IT", {year: "numeric"}).format(this.date).toUpperCase();
+  }
+
+  ngOnInit(): void {
+    this.accountService.getObservableAccount().subscribe((account: Account | null) => {
+      this.date = DashboardComponent.getTodaysDate()
+      this.account = account;
+      this.createMonthCalendar()
+      this.fetchWorkdays();
+    });
   }
 
   previousMonth() {
     this.date.setMonth(this.date.getMonth() - 1);
+    this.fetchWorkdays()
   }
 
   nextMonth() {
     this.date.setMonth(this.date.getMonth() + 1);
+    this.fetchWorkdays()
   }
 
-  getMonthDays() {
+  createMonthCalendar() {
     this.monthDays = [];
     const date = new Date(this.date.getFullYear(), this.date.getMonth(), 1);
 
@@ -84,6 +71,22 @@ export class DashboardComponent implements OnInit {
     }
     this.addOtherMonthsDays()
     return this.monthDays;
+  }
+
+  private fetchWorkdays() {
+    this.workdayService.findWorkdaysByUsername(this.account.username, this.monthBeginningDate(this.date.getMonth()), this.monthEndingDate(this.date.getMonth() + 1)).subscribe(workdays => {
+        this.workdays = workdays;
+        this.workdays.forEach(wd => this.monthDays.find(d => d.monthDayNumber == new Date(wd.date).getDate()).workday = wd);
+      }
+    )
+  }
+
+  private monthBeginningDate(month: number) {
+    return new Date(this.date.getFullYear(), month, 1).toLocaleDateString();
+  }
+
+  private monthEndingDate(month: number) {
+    return new Date(this.date.getFullYear(), month, 0).toLocaleDateString();
   }
 
   isNotWorkingDay(day: Day): boolean {

@@ -1,15 +1,23 @@
 .arrow-button {
-  @apply text-white bg-primary h-20 flex justify-center items-center
+  @apply text-white bg-primary h-20 flex justify-center items-center rounded-xl
+}
+
+.day-commons {
+  @apply py-4 justify-center items-center rounded-xl flex flex-col h-28
 }
 
 .not-working-day {
-  @apply py-4 text-red-300 bg-red-50 flex flex-col justify-center items-center rounded-xl
+  @apply day-commons text-red-300 bg-red-50
 }
 
 .working-day {
-  @apply py-4 bg-amber-50 flex flex-col justify-center items-center rounded-xl
+  @apply day-commons bg-amber-50
 }
 
-.outer-months {
-  @apply py-4 text-gray-300  bg-gray-50 flex flex-col justify-center items-center rounded-xl
+.outer-months-day {
+  @apply day-commons text-gray-300 bg-gray-50
+}
+
+.logged-day {
+  @apply day-commons bg-blue-50
 }
