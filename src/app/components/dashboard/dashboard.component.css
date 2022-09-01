@@ -7,11 +7,11 @@
 }
 
 .not-working-day {
-  @apply day-commons text-red-300 bg-red-50
+  @apply day-commons text-red-300 bg-red-50 cursor-pointer
 }
 
 .working-day {
-  @apply day-commons bg-amber-50
+  @apply day-commons bg-amber-50 cursor-pointer
 }
 
 .outer-months-day {
@@ -19,5 +19,5 @@
 }
 
 .logged-day {
-  @apply day-commons bg-blue-50
+  @apply day-commons bg-blue-50 cursor-pointer
 }

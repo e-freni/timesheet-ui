@@ -4,7 +4,7 @@ import {Workday} from "app/models/workday.model";
 export class Day {
   monthDayNumber: number;
   weekdayValue: WeekDay;
-  outerMonths: boolean = false; //TODO fix undefined
+  outerMonths: boolean = false;
   workday: Workday = null;
 
   constructor(monthDayNumber: number, dayValue: number, outerMonths?: boolean, workday?: Workday) {

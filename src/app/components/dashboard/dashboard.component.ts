@@ -1,10 +1,12 @@
 import {Component, OnInit} from '@angular/core';
+import {MatDialog} from '@angular/material/dialog';
 import {WeekDay} from "@angular/common";
 import {Day} from "app/models/day";
 import {Account} from "app/models/account.model";
 import {AccountService} from "app/services/account.service";
 import {WorkdayService} from "app/services/workday.service";
 import {Workday} from "app/models/workday.model";
+import {EditWorkdayComponent} from "app/components/dashboard/edit-workday/edit-workday.component";
 
 @Component({
   selector: 'app-dashboard',
@@ -19,6 +21,7 @@ export class DashboardComponent implements OnInit {
   workdays: Workday[] = [];
 
   constructor(
+    private matDialog: MatDialog,
     private accountService: AccountService,
     private workdayService: WorkdayService,
   ) {
@@ -52,12 +55,15 @@ export class DashboardComponent implements OnInit {
 
   previousMonth() {
     this.date.setMonth(this.date.getMonth() - 1);
+    this.createMonthCalendar()
     this.fetchWorkdays()
   }
 
   nextMonth() {
     this.date.setMonth(this.date.getMonth() + 1);
+    this.createMonthCalendar()
     this.fetchWorkdays()
+
   }
 
   createMonthCalendar() {
@@ -65,12 +71,11 @@ export class DashboardComponent implements OnInit {
     const date = new Date(this.date.getFullYear(), this.date.getMonth(), 1);
 
     while (date.getMonth() === this.date.getMonth()) {
-      const day = new Day(date.getDate(), date.getDay())
+      const day = new Day(date.getDate(), date.getDay(), false)
       this.monthDays.push(day)
       date.setDate(date.getDate() + 1);
     }
     this.addOtherMonthsDays()
-    return this.monthDays;
   }
 
   private fetchWorkdays() {
@@ -114,5 +119,19 @@ export class DashboardComponent implements OnInit {
         this.monthDays.push(new Day(now.getDate(), now.getDay(), true))
       }
     }
+  }
+
+  openDay(day: Day) {
+    if(day.outerMonths) {
+      return
+    }
+    this.matDialog.open(EditWorkdayComponent, {
+      panelClass: 'full-width-dialog',
+      disableClose: true,
+      hasBackdrop: true,
+      enterAnimationDuration: "100ms",
+      exitAnimationDuration: "100ms",
+      data: day
+    })
   }
 }
