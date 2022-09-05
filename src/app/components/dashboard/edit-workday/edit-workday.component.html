@@ -1,21 +1,81 @@
-<div>
-  <h1 class="text-center text-5xl">{{day.dayName}} {{day.monthDayNumber}} </h1>
-  <form (submit)="logWorkDay()" [formGroup]="workDayForm" class="form" id="credentials-form">
+<div class="min-h-[30rem] relative">
+  <div class="flex items-center">
+    <icon-close [height]="10" [width]="10" class="ml-auto cursor-pointer" (click)="close()"></icon-close>
+  </div>
+  <h1 class="text-center text-5xl pb-5">
+    {{calendarDate.getDate()}}/{{calendarDate.getMonth() + 1}}/{{calendarDate.getFullYear()}}</h1>
+  <div class="flex flex-col justify-between h-full" id="credentials-form">
+    <!-- Day type Selection -->
+    <ng-select [(ngModel)]="selectedWorkdayType"
+               [ngModelOptions]="{standalone: true}"
+               [appearance]="'outline'"
+               [clearable]="false"
+               (change)="setSelectedWorkdayType($event);">
+      <ng-option [value]="workingStatus">Giornata lavorativa</ng-option>
+      <ng-option [value]="holidayStatus">Ferie</ng-option>
+      <ng-option [value]="sicknessStatus">Malattia</ng-option>
+      <ng-option [value]="accidentAtWorkStatus">Infortunio</ng-option>
+    </ng-select>
 
-  </form>
-  <div id="btn-group" class="pt-5">
-    <button type="button"
-            class="inline-flex w-full justify-center rounded-md border border-transparent bg-primary px-4 py-2 text-base font-medium text-white shadow-sm hover:bg-blue-400 sm:ml-3 sm:w-auto sm:text-sm">
-      Registra giornata
-    </button>
-    <button type="button"
-            [disabled]="isCreation"
-            class="inline-flex w-full justify-center rounded-md border border-transparent bg-red-600 px-4 py-2 text-base font-medium text-white shadow-sm hover:bg-red-400 sm:ml-3 sm:w-auto sm:text-sm">
-      Cancella giornata
-    </button>
-    <button type="button"
-            class="mt-3 inline-flex w-full justify-center rounded-md border border-gray-300 bg-white px-4 py-2 text-base font-medium text-gray-700 shadow-sm hover:bg-gray-50 focus:outline-none sm:mt-0 sm:ml-3 sm:w-auto sm:text-sm"
-            (click)="close()">Indietro
-    </button>
+    <!-- normal day work log use cases -->
+    <div id="work-permit-hours" *ngIf="workPermitHours > 0" class="flex items-center pt-5">
+      <p class="w-8/12">Ore di permesso</p>
+      <input type="number" [defaultValue]="1" min="1" max="24" class="w-2/12 h-10 border text-center">
+      <button class="ml-auto text-red-400 hover:text-red-500" (click)="deleteHoursType('workPermitHours')">
+        <icon-delete [height]="10" [width]="10" class="w-1/12 h-10 ml-auto"></icon-delete>
+      </button>
+    </div>
+
+    <div id="work-extra-hours" *ngIf="extraHours > 0" class="flex items-center pt-5">
+      <p class="w-8/12">Ore di straordinario</p>
+      <input type="number" [defaultValue]="1" min="1" max="24" class="w-2/12 h-10 border text-center">
+      <button class="ml-auto text-red-400 hover:text-red-500" (click)="deleteHoursType('extraHours')">
+        <icon-delete [height]="10" [width]="10" class="w-1/12 h-10 ml-auto"></icon-delete>
+      </button>
+    </div>
+
+    <div id="work-furneral-permit-hours" *ngIf="funeralLeaveHours > 0" class="flex items-center pt-5">
+      <p class="w-8/12">Ore di permesso per lutto</p>
+      <input type="number" [defaultValue]="1" min="1" max="24" class="w-2/12 h-10 border text-center">
+      <button class="ml-auto text-red-400 hover:text-red-500" (click)="deleteHoursType('funeralLeaveHours')">
+        <icon-delete [height]="10" [width]="10" class="w-1/12 h-10 ml-auto"></icon-delete>
+      </button>
+    </div>
+
+    <!-- Add hours select -->
+    <ng-select *ngIf="!hourFilled" class="w-8/12"
+               [items]="showedHours"
+               (change)="setAddedHours($event)"
+    ></ng-select>
+    <!-- Add hours button -->
+    <div *ngIf="addedHours.length < 3 && checkWorkingDay() && hourFilled" class="flex w-full justify-center ">
+      <button (click)="addHours()"
+              [disabled]=""
+              class="flex items-center w-full justify-center rounded-md border border-transparent bg-green-600 px-4 py-2 text-base font-medium text-white shadow-sm hover:bg-green-400 sm:ml-3 sm:w-auto sm:text-sm">
+        <icon-plus></icon-plus>
+        <p class="pl-2">Aggiungi Ore</p>
+      </button>
+    </div>
+    <!-- Notes -->
+    <div class="flex flex-col pb-24">
+      <label>Note:</label>
+      <textarea class="border border-primary" [(ngModel)]="notes"></textarea>
+    </div>
+    <!-- Actions -->
+    <div class="grid grid-cols-3 gap-14 absolute bottom-0 left-0 right-0">
+      <button type="button"
+              class="submit-button">
+        Registra giornata
+      </button>
+      <button type="button"
+              [disabled]="isCreation"
+              class="delete-button">
+        Cancella giornata
+      </button>
+      <button type="button"
+              class="back-button"
+              (click)="close()">Indietro
+      </button>
+    </div>
   </div>
 </div>

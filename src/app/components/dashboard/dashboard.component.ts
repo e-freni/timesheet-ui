@@ -126,12 +126,12 @@ export class DashboardComponent implements OnInit {
       return
     }
     this.matDialog.open(EditWorkdayComponent, {
-      panelClass: 'full-width-dialog',
+      width: '50%',
       disableClose: true,
       hasBackdrop: true,
       enterAnimationDuration: "100ms",
       exitAnimationDuration: "100ms",
-      data: day
+      data: {day: day, calendarDate: new Date(this.date.getFullYear(), this.date.getMonth(), day.monthDayNumber, 0, 0, 0)}
     })
   }
 }

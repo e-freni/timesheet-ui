@@ -10,6 +10,8 @@ import {BrowserModule} from '@angular/platform-browser';
 import {BrowserAnimationsModule} from "@angular/platform-browser/animations";
 import {RouterModule} from "@angular/router";
 import {NgSelectModule} from '@ng-select/ng-select';
+import {DeleteComponent} from "app/components/menu-elements/icons/delete/delete.component";
+import {PlusComponent} from "app/components/menu-elements/icons/plus/plus.component";
 import {AuthInterceptor} from "app/interceptor/auth.interceptor.service";
 import {NgxWebstorageModule} from "ngx-webstorage";
 import {AppRoutingModule} from "./app-routing.module";
@@ -23,6 +25,7 @@ import {LeftarrowComponent} from './components/menu-elements/icons/leftarrow/lef
 import {RightarrowComponent} from './components/menu-elements/icons/rightarrow/rightarrow.component';
 import {TimeComponent} from './components/menu-elements/icons/time/time.component';
 import {NavbarComponent} from './components/navbar/navbar.component';
+import { CloseComponent } from './components/menu-elements/icons/close/close.component';
 
 @NgModule({
   declarations: [
@@ -34,7 +37,10 @@ import {NavbarComponent} from './components/navbar/navbar.component';
     LeftarrowComponent,
     RightarrowComponent,
     TimeComponent,
-    EditWorkdayComponent
+    EditWorkdayComponent,
+    CloseComponent,
+    PlusComponent,
+    DeleteComponent
   ],
   imports: [
     BrowserModule,
