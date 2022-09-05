@@ -19,4 +19,8 @@ export class WorkdayService {
     return this.httpClient.get<Workday[]>(SERVER_API_URL + '/workday', {params: params});
   }
 
+  findWorkdayById(id: number): Observable<Workday> {
+    return this.httpClient.get<Workday>(SERVER_API_URL + '/workday/' + id);
+  }
+
 }

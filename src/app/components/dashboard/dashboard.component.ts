@@ -7,6 +7,7 @@ import {AccountService} from "app/services/account.service";
 import {WorkdayService} from "app/services/workday.service";
 import {Workday} from "app/models/workday.model";
 import {EditWorkdayComponent} from "app/components/dashboard/edit-workday/edit-workday.component";
+import { getTodaysDate } from 'app/utils/date-utilities';
 
 @Component({
   selector: 'app-dashboard',
@@ -27,14 +28,6 @@ export class DashboardComponent implements OnInit {
   ) {
   }
 
-  private static getTodaysDate() {
-    let date = new Date();
-    date.setHours(0);
-    date.setMinutes(0);
-    date.setSeconds(0);
-    date.setMilliseconds(0);
-    return date;
-  }
 
   get month(): string {
     return new Intl.DateTimeFormat("it-IT", {month: "long"}).format(this.date).toUpperCase();
@@ -46,7 +39,7 @@ export class DashboardComponent implements OnInit {
 
   ngOnInit(): void {
     this.accountService.getObservableAccount().subscribe((account: Account | null) => {
-      this.date = DashboardComponent.getTodaysDate()
+      this.date = getTodaysDate()
       this.account = account;
       this.createMonthCalendar()
       this.fetchWorkdays();
