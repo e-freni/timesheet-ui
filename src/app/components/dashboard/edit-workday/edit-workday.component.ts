@@ -5,6 +5,11 @@ import {Day} from "app/models/day";
 import {WorkdayType} from "app/models/workday-type.model";
 
 
+export type SelectValue = {
+  value: string,
+  label: string,
+}
+
 @Component({
   selector: 'app-edit-workday',
   templateUrl: './edit-workday.component.html',
@@ -38,9 +43,9 @@ export class EditWorkdayComponent implements OnInit {
 
   isCreation: boolean = true;
 
-  addedHours: string[] = [];
+  addedHours: SelectValue[] = [];
 
-  addableHours: any[] = [
+  addableHours: SelectValue[] = [
     {value: 'workPermitHours', label: 'Ore di permesso'},
     {value: 'extraHours', label: 'Ore di straordinario'},
     {value: 'funeralLeaveHours', label: 'Ore di permesso per lutto'},
@@ -140,7 +145,6 @@ export class EditWorkdayComponent implements OnInit {
   }
 
   deleteHoursType(hoursType: string) {
-    // @ts-ignore //TODO define an object type for select
     this.addedHours = this.addedHours.filter(h => h.value !== hoursType);
     this.showedHours = this.addableHours.filter(h => !this.addedHours.includes(h))
 
@@ -162,12 +166,24 @@ export class EditWorkdayComponent implements OnInit {
     return this.workDayForm.get('workPermitHours')!.value;
   }
 
+  set workPermitHours(hours) {
+    this.workDayForm.patchValue({workPermitHours: hours});
+  }
+
   get extraHours() {
     return this.workDayForm.get('extraHours')!.value;
   }
 
+  set extraHours(hours) {
+    this.workDayForm.patchValue({extraHours: hours});
+  }
+
   get funeralLeaveHours() {
     return this.workDayForm.get('funeralLeaveHours')!.value;
+  }
+
+  set funeralLeaveHours(hours) {
+    this.workDayForm.patchValue({funeralLeaveHours: hours});
   }
 
   get notes() {

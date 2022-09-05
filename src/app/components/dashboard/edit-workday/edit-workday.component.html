@@ -20,7 +20,7 @@
     <!-- normal day work log use cases -->
     <div id="work-permit-hours" *ngIf="workPermitHours > 0" class="flex items-center pt-5">
       <p class="w-8/12">Ore di permesso</p>
-      <input type="number" [defaultValue]="1" min="1" max="24" class="w-2/12 h-10 border text-center">
+      <input type="number" [(ngModel)]="workPermitHours" [defaultValue]="1" min="1" max="24" class="w-2/12 h-10 border text-center">
       <button class="ml-auto text-red-400 hover:text-red-500" (click)="deleteHoursType('workPermitHours')">
         <icon-delete [height]="10" [width]="10" class="w-1/12 h-10 ml-auto"></icon-delete>
       </button>
@@ -28,7 +28,7 @@
 
     <div id="work-extra-hours" *ngIf="extraHours > 0" class="flex items-center pt-5">
       <p class="w-8/12">Ore di straordinario</p>
-      <input type="number" [defaultValue]="1" min="1" max="24" class="w-2/12 h-10 border text-center">
+      <input type="number" [(ngModel)]="extraHours" [defaultValue]="1" min="1" max="24" class="w-2/12 h-10 border text-center">
       <button class="ml-auto text-red-400 hover:text-red-500" (click)="deleteHoursType('extraHours')">
         <icon-delete [height]="10" [width]="10" class="w-1/12 h-10 ml-auto"></icon-delete>
       </button>
@@ -36,16 +36,17 @@
 
     <div id="work-furneral-permit-hours" *ngIf="funeralLeaveHours > 0" class="flex items-center pt-5">
       <p class="w-8/12">Ore di permesso per lutto</p>
-      <input type="number" [defaultValue]="1" min="1" max="24" class="w-2/12 h-10 border text-center">
+      <input type="number" [(ngModel)]="funeralLeaveHours" [defaultValue]="1" min="1" max="24" class="w-2/12 h-10 border text-center">
       <button class="ml-auto text-red-400 hover:text-red-500" (click)="deleteHoursType('funeralLeaveHours')">
         <icon-delete [height]="10" [width]="10" class="w-1/12 h-10 ml-auto"></icon-delete>
       </button>
     </div>
 
     <!-- Add hours select -->
-    <ng-select *ngIf="!hourFilled" class="w-8/12"
+    <ng-select id="hours-select" *ngIf="!hourFilled" class="w-full"
                [items]="showedHours"
                (change)="setAddedHours($event)"
+               [isOpen]="true"
     ></ng-select>
     <!-- Add hours button -->
     <div *ngIf="addedHours.length < 3 && checkWorkingDay() && hourFilled" class="flex w-full justify-center ">
@@ -53,7 +54,7 @@
               [disabled]=""
               class="flex items-center w-full justify-center rounded-md border border-transparent bg-green-600 px-4 py-2 text-base font-medium text-white shadow-sm hover:bg-green-400 sm:ml-3 sm:w-auto sm:text-sm">
         <icon-plus></icon-plus>
-        <p class="pl-2">Aggiungi Ore</p>
+        <p class="pl-2">Aggiungi altre ore</p>
       </button>
     </div>
     <!-- Notes -->
