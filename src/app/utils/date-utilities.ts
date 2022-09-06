@@ -7,7 +7,8 @@ export function getTodaysDate(): Date {
   return date;
 }
 
-export function getFormattedTodaysDate(): string {
+export function getFormattedDate(year: number, month: number, day:number): string {
   let date = getTodaysDate();
+  date.setFullYear(year, month, day)
   return date.toISOString().split('T')[0];
 }

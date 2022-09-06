@@ -28,7 +28,7 @@ export class DashboardComponent implements OnInit {
   ) {
   }
 
-
+  //FIXME bug su colorazione giorni se i numeri finali coincidono con gli outer del mese precedente
   get month(): string {
     return new Intl.DateTimeFormat("it-IT", {month: "long"}).format(this.date).toUpperCase();
   }
@@ -56,7 +56,6 @@ export class DashboardComponent implements OnInit {
     this.date.setMonth(this.date.getMonth() + 1);
     this.createMonthCalendar()
     this.fetchWorkdays()
-
   }
 
   createMonthCalendar() {
@@ -125,6 +124,13 @@ export class DashboardComponent implements OnInit {
       enterAnimationDuration: "100ms",
       exitAnimationDuration: "100ms",
       data: {day: day, calendarDate: new Date(this.date.getFullYear(), this.date.getMonth(), day.monthDayNumber, 0, 0, 0)}
+    }).afterClosed().subscribe((workDayHasBeenChanged) =>{
+      console.log(workDayHasBeenChanged);
+      if(workDayHasBeenChanged){
+        this.fetchWorkdays()
+      }
     })
+
+
   }
 }

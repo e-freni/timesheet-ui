@@ -7,7 +7,7 @@ import {WorkdayType} from "app/models/workday-type.model";
 import {Workday} from "app/models/workday.model";
 import {AccountService} from "app/services/account.service";
 import {WorkdayService} from "app/services/workday.service";
-import {getFormattedTodaysDate} from "app/utils/date-utilities";
+import {getFormattedDate} from "app/utils/date-utilities";
 
 
 export type SelectValue = {
@@ -83,7 +83,8 @@ export class EditWorkdayComponent implements OnInit {
         this.isCreation = false;
       }
       if (this.isCreation) {
-        this.workDayForm.patchValue({date: getFormattedTodaysDate()})
+        const dayDateZeroBased = this.calendarDate.getDate() + 1
+        this.workDayForm.patchValue({date: getFormattedDate(this.calendarDate.getFullYear(), this.calendarDate.getMonth(), dayDateZeroBased)})
         this.workDayForm.patchValue({usernameId: this.account.id})
         this.setSelectedWorkdayType(WorkdayType.WORKING);
       }
@@ -106,17 +107,42 @@ export class EditWorkdayComponent implements OnInit {
     });
   }
 
+  private createFromForm(): Workday {
+    return {
+      id: this.workDayForm.get(['id'])!.value,
+      date: this.workDayForm.get(['date'])!.value,
+      usernameId: this.workDayForm.get(['usernameId'])!.value,
+      workingHours: this.workDayForm.get(['workingHours'])!.value,
+      extraHours: this.workDayForm.get(['extraHours'])!.value,
+      workPermitHours: this.workDayForm.get(['workPermitHours'])!.value,
+      funeralLeaveHours: this.workDayForm.get(['funeralLeaveHours'])!.value,
+      holiday: this.workDayForm.get(['holiday'])!.value,
+      sick: this.workDayForm.get(['sick'])!.value,
+      accidentAtWork: this.workDayForm.get(['accidentAtWork'])!.value,
+      notes: this.workDayForm.get(['notes'])!.value,
+    };
+  }
+
   close() {
     this.dialogRef.close()
   }
 
   logWorkDay() {
     this.isSaving = true;
+    const workday = this.createFromForm();
 
-    //TODO call service
-    // save or create discrimination
-
+    if(this.isCreation){
+      this.workdayService.createWorkday(workday).subscribe(response => {
+        console.log('create', response)
+      })
+    } else {
+      this.workdayService.editWorkday(workday).subscribe(response => {
+        console.log('edit', response)
+      })
+    }
     this.isSaving = false;
+    const hasBeenChanged = true
+    this.dialogRef.close(hasBeenChanged)
   }
 
   deleteWorkDay() {
@@ -138,18 +164,21 @@ export class EditWorkdayComponent implements OnInit {
 
     this.refreshShowingArrays(hoursType);
 
+    const initHours = 1;
     if (hoursType.value == 'workPermitHours') {
-      this.workDayForm.patchValue({workPermitHours: 1});
+      this.workDayForm.patchValue({workPermitHours: initHours});
     }
 
     if (hoursType.value == 'extraHours') {
-      this.workDayForm.patchValue({extraHours: 1});
+      this.workDayForm.patchValue({extraHours: initHours});
     }
 
     if (hoursType.value == 'funeralLeaveHours') {
-      this.workDayForm.patchValue({funeralLeaveHours: 1});
+      console.log('funeral')
+      this.workDayForm.patchValue({funeralLeaveHours: initHours});
     }
 
+    this.decreaseWorkingHours()
     this.hourFilled = true
   }
 
@@ -197,6 +226,7 @@ export class EditWorkdayComponent implements OnInit {
     this.showedHours = this.addableHours.filter(h1 => !this.addedHours.find(h2 => h1.id == h2.id))
 
     if (hoursType == 'workPermitHours') {
+      this.correctWorkingHours('workPermitHours');
       this.workDayForm.patchValue({workPermitHours: 0});
     }
 
@@ -205,11 +235,16 @@ export class EditWorkdayComponent implements OnInit {
     }
 
     if (hoursType == 'funeralLeaveHours') {
+      this.correctWorkingHours('funeralLeaveHours');
       this.workDayForm.patchValue({funeralLeaveHours: 0});
     }
 
   }
 
+
+
+
+  //TODO sostituire con form
   get workPermitHours() {
     return this.workDayForm.get('workPermitHours')!.value;
   }
@@ -269,7 +304,17 @@ export class EditWorkdayComponent implements OnInit {
 
   }
 
-  decreaseWorkingHours(value: number) {
-    this.workDayForm.patchValue({workingHours: (8 - value)});
+  private correctWorkingHours(fieldName: string) {
+    const deletedHours = this.workDayForm.get(fieldName)!.value;
+    let workingHours = this.workDayForm.get('workingHours')!.value;
+    workingHours = workingHours + deletedHours
+    this.workDayForm.patchValue({workingHours: workingHours});
+  }
+
+  decreaseWorkingHours() {
+    const permitHours = this.workDayForm.get('workPermitHours')!.value;
+    const funeralLeaveHours = this.workDayForm.get('funeralLeaveHours')!.value;
+    this.workDayForm.patchValue({workingHours: (8 - (permitHours + funeralLeaveHours))});
+    console.log( this.workDayForm.get('workingHours')!.value)
   }
 }

@@ -1,6 +1,6 @@
 import {Injectable} from '@angular/core';
 import {Observable} from "rxjs";
-import {HttpClient} from "@angular/common/http";
+import {HttpClient, HttpResponse} from "@angular/common/http";
 import {SERVER_API_URL} from "app.constants";
 import {Workday} from "app/models/workday.model";
 
@@ -21,6 +21,14 @@ export class WorkdayService {
 
   findWorkdayById(id: number): Observable<Workday> {
     return this.httpClient.get<Workday>(SERVER_API_URL + '/workday/' + id);
+  }
+
+  createWorkday(workday: Workday): Observable<HttpResponse<Workday>> {
+    return this.httpClient.post<Workday>(SERVER_API_URL + '/workday/new', workday, {observe: 'response'});
+  }
+
+  editWorkday(workday: Workday): Observable<HttpResponse<Workday>> {
+    return this.httpClient.put<Workday>(SERVER_API_URL + '/workday/edit', workday, {observe: 'response'});
   }
 
 }

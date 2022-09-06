@@ -20,7 +20,7 @@
     <!-- normal day work log use cases -->
     <div *ngIf="workPermitHours || workPermitHours == null" class="flex items-center pt-5">
       <p class="w-8/12">Ore di permesso</p>
-      <input type="number"  [(ngModel)]="workPermitHours" (ngModelChange)="decreaseWorkingHours($event)" [defaultValue]="1" min="1" max="8" class="w-2/12 h-10 border text-center">
+      <input type="number"  [(ngModel)]="workPermitHours" (ngModelChange)="decreaseWorkingHours()" [defaultValue]="1" min="1" max="8" class="w-2/12 h-10 border text-center">
       <button class="ml-auto text-red-400 hover:text-red-500" (click)="trashHoursType('workPermitHours')">
         <icon-delete [height]="10" [width]="10" class="w-1/12 h-10 ml-auto"></icon-delete>
       </button>
@@ -36,7 +36,7 @@
 
     <div *ngIf="funeralLeaveHours || funeralLeaveHours == null" class="flex items-center pt-5">
       <p class="w-8/12">Ore di permesso per lutto</p>
-      <input type="number" [(ngModel)]="funeralLeaveHours" (ngModelChange)="decreaseWorkingHours($event)" [defaultValue]="1" min="1" max="8" class="w-2/12 h-10 border text-center">
+      <input type="number" [(ngModel)]="funeralLeaveHours" (ngModelChange)="decreaseWorkingHours()" [defaultValue]="1" min="1" max="8" class="w-2/12 h-10 border text-center">
       <button class="ml-auto text-red-400 hover:text-red-500" (click)="trashHoursType('funeralLeaveHours')">
         <icon-delete [height]="10" [width]="10" class="w-1/12 h-10 ml-auto"></icon-delete>
       </button>
