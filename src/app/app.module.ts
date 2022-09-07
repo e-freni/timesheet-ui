@@ -26,6 +26,7 @@ import {RightarrowComponent} from './components/menu-elements/icons/rightarrow/r
 import {TimeComponent} from './components/menu-elements/icons/time/time.component';
 import {NavbarComponent} from './components/navbar/navbar.component';
 import { CloseComponent } from './components/menu-elements/icons/close/close.component';
+import { SpinningCircleComponent } from './components/menu-elements/icons/spinning-circle/spinning-circle.component';
 
 @NgModule({
   declarations: [
@@ -40,7 +41,8 @@ import { CloseComponent } from './components/menu-elements/icons/close/close.com
     EditWorkdayComponent,
     CloseComponent,
     PlusComponent,
-    DeleteComponent
+    DeleteComponent,
+    SpinningCircleComponent
   ],
   imports: [
     BrowserModule,

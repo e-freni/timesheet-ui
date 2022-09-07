@@ -1,6 +1,6 @@
 <div class="min-h-[30rem] relative">
   <div class="flex items-center">
-    <icon-close [height]="10" [width]="10" class="ml-auto cursor-pointer" (click)="close()"></icon-close>
+    <icon-close [height]="10" [width]="10" class="ml-auto cursor-pointer" (click)="back()"></icon-close>
   </div>
   <h1 class="text-center text-5xl pb-5">
     {{calendarDate.getDate()}}/{{calendarDate.getMonth() + 1}}/{{calendarDate.getFullYear()}}</h1>
@@ -66,13 +66,14 @@
     <div class="grid grid-cols-3 gap-14 absolute bottom-0 left-0 right-0">
       <button type="button"
               class="submit-button"
-              [disabled]="this.workDayForm.invalid || isSaving"
+              [disabled]="this.workDayForm.invalid || isLoading"
               (click)="logWorkDay()"
       >
         Registra giornata
+      <app-spinning-circle *ngIf="isLoading" [color]="'blue'"></app-spinning-circle>
       </button>
       <button type="button"
-              [disabled]="isCreation || isSaving"
+              [disabled]="isCreation || isLoading"
               class="delete-button"
               (click)="deleteWorkDay()"
       >
@@ -80,7 +81,7 @@
       </button>
       <button type="button"
               class="back-button"
-              (click)="close()">Indietro
+              (click)="back()">Indietro
       </button>
     </div>
   </div>

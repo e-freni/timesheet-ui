@@ -28,7 +28,7 @@ export class EditWorkdayComponent implements OnInit {
   public calendarDate: Date
   public selectedWorkdayType: WorkdayType = null;
   isCreation: boolean = true;
-  isSaving: boolean = false;
+  isLoading: boolean = false;
   account: Account = null;
 
   public workingStatus: string = WorkdayType.WORKING
@@ -123,34 +123,38 @@ export class EditWorkdayComponent implements OnInit {
     };
   }
 
-  close() {
+  back() {
     this.dialogRef.close()
   }
 
-  logWorkDay() {
-    this.isSaving = true;
-    const workday = this.createFromForm();
-
-    if(this.isCreation){
-      this.workdayService.createWorkday(workday).subscribe(response => {
-        console.log('create', response)
-      })
-    } else {
-      this.workdayService.editWorkday(workday).subscribe(response => {
-        console.log('edit', response)
-      })
-    }
-    this.isSaving = false;
+  close() {
     const hasBeenChanged = true
     this.dialogRef.close(hasBeenChanged)
   }
 
+  logWorkDay() {
+    this.isLoading = true;
+    const workday = this.createFromForm();
+
+    if(this.isCreation){
+      this.workdayService.createWorkday(workday).subscribe(() => {
+        this.isLoading = false;
+        this.close()
+      })
+    } else {
+      this.workdayService.editWorkday(workday).subscribe(() => {
+        this.isLoading = false;
+        this.close()
+      })
+    }
+  }
+
   deleteWorkDay() {
-    this.isSaving = true;
+    this.isLoading = true;
 
     //TODO call service
 
-    this.isSaving = false;
+    this.isLoading = false;
   }
 
   addHours() {
