@@ -129,6 +129,7 @@ export class DashboardComponent implements OnInit {
       }
     }).afterClosed().subscribe((workDayHasBeenChanged) => {
       if (workDayHasBeenChanged) {
+        this.createMonthCalendar()
         this.fetchWorkdays()
       }
     })

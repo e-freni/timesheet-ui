@@ -128,6 +128,7 @@ export class EditWorkdayComponent implements OnInit {
   }
 
   close() {
+    this.isLoading = false
     const hasBeenChanged = true
     this.dialogRef.close(hasBeenChanged)
   }
@@ -138,32 +139,29 @@ export class EditWorkdayComponent implements OnInit {
 
     if(this.isCreation){
       this.workdayService.createWorkday(workday).subscribe(() => {
-        this.isLoading = false;
-        this.close()
+        this.close();
       })
     } else {
       this.workdayService.editWorkday(workday).subscribe(() => {
-        this.isLoading = false;
-        this.close()
+        this.close();
       })
     }
   }
 
   deleteWorkDay() {
     this.isLoading = true;
-
-    //TODO call service
-
-    this.isLoading = false;
+    this.workdayService.deleteWorkday(this.workDayForm.get(['id'])!.value, this.account.id).subscribe(() => {
+      this.close();
+    })
   }
 
   addHours() {
-    this.hourFilled = false
+    this.hourFilled = false;
   }
 
   setAddedHours(hoursType: any) {
     if (!hoursType) {
-      return
+      return;
     }
 
     this.refreshShowingArrays(hoursType);
@@ -178,12 +176,11 @@ export class EditWorkdayComponent implements OnInit {
     }
 
     if (hoursType.value == 'funeralLeaveHours') {
-      console.log('funeral')
       this.workDayForm.patchValue({funeralLeaveHours: initHours});
     }
 
     this.decreaseWorkingHours()
-    this.hourFilled = true
+    this.hourFilled = true;
   }
 
   private refreshShowingArrays(hoursType: SelectValue) {
@@ -198,8 +195,8 @@ export class EditWorkdayComponent implements OnInit {
   //TODO semplificare struttura codice che ora è poco leggibile
   setSelectedWorkdayType(selectedWorkdayType: WorkdayType) {
     this.addedHours = [];
-    this.showedHours = this.addableHours.filter(h => !this.addedHours.includes(h))
-    this.hourFilled = true
+    this.showedHours = this.addableHours.filter(h => !this.addedHours.includes(h));
+    this.hourFilled = true;
     this.selectedWorkdayType = selectedWorkdayType;
 
     this.workDayForm.patchValue({workingHours: 0});
@@ -227,7 +224,7 @@ export class EditWorkdayComponent implements OnInit {
 
   trashHoursType(hoursType: string) {
     this.addedHours = this.addedHours.filter(h => h.value !== hoursType);
-    this.showedHours = this.addableHours.filter(h1 => !this.addedHours.find(h2 => h1.id == h2.id))
+    this.showedHours = this.addableHours.filter(h1 => !this.addedHours.find(h2 => h1.id == h2.id));
 
     if (hoursType == 'workPermitHours') {
       this.correctWorkingHours('workPermitHours');
@@ -242,7 +239,6 @@ export class EditWorkdayComponent implements OnInit {
       this.correctWorkingHours('funeralLeaveHours');
       this.workDayForm.patchValue({funeralLeaveHours: 0});
     }
-
   }
 
 
@@ -283,35 +279,33 @@ export class EditWorkdayComponent implements OnInit {
 
   private formTemplateFilling(workday: Workday) {
     if (!workday.holiday && !workday.sick && !workday.accidentAtWork) {
-      this.selectedWorkdayType = WorkdayType.WORKING
+      this.selectedWorkdayType = WorkdayType.WORKING;
     }
     if (workday.holiday) {
-      this.selectedWorkdayType = WorkdayType.HOLIDAY
+      this.selectedWorkdayType = WorkdayType.HOLIDAY;
     }
     if (workday.sick) {
-      this.selectedWorkdayType = WorkdayType.SICKNESS
+      this.selectedWorkdayType = WorkdayType.SICKNESS;
     }
     if (workday.accidentAtWork) {
-      this.selectedWorkdayType = WorkdayType.ACCIDENT_AT_WORK
+      this.selectedWorkdayType = WorkdayType.ACCIDENT_AT_WORK;
     }
     if (workday.workPermitHours > 0) {
-      this.addedHours.push({id: 1, value: 'workPermitHours', label: 'Ore di permesso'})
+      this.addedHours.push({id: 1, value: 'workPermitHours', label: 'Ore di permesso'});
     }
     if (workday.extraHours > 0) {
-      this.addedHours.push({id: 2, value: 'extraHours', label: 'Ore di straordinario'})
+      this.addedHours.push({id: 2, value: 'extraHours', label: 'Ore di straordinario'});
     }
     if (workday.funeralLeaveHours > 0) {
-      this.addedHours.push({id: 3, value: 'funeralLeaveHours', label: 'Ore di permesso per lutto'})
+      this.addedHours.push({id: 3, value: 'funeralLeaveHours', label: 'Ore di permesso per lutto'});
     }
-
-    this.showedHours = this.addableHours.filter(h1 => !this.addedHours.find(h2 => h1.id == h2.id))
-
+    this.showedHours = this.addableHours.filter(h1 => !this.addedHours.find(h2 => h1.id == h2.id));
   }
 
   private correctWorkingHours(fieldName: string) {
     const deletedHours = this.workDayForm.get(fieldName)!.value;
     let workingHours = this.workDayForm.get('workingHours')!.value;
-    workingHours = workingHours + deletedHours
+    workingHours = workingHours + deletedHours;
     this.workDayForm.patchValue({workingHours: workingHours});
   }
 
@@ -319,6 +313,5 @@ export class EditWorkdayComponent implements OnInit {
     const permitHours = this.workDayForm.get('workPermitHours')!.value;
     const funeralLeaveHours = this.workDayForm.get('funeralLeaveHours')!.value;
     this.workDayForm.patchValue({workingHours: (8 - (permitHours + funeralLeaveHours))});
-    console.log( this.workDayForm.get('workingHours')!.value)
   }
 }

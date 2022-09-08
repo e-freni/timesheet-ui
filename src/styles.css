@@ -17,3 +17,7 @@ body {
 .page {
   @apply h-screen bg-gray-50
 }
+
+.mat-tooltip.tooltip {
+  @apply text-2xl font-sans
+}

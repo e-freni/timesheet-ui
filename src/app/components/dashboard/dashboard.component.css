@@ -3,7 +3,7 @@
 }
 
 .day-commons {
-  @apply py-4 justify-center items-center rounded-xl flex flex-col h-28
+  @apply py-1  justify-center items-center rounded-xl flex flex-col h-[10rem]
 }
 
 .not-working-day {
@@ -20,4 +20,8 @@
 
 .logged-day {
   @apply day-commons bg-blue-50 cursor-pointer
+}
+
+.day-info-panel {
+  @apply flex flex-col px-2
 }
