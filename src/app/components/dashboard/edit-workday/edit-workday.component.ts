@@ -39,7 +39,7 @@ export class EditWorkdayComponent implements OnInit {
   workDayForm = this.formBuilder.group({
     id: null,
     date: null,
-    usernameId: null,
+    userId: null,
     workingHours: [0, [Validators.required, Validators.min(0), Validators.max(8)]],
     extraHours: [0, [Validators.required, Validators.min(0), Validators.max(24)]],
     workPermitHours: [0, [Validators.required, Validators.min(0), Validators.max(8)]],
@@ -85,7 +85,7 @@ export class EditWorkdayComponent implements OnInit {
       if (this.isCreation) {
         const dayDateZeroBased = this.calendarDate.getDate() + 1
         this.workDayForm.patchValue({date: getFormattedDate(this.calendarDate.getFullYear(), this.calendarDate.getMonth(), dayDateZeroBased)})
-        this.workDayForm.patchValue({usernameId: this.account.id})
+        this.workDayForm.patchValue({userId: this.account.id})
         this.setSelectedWorkdayType(WorkdayType.WORKING);
       }
     });
@@ -95,7 +95,7 @@ export class EditWorkdayComponent implements OnInit {
     this.workDayForm.patchValue({
       id: workday.id,
       date: workday.date,
-      usernameId: workday.usernameId,
+      userId: workday.userId,
       workingHours: workday.workingHours,
       extraHours: workday.extraHours,
       workPermitHours: workday.workPermitHours,
@@ -111,7 +111,7 @@ export class EditWorkdayComponent implements OnInit {
     return {
       id: this.workDayForm.get(['id'])!.value,
       date: this.workDayForm.get(['date'])!.value,
-      usernameId: this.workDayForm.get(['usernameId'])!.value,
+      userId: this.workDayForm.get(['userId'])!.value,
       workingHours: this.workDayForm.get(['workingHours'])!.value,
       extraHours: this.workDayForm.get(['extraHours'])!.value,
       workPermitHours: this.workDayForm.get(['workPermitHours'])!.value,

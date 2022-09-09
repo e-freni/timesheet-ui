@@ -1,7 +1,7 @@
 export type Workday = {
   id?: number,
   date: Date,
-  usernameId: number,
+  userId: number,
   workingHours: number,
   extraHours: number,
   workPermitHours: number,

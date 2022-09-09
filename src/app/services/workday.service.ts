@@ -31,8 +31,8 @@ export class WorkdayService {
     return this.httpClient.put<Workday>(`${SERVER_API_URL}/workday/edit`, workday, {observe: 'response'});
   }
 
-  deleteWorkday(workdayId: number, usernameId: number): Observable<HttpResponse<{}>> {
-    return this.httpClient.delete(`${SERVER_API_URL}/workday/${usernameId}/delete/${workdayId}`, {observe: 'response'});
+  deleteWorkday(workdayId: number, userId: number): Observable<HttpResponse<{}>> {
+    return this.httpClient.delete(`${SERVER_API_URL}/workday/${userId}/delete/${workdayId}`, {observe: 'response'});
   }
 
 }
