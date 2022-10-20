@@ -44,7 +44,7 @@ export class AccountService {
 
 
   hasRole(role: string): boolean {
-    return this.account?.authorities.includes(role);
+    return this.account?.role.includes(role);
   }
 
   public load(): void {

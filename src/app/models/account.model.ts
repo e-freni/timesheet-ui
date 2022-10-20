@@ -5,10 +5,10 @@ export type Account = {
   email: string,
   username: string,
   password?: string,
-  authorities: string[],
+  role: string[],
 }
 
 export const Authorities = {
-  ADMIN: 'ROLE_ADMINISTRATOR',
-  USER: 'ROLE_USER',
+  ADMINISTRATOR: 'ADMINISTRATOR',
+  USER: 'USER',
 };
