@@ -14,6 +14,10 @@ import {SickComponent} from "app/components/menu-elements/icons/sick/sick.compon
 import {SpinningCircleComponent} from "app/components/menu-elements/icons/spinning-circle/spinning-circle.component";
 import {TimeComponent} from "app/components/menu-elements/icons/time/time.component";
 import {WorkComponent} from "app/components/menu-elements/icons/work/work.component";
+import {ShareComponent} from "app/components/menu-elements/icons/share/share.component";
+import {ExportComponent} from "app/components/menu-elements/icons/export/export.component";
+import {AnalyticsComponent} from "app/components/menu-elements/icons/analytics/analytics.component";
+import {EditDataComponent} from "app/components/menu-elements/icons/edit-data/edit-data.component";
 
 
 @NgModule({
@@ -21,13 +25,17 @@ import {WorkComponent} from "app/components/menu-elements/icons/work/work.compon
     AccidentAtWorkComponent,
     CloseComponent,
     DeleteComponent,
+    AnalyticsComponent,
+    EditDataComponent,
     ExtraComponent,
+    ExportComponent,
     FuneralLeaveComponent,
     HolidayComponent,
     LeftarrowComponent,
     PermissionComponent,
     PlusComponent,
     RightarrowComponent,
+    ShareComponent,
     SickComponent,
     SpinningCircleComponent,
     TimeComponent,
@@ -37,13 +45,17 @@ import {WorkComponent} from "app/components/menu-elements/icons/work/work.compon
     AccidentAtWorkComponent,
     CloseComponent,
     DeleteComponent,
+    AnalyticsComponent,
+    EditDataComponent,
     ExtraComponent,
+    ExportComponent,
     FuneralLeaveComponent,
     HolidayComponent,
     LeftarrowComponent,
     PermissionComponent,
     PlusComponent,
     RightarrowComponent,
+    ShareComponent,
     SickComponent,
     SpinningCircleComponent,
     TimeComponent,

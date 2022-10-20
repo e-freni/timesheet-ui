@@ -1,6 +1,6 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { EditWorkdayComponent } from 'app/components/dashboard/edit-workday/edit-workday.component';
+import { EditWorkdayComponent } from 'app/pages/dashboard/edit-workday/edit-workday.component';
 
 describe('EditWorkdayComponent', () => {
   let component: EditWorkdayComponent;

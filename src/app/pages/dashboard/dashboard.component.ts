@@ -6,8 +6,9 @@ import {Account} from "app/models/account.model";
 import {AccountService} from "app/services/account.service";
 import {WorkdayService} from "app/services/workday.service";
 import {Workday} from "app/models/workday.model";
-import {EditWorkdayComponent} from "app/components/dashboard/edit-workday/edit-workday.component";
+import {EditWorkdayComponent} from "app/pages/dashboard/edit-workday/edit-workday.component";
 import {getTodaysDate} from 'app/utils/date-utilities';
+import * as FileSaver from "file-saver";
 
 @Component({
   selector: 'app-dashboard',
@@ -135,5 +136,21 @@ export class DashboardComponent implements OnInit {
     })
 
 
+  }
+
+  exportToExcel(): void {
+    const year = this.date.getFullYear();
+    const month = this.date.getMonth() + 1;
+    this.workdayService.exportWorkdayMonth(year, month, this.account.id).subscribe(blob => {
+      FileSaver.saveAs(blob, `${this.account.lastName}_foglio_ore_${this.year}_${this.month}.xlsx`, {autoBom: false});
+    });
+  }
+
+  goToEdit() {
+    console.log("get back to edit")
+  }
+
+  goToStatistics() {
+    console.log("go to statistics")
   }
 }

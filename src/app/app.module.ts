@@ -11,15 +11,15 @@ import {BrowserModule} from '@angular/platform-browser';
 import {BrowserAnimationsModule} from "@angular/platform-browser/animations";
 import {RouterModule} from "@angular/router";
 import {NgSelectModule} from '@ng-select/ng-select';
-import {EditWorkdayComponent} from "app/components/dashboard/edit-workday/edit-workday.component";
+import {EditWorkdayComponent} from "app/pages/dashboard/edit-workday/edit-workday.component";
 import {IconsModule} from "app/components/menu-elements/icons/icons.module";
 import {AuthInterceptor} from "app/interceptor/auth.interceptor.service";
 import {NgxWebstorageModule} from "ngx-webstorage";
 import {AppRoutingModule} from "./app-routing.module";
 
 import {AppComponent} from './app.component';
-import {DashboardComponent} from './components/dashboard/dashboard.component';
-import {LoginComponent} from "./components/login/login.component";
+import {DashboardComponent} from './pages/dashboard/dashboard.component';
+import {LoginComponent} from "./pages/login/login.component";
 import {DropdownComponent} from './components/menu-elements/dropdown/dropdown.component';
 import {NavbarComponent} from './components/navbar/navbar.component';
 

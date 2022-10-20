@@ -1,7 +1,7 @@
 <div class="min-h-full px-10 pt-8">
   <div class="w-full" id="calendar-container">
     <!-- Calendar header -->
-    <div class="w-full grid grid-cols-10 pb-10">
+    <div class="w-full grid grid-cols-10 pb-2">
       <div (click)="previousMonth()" class="arrow-button col-start-1 col-end-3"
            id="left-arrow">
         <icon-leftarrow [height]="12" [width]="12"></icon-leftarrow>
@@ -13,6 +13,14 @@
       <div (click)="nextMonth()" class="arrow-button col-start-9 col-end-11" id="right-arrow">
         <icon-rightarrow [height]="12" [width]="12"></icon-rightarrow>
       </div>
+
+    </div>
+    <div class="flex w-full items-center justify-center pb-4 gap-x-5">
+      <button (click)="goToEdit()"><icon-edit-data [height]="6" [width]="6"></icon-edit-data></button>
+      <button (click)="goToStatistics()"><icon-analytics [height]="6" [width]="6"></icon-analytics></button>
+      <button (click)="exportToExcel()"><icon-export [height]="6" [width]="6"></icon-export></button>
+      <button><icon-share [height]="6" [width]="6"></icon-share></button>
+
     </div>
     <!-- Calendar cells -->
     <div class="grid grid-cols-7 gap-2" id="calendar-body">

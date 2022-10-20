@@ -35,4 +35,9 @@ export class WorkdayService {
     return this.httpClient.delete(`${SERVER_API_URL}/workday/${userId}/delete/${workdayId}`, {observe: 'response'});
   }
 
+  exportWorkdayMonth(year: number, month:number, userId: number): Observable<Blob> {
+    const params = {year: year, month: month}
+    return this.httpClient.get(`${SERVER_API_URL}/workday/${userId}/export`, {params: params, responseType: 'blob'});
+  }
+
 }
