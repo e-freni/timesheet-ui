@@ -22,15 +22,18 @@ import {DashboardComponent} from './pages/dashboard/dashboard.component';
 import {LoginComponent} from "./pages/login/login.component";
 import {DropdownComponent} from './components/menu-elements/dropdown/dropdown.component';
 import {NavbarComponent} from './components/navbar/navbar.component';
+import { AlertComponent } from './components/alert/alert.component';
 
 @NgModule({
   declarations: [
+    AlertComponent,
     AppComponent,
     LoginComponent,
     DashboardComponent,
     NavbarComponent,
     DropdownComponent,
-    EditWorkdayComponent
+    EditWorkdayComponent,
+    AlertComponent
   ],
     imports: [
         BrowserModule,

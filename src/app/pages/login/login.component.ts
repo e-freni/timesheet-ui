@@ -5,6 +5,7 @@ import {FormBuilder} from "@angular/forms";
 import {JwtToken} from "app/models/jwt-token.model";
 import {JWT_STORAGE_KEY} from "app.constants";
 import {AccountService} from "app/services/account.service";
+import {AlertService} from "app/services/alert.service";
 
 
 @Component({
@@ -24,6 +25,7 @@ export class LoginComponent {
     private httpClient: HttpClient,
     private localStorageService: LocalStorageService,
     private accountService: AccountService,
+    private alertService: AlertService,
   ) {
   }
 
@@ -38,6 +40,11 @@ export class LoginComponent {
           this.localStorageService.store(JWT_STORAGE_KEY, jwtToken.token);
 
           this.accountService.load();
+        }, error: (res) => {
+          if (res.status == 504)
+            this.alertService.addAlert({type: 'alert', msg: "Server non trovato. Il backend è online e raggiungibile?"});
+          if (res.status == 401)
+            this.alertService.addAlert({type: 'alert', msg: "Login non riuscita. Utente e password sono corretti?"});
         }
       });
   }

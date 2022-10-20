@@ -71,12 +71,14 @@ export class DashboardComponent implements OnInit {
   }
 
   private fetchWorkdays() {
-    this.workdayService.findWorkdaysByUsername(this.account.username, this.monthBeginningDate(this.date.getMonth()), this.monthEndingDate(this.date.getMonth() + 1)).subscribe(workdays => {
-        this.workdays = workdays;
-        const onlyWorkDays = this.monthDays.filter(d => !d.outerMonths)
-        this.workdays.forEach(wd => onlyWorkDays.find(d => d.monthDayNumber == new Date(wd.date).getDate()).workday = wd);
-      }
-    )
+    if (this.account) {
+      this.workdayService.findWorkdaysByUsername(this.account.username, this.monthBeginningDate(this.date.getMonth()), this.monthEndingDate(this.date.getMonth() + 1)).subscribe(workdays => {
+          this.workdays = workdays;
+          const onlyWorkDays = this.monthDays.filter(d => !d.outerMonths)
+          this.workdays.forEach(wd => onlyWorkDays.find(d => d.monthDayNumber == new Date(wd.date).getDate()).workday = wd);
+        }
+      )
+    }
   }
 
   private monthBeginningDate(month: number) {
