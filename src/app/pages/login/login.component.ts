@@ -1,7 +1,7 @@
 import {Component} from '@angular/core';
 import {HttpClient} from "@angular/common/http";
 import {LocalStorageService} from "ngx-webstorage";
-import {FormBuilder} from "@angular/forms";
+import {FormBuilder, Validators} from "@angular/forms";
 import {JwtToken} from "app/models/jwt-token.model";
 import {JWT_STORAGE_KEY} from "app.constants";
 import {AccountService} from "app/services/account.service";
@@ -16,8 +16,8 @@ import {AlertService} from "app/services/alert.service";
 export class LoginComponent {
   hidePassword: boolean = true;
   loginForm = this.formBuilder.group({
-    username: [''],
-    password: [''],
+    username: ['', Validators.required],
+    password: ['', Validators.required],
   });
 
   constructor(

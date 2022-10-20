@@ -22,7 +22,9 @@
 }
 
 .login-button {
-  @apply py-3 px-12 bg-transparent outline-primary outline-2 outline text-primary rounded-xl font-bold transition duration-300 ease-in-out transform  hover:text-primary  hover:scale-125;
+  @apply py-3 px-12 bg-transparent outline-primary outline-2 outline text-primary rounded-xl font-bold transition duration-300 ease-in-out transform
+  hover:text-primary hover:scale-125
+  disabled:transform-none disabled:opacity-30 disabled:transition disabled:cursor-not-allowed;
   letter-spacing: 1px;
 }
 
