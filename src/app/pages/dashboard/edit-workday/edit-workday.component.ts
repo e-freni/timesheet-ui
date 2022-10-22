@@ -41,7 +41,7 @@ export class EditWorkdayComponent implements OnInit {
     date: null,
     userId: null,
     workingHours: [0, [Validators.required, Validators.min(0), Validators.max(8)]],
-    extraHours: [0, [Validators.required, Validators.min(0), Validators.max(24)]],
+    extraHours: [0, [Validators.required, Validators.min(0), Validators.max(10)]],
     nightWorkingHours: [0, [Validators.required, Validators.min(0), Validators.max(5)]],
     workPermitHours: [0, [Validators.required, Validators.min(0), Validators.max(8)]],
     funeralLeaveHours: [0, [Validators.required, Validators.min(0), Validators.max(8)]],
@@ -252,7 +252,7 @@ export class EditWorkdayComponent implements OnInit {
       this.correctWorkingHours('funeralLeaveHours');
       this.workDayForm.patchValue({funeralLeaveHours: 0});
     }
-    this.workDayForm.setValidators(null);
+    this.workDayForm.get(hoursType).setErrors(null);
   }
 
   private formTemplateFilling(workday: Workday) {
