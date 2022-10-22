@@ -4,6 +4,7 @@ export type Workday = {
   userId: number,
   workingHours: number,
   extraHours: number,
+  nightWorkingHours: number,
   workPermitHours: number,
   funeralLeaveHours: number,
   holiday: boolean,

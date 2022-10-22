@@ -53,6 +53,11 @@
               <icon-extra [height]="6" [width]="6"></icon-extra>
               <p class="text-lg">{{day.workday?.extraHours}}H</p>
             </div>
+            <div *ngIf="day.workday?.nightWorkingHours > 0" class="day-info-panel" [matTooltipClass]="'tooltip'"
+                 [matTooltip]="'Notturno'">
+              <icon-night-hours [height]="6" [width]="6"></icon-night-hours>
+              <p class="text-lg">{{day.workday?.nightWorkingHours}}H</p>
+            </div>
             <div *ngIf="day.workday?.funeralLeaveHours > 0" class="day-info-panel" [matTooltipClass]="'tooltip'"
                  [matTooltip]="'Permessi per lutto'">
               <icon-funeral-leave [height]="6" [width]="6"></icon-funeral-leave>

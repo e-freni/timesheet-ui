@@ -37,6 +37,15 @@
       </button>
     </div>
 
+    <div *ngIf="nightWorkingHours || nightWorkingHours == null" class="flex items-center pt-5">
+      <p class="w-8/12">Ore di lavoro notturno</p>
+      <input type="number" [(ngModel)]="nightWorkingHours" [defaultValue]="1" min="1" max="16"
+             class="w-2/12 h-10 border text-center">
+      <button class="ml-auto text-red-400 hover:text-red-500" (click)="trashHoursType('nightWorkingHours')">
+        <icon-delete [height]="10" [width]="10" class="w-1/12 h-10 ml-auto"></icon-delete>
+      </button>
+    </div>
+
     <div *ngIf="funeralLeaveHours || funeralLeaveHours == null" class="flex items-center pt-5">
       <p class="w-8/12">Ore di permesso per lutto</p>
       <input type="number" [(ngModel)]="funeralLeaveHours" (ngModelChange)="decreaseWorkingHours()" [defaultValue]="1"
@@ -53,7 +62,7 @@
                [isOpen]="true"
     ></ng-select>
     <!-- Add hours button -->
-    <div *ngIf="addedHours.length < 3 && checkWorkingDay() && hourFilled" class="flex w-full justify-center ">
+    <div *ngIf="addedHours.length < 4 && checkWorkingDay() && hourFilled" class="flex w-full justify-center ">
       <button (click)="addHours()"
               [disabled]=""
               class="flex items-center w-full justify-center rounded-md border border-transparent bg-green-600 px-4 py-2 text-base font-medium text-white shadow-sm hover:bg-green-400 sm:ml-3 sm:w-auto sm:text-sm">

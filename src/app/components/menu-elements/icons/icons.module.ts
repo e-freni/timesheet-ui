@@ -18,6 +18,7 @@ import {ShareComponent} from "app/components/menu-elements/icons/share/share.com
 import {ExportComponent} from "app/components/menu-elements/icons/export/export.component";
 import {AnalyticsComponent} from "app/components/menu-elements/icons/analytics/analytics.component";
 import {EditDataComponent} from "app/components/menu-elements/icons/edit-data/edit-data.component";
+import {NightHoursComponent} from "app/components/menu-elements/icons/night-hours/night-hours.component";
 
 
 @NgModule({
@@ -28,6 +29,7 @@ import {EditDataComponent} from "app/components/menu-elements/icons/edit-data/ed
     AnalyticsComponent,
     EditDataComponent,
     ExtraComponent,
+    NightHoursComponent,
     ExportComponent,
     FuneralLeaveComponent,
     HolidayComponent,
@@ -48,6 +50,7 @@ import {EditDataComponent} from "app/components/menu-elements/icons/edit-data/ed
     AnalyticsComponent,
     EditDataComponent,
     ExtraComponent,
+    NightHoursComponent,
     ExportComponent,
     FuneralLeaveComponent,
     HolidayComponent,

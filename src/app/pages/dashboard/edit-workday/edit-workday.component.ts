@@ -42,6 +42,7 @@ export class EditWorkdayComponent implements OnInit {
     userId: null,
     workingHours: [0, [Validators.required, Validators.min(0), Validators.max(8)]],
     extraHours: [0, [Validators.required, Validators.min(0), Validators.max(24)]],
+    nightWorkingHours: [0, [Validators.required, Validators.min(0), Validators.max(24)]],
     workPermitHours: [0, [Validators.required, Validators.min(0), Validators.max(8)]],
     funeralLeaveHours: [0, [Validators.required, Validators.min(0), Validators.max(8)]],
     holiday: false,
@@ -55,7 +56,8 @@ export class EditWorkdayComponent implements OnInit {
   addableHours: SelectValue[] = [
     {id: 1, value: 'workPermitHours', label: 'Ore di permesso'},
     {id: 2, value: 'extraHours', label: 'Ore di straordinario'},
-    {id: 3, value: 'funeralLeaveHours', label: 'Ore di permesso per lutto'},
+    {id: 3, value: 'nightWorkingHours', label: 'Ore di lavoro notturno'},
+    {id: 4, value: 'funeralLeaveHours', label: 'Ore di permesso per lutto'},
   ]
 
   showedHours = this.addableHours.filter(h => !this.addedHours.includes(h))
@@ -98,6 +100,7 @@ export class EditWorkdayComponent implements OnInit {
       userId: workday.userId,
       workingHours: workday.workingHours,
       extraHours: workday.extraHours,
+      nightWorkingHours: workday.nightWorkingHours,
       workPermitHours: workday.workPermitHours,
       funeralLeaveHours: workday.funeralLeaveHours,
       holiday: workday.holiday,
@@ -114,6 +117,7 @@ export class EditWorkdayComponent implements OnInit {
       userId: this.workDayForm.get(['userId'])!.value,
       workingHours: this.workDayForm.get(['workingHours'])!.value,
       extraHours: this.workDayForm.get(['extraHours'])!.value,
+      nightWorkingHours: this.workDayForm.get(['nightWorkingHours'])!.value,
       workPermitHours: this.workDayForm.get(['workPermitHours'])!.value,
       funeralLeaveHours: this.workDayForm.get(['funeralLeaveHours'])!.value,
       holiday: this.workDayForm.get(['holiday'])!.value,
@@ -175,6 +179,10 @@ export class EditWorkdayComponent implements OnInit {
       this.workDayForm.patchValue({extraHours: initHours});
     }
 
+    if (hoursType.value == 'nightWorkingHours') {
+      this.workDayForm.patchValue({nightWorkingHours: initHours});
+    }
+
     if (hoursType.value == 'funeralLeaveHours') {
       this.workDayForm.patchValue({funeralLeaveHours: initHours});
     }
@@ -201,6 +209,7 @@ export class EditWorkdayComponent implements OnInit {
 
     this.workDayForm.patchValue({workingHours: 0});
     this.workDayForm.patchValue({extraHours: 0});
+    this.workDayForm.patchValue({nightWorkingHours: 0});
     this.workDayForm.patchValue({funeralLeaveHours: 0});
     this.workDayForm.patchValue({workPermitHours: 0});
     this.workDayForm.patchValue({holiday: false});
@@ -235,14 +244,15 @@ export class EditWorkdayComponent implements OnInit {
       this.workDayForm.patchValue({extraHours: 0});
     }
 
+    if (hoursType == 'nightWorkingHours') {
+      this.workDayForm.patchValue({nightWorkingHours: 0});
+    }
+
     if (hoursType == 'funeralLeaveHours') {
       this.correctWorkingHours('funeralLeaveHours');
       this.workDayForm.patchValue({funeralLeaveHours: 0});
     }
   }
-
-
-
 
   //TODO sostituire con form
   get workPermitHours() {
@@ -259,6 +269,14 @@ export class EditWorkdayComponent implements OnInit {
 
   set extraHours(hours) {
     this.workDayForm.patchValue({extraHours: hours});
+  }
+
+  get nightWorkingHours() {
+    return this.workDayForm.get('nightWorkingHours')!.value;
+  }
+
+  set nightWorkingHours(hours) {
+    this.workDayForm.patchValue({nightWorkingHours: hours});
   }
 
   get funeralLeaveHours() {
@@ -295,6 +313,9 @@ export class EditWorkdayComponent implements OnInit {
     }
     if (workday.extraHours > 0) {
       this.addedHours.push({id: 2, value: 'extraHours', label: 'Ore di straordinario'});
+    }
+    if (workday.nightWorkingHours > 0) {
+      this.addedHours.push({id: 2, value: 'nightWorkingHours', label: 'Ore di lavoro notturno'});
     }
     if (workday.funeralLeaveHours > 0) {
       this.addedHours.push({id: 3, value: 'funeralLeaveHours', label: 'Ore di permesso per lutto'});
