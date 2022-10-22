@@ -42,7 +42,7 @@ export class EditWorkdayComponent implements OnInit {
     userId: null,
     workingHours: [0, [Validators.required, Validators.min(0), Validators.max(8)]],
     extraHours: [0, [Validators.required, Validators.min(0), Validators.max(24)]],
-    nightWorkingHours: [0, [Validators.required, Validators.min(0), Validators.max(24)]],
+    nightWorkingHours: [0, [Validators.required, Validators.min(0), Validators.max(5)]],
     workPermitHours: [0, [Validators.required, Validators.min(0), Validators.max(8)]],
     funeralLeaveHours: [0, [Validators.required, Validators.min(0), Validators.max(8)]],
     holiday: false,
@@ -252,47 +252,7 @@ export class EditWorkdayComponent implements OnInit {
       this.correctWorkingHours('funeralLeaveHours');
       this.workDayForm.patchValue({funeralLeaveHours: 0});
     }
-  }
-
-  //TODO sostituire con form
-  get workPermitHours() {
-    return this.workDayForm.get('workPermitHours')!.value;
-  }
-
-  set workPermitHours(hours) {
-    this.workDayForm.patchValue({workPermitHours: hours});
-  }
-
-  get extraHours() {
-    return this.workDayForm.get('extraHours')!.value;
-  }
-
-  set extraHours(hours) {
-    this.workDayForm.patchValue({extraHours: hours});
-  }
-
-  get nightWorkingHours() {
-    return this.workDayForm.get('nightWorkingHours')!.value;
-  }
-
-  set nightWorkingHours(hours) {
-    this.workDayForm.patchValue({nightWorkingHours: hours});
-  }
-
-  get funeralLeaveHours() {
-    return this.workDayForm.get('funeralLeaveHours')!.value;
-  }
-
-  set funeralLeaveHours(hours) {
-    this.workDayForm.patchValue({funeralLeaveHours: hours});
-  }
-
-  get notes() {
-    return this.workDayForm.get('notes')!.value;
-  }
-
-  set notes(content) {
-    this.workDayForm.patchValue({notes: content});
+    this.workDayForm.setValidators(null);
   }
 
   private formTemplateFilling(workday: Workday) {
@@ -315,10 +275,10 @@ export class EditWorkdayComponent implements OnInit {
       this.addedHours.push({id: 2, value: 'extraHours', label: 'Ore di straordinario'});
     }
     if (workday.nightWorkingHours > 0) {
-      this.addedHours.push({id: 2, value: 'nightWorkingHours', label: 'Ore di lavoro notturno'});
+      this.addedHours.push({id: 3, value: 'nightWorkingHours', label: 'Ore di lavoro notturno'});
     }
     if (workday.funeralLeaveHours > 0) {
-      this.addedHours.push({id: 3, value: 'funeralLeaveHours', label: 'Ore di permesso per lutto'});
+      this.addedHours.push({id: 4, value: 'funeralLeaveHours', label: 'Ore di permesso per lutto'});
     }
     this.showedHours = this.addableHours.filter(h1 => !this.addedHours.find(h2 => h1.id == h2.id));
   }
