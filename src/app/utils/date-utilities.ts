@@ -12,3 +12,11 @@ export function getFormattedDate(year: number, month: number, day:number): strin
   date.setFullYear(year, month, day)
   return date.toISOString().split('T')[0];
 }
+
+export function getMonth(date: Date): string {
+  return new Intl.DateTimeFormat("it-IT", {month: "long"}).format(date).toUpperCase();
+}
+
+export function getYear(date: Date): string {
+  return new Intl.DateTimeFormat("it-IT", {year: "numeric"}).format(date).toUpperCase();
+}

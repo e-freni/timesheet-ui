@@ -6,7 +6,7 @@ import {Day} from "app/models/day";
 import {WorkdayType} from "app/models/workday-type.model";
 import {Workday} from "app/models/workday.model";
 import {AccountService} from "app/services/account.service";
-import {WorkdayService} from "app/services/workday.service";
+import {WorkdayService} from "app/services/rest/workday.service";
 import {getFormattedDate} from "app/utils/date-utilities";
 
 
@@ -26,7 +26,7 @@ export class EditWorkdayComponent implements OnInit {
 
   public day: Day
   public calendarDate: Date
-  public selectedWorkdayType: WorkdayType = null;
+  public selectedBeginningWorkdayType: WorkdayType = null;
   isCreation: boolean = true;
   isLoading: boolean = false;
   account: Account = null;
@@ -77,18 +77,17 @@ export class EditWorkdayComponent implements OnInit {
   ngOnInit(): void {
     this.accountService.getObservableAccount().subscribe((account: Account | null) => {
       this.account = account;
-      if (this.day.workday?.id) {
-        this.workdayService.findWorkdayById(this.day.workday.id).subscribe(workday => {
-          this.updateForm(workday);
-          this.formTemplateFilling(workday);
-        })
-        this.isCreation = false;
-      }
+      this.isCreation = !this.day.workday?.id;
       if (this.isCreation) {
         const dayDateZeroBased = this.calendarDate.getDate() + 1
         this.workDayForm.patchValue({date: getFormattedDate(this.calendarDate.getFullYear(), this.calendarDate.getMonth(), dayDateZeroBased)})
         this.workDayForm.patchValue({userId: this.account.id})
-        this.setSelectedWorkdayType(WorkdayType.WORKING);
+        this.setBeginningWorkdayType(WorkdayType.WORKING);
+      } else {
+        this.workdayService.findWorkdayById(this.day.workday.id).subscribe(workday => {
+          this.updateForm(workday);
+          this.formTemplateFilling(workday);
+        })
       }
     });
   }
@@ -197,24 +196,17 @@ export class EditWorkdayComponent implements OnInit {
   }
 
   checkWorkingDay() {
-    return this.selectedWorkdayType == this.workingStatus;
+    return this.selectedBeginningWorkdayType == this.workingStatus;
   }
 
   //TODO semplificare struttura codice che ora è poco leggibile
-  setSelectedWorkdayType(selectedWorkdayType: WorkdayType) {
+  setBeginningWorkdayType(selectedWorkdayType: WorkdayType) {
     this.addedHours = [];
     this.showedHours = this.addableHours.filter(h => !this.addedHours.includes(h));
     this.hourFilled = true;
-    this.selectedWorkdayType = selectedWorkdayType;
+    this.selectedBeginningWorkdayType = selectedWorkdayType;
 
-    this.workDayForm.patchValue({workingHours: 0});
-    this.workDayForm.patchValue({extraHours: 0});
-    this.workDayForm.patchValue({nightWorkingHours: 0});
-    this.workDayForm.patchValue({funeralLeaveHours: 0});
-    this.workDayForm.patchValue({workPermitHours: 0});
-    this.workDayForm.patchValue({holiday: false});
-    this.workDayForm.patchValue({sick: false});
-    this.workDayForm.patchValue({accidentAtWork: false});
+    this.resetFormToInitalState()
 
     if (selectedWorkdayType == WorkdayType.WORKING) {
       this.workDayForm.patchValue({workingHours: 8});
@@ -257,16 +249,16 @@ export class EditWorkdayComponent implements OnInit {
 
   private formTemplateFilling(workday: Workday) {
     if (!workday.holiday && !workday.sick && !workday.accidentAtWork) {
-      this.selectedWorkdayType = WorkdayType.WORKING;
+      this.selectedBeginningWorkdayType = WorkdayType.WORKING;
     }
     if (workday.holiday) {
-      this.selectedWorkdayType = WorkdayType.HOLIDAY;
+      this.selectedBeginningWorkdayType = WorkdayType.HOLIDAY;
     }
     if (workday.sick) {
-      this.selectedWorkdayType = WorkdayType.SICKNESS;
+      this.selectedBeginningWorkdayType = WorkdayType.SICKNESS;
     }
     if (workday.accidentAtWork) {
-      this.selectedWorkdayType = WorkdayType.ACCIDENT_AT_WORK;
+      this.selectedBeginningWorkdayType = WorkdayType.ACCIDENT_AT_WORK;
     }
     if (workday.workPermitHours > 0) {
       this.addedHours.push({id: 1, value: 'workPermitHours', label: 'Ore di permesso'});
@@ -294,5 +286,16 @@ export class EditWorkdayComponent implements OnInit {
     const permitHours = this.workDayForm.get('workPermitHours')!.value;
     const funeralLeaveHours = this.workDayForm.get('funeralLeaveHours')!.value;
     this.workDayForm.patchValue({workingHours: (8 - (permitHours + funeralLeaveHours))});
+  }
+
+  private resetFormToInitalState() {
+    this.workDayForm.patchValue({workingHours: 0});
+    this.workDayForm.patchValue({extraHours: 0});
+    this.workDayForm.patchValue({nightWorkingHours: 0});
+    this.workDayForm.patchValue({funeralLeaveHours: 0});
+    this.workDayForm.patchValue({workPermitHours: 0});
+    this.workDayForm.patchValue({holiday: false});
+    this.workDayForm.patchValue({sick: false});
+    this.workDayForm.patchValue({accidentAtWork: false});
   }
 }

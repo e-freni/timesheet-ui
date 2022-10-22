@@ -11,29 +11,35 @@ import {BrowserModule} from '@angular/platform-browser';
 import {BrowserAnimationsModule} from "@angular/platform-browser/animations";
 import {RouterModule} from "@angular/router";
 import {NgSelectModule} from '@ng-select/ng-select';
-import {EditWorkdayComponent} from "app/pages/dashboard/edit-workday/edit-workday.component";
+import {EditWorkdayComponent} from "app/pages/dashboard/calendar/edit-workday/edit-workday.component";
 import {IconsModule} from "app/components/menu-elements/icons/icons.module";
 import {AuthInterceptor} from "app/interceptor/auth.interceptor.service";
 import {NgxWebstorageModule} from "ngx-webstorage";
 import {AppRoutingModule} from "./app-routing.module";
 
 import {AppComponent} from './app.component';
-import {DashboardComponent} from './pages/dashboard/dashboard.component';
+import {CalendarComponent} from 'app/pages/dashboard/calendar/calendar.component';
 import {LoginComponent} from "./pages/login/login.component";
 import {DropdownComponent} from './components/menu-elements/dropdown/dropdown.component';
 import {NavbarComponent} from './components/navbar/navbar.component';
 import { AlertComponent } from './components/alert/alert.component';
+import { MonthSwitchComponent } from './components/month-switch/month-switch.component';
+import { DashboardComponent } from 'app/pages/dashboard/dashboard.component';
+import { AnalyticsComponent } from './pages/dashboard/analytics/analytics.component';
 
 @NgModule({
   declarations: [
     AlertComponent,
     AppComponent,
     LoginComponent,
-    DashboardComponent,
+    CalendarComponent,
     NavbarComponent,
     DropdownComponent,
     EditWorkdayComponent,
-    AlertComponent
+    AlertComponent,
+    MonthSwitchComponent,
+    DashboardComponent,
+    AnalyticsComponent
   ],
     imports: [
         BrowserModule,

@@ -2,6 +2,8 @@ import {Component, OnInit} from '@angular/core';
 import {AccountService} from "app/services/account.service";
 import {Router} from "@angular/router";
 import {Account} from "app/models/account.model";
+import {DateService} from "app/services/date.service";
+import {getTodaysDate} from "app/utils/date-utilities";
 
 @Component({
   selector: 'app-root',
@@ -16,6 +18,7 @@ export class AppComponent implements OnInit {
 
   constructor(
     private accountService: AccountService,
+    private dateService: DateService,
     private router: Router,
   ) {
   }
@@ -32,6 +35,7 @@ export class AppComponent implements OnInit {
 
       // redirect a dashboard se loggato
       if (this.loggedIn) {
+        this.dateService.setDate(getTodaysDate());
         this.accountService.redirect();
       }
       this.loading = false;

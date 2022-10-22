@@ -1,10 +1,4 @@
 <app-alert></app-alert>
-<div *ngIf="!loggedIn; else loadedBlock">
-  <app-login></app-login>
+<div class="h-screen">
+  <router-outlet></router-outlet>
 </div>
-<ng-template #loadedBlock>
-  <div class="h-screen">
-    <app-navbar></app-navbar>
-    <router-outlet></router-outlet>
-  </div>
-</ng-template>

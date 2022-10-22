@@ -34,18 +34,10 @@ export class AccountService {
     this.accountSubject.next(null);
   }
 
-  getAccount(): Account | null {
-    return this.account;
-  }
-
   getObservableAccount(): Observable<Account | null> {
     return this.accountSubject.asObservable();
   }
 
-
-  hasRole(role: string): boolean {
-    return this.account?.role.includes(role);
-  }
 
   public load(): void {
     this.httpClient.get<Account>(SERVER_API_URL + '/account/info')
@@ -69,6 +61,4 @@ export class AccountService {
     }
     this.router.navigateByUrl("/dashboard");
   }
-
-
 }
