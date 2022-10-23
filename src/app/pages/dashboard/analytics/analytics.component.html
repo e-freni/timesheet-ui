@@ -4,97 +4,100 @@
     <p class="text-5xl text-center">Statistiche del mese</p>
   </div>
   <!-- body -->
-  <div class="w-full flex flex-col gap-y-6 p-4 mt-4 justify-center">
+  <div class="w-full flex flex-col gap-y-6 p-4 mt-4">
     <!-- remaining days to month end -->
-    <div class="info-card ">
-      <div>
+    <div *ngIf="currentMonth == showedMonth" class="info-card flex flex-col gap-y-2">
+      <div class="flex justify-center items-center">
         <p class="w-[98%] font-bold mr-4 text-xl">Giorni rimanenti alla fine del mese:</p>
+        <div [ngClass]="this.daysToMonthsEnd <= 7 ? 'text-red-500' : 'text-black'">
+          <p class="info-text-value text-4xl font-black"
+          >{{this.daysToMonthsEnd }}</p>
+        </div>
       </div>
-      <div>
-        <p class="info-text-value text-4xl font-black">30</p>
-      </div>
+      <p *ngIf="this.daysToMonthsEnd <= 7 && this.summary.toLogHours > 0"
+         class="text-4xl text-red-500 font-black uppercase">{{'Ricordati di loggare le ' + this.summary.toLogHours + ' ore mancanti!'}}</p>
     </div>
     <!-- summary table -->
     <div class="flex justify-center">
       <div class="w-1/4 flex justify-center border-2 border-primary rounded-2xl gap-x-10">
-      <!-- left summary -->
-      <div class="info-summary">
-        <div class="info-card">
-          <div class="info-container-label">
-            <p class="info-text-label">Ore segnate:</p>
+        <!-- left summary -->
+        <div class="info-summary">
+          <div class="info-card">
+            <div class="info-container-label">
+              <p class="info-text-label">Ore segnate:</p>
+            </div>
+            <div class="info-container-value">
+              <p class="info-text-value">{{this.summary.loggedHours}}</p>
+            </div>
           </div>
-          <div class="info-container-value">
-            <p class="info-text-value">100</p>
+          <div *ngIf="summary.loggedPermitHours > 0" class="info-card">
+            <div class="info-container-label">
+              <p class="info-text-label">Permessi presi:</p>
+            </div>
+            <div class="info-container-value">
+              <p class="info-text-value">{{this.summary.loggedPermitHours}}</p>
+            </div>
           </div>
-        </div>
-        <div class="info-card">
-          <div class="info-container-label">
-            <p class="info-text-label">Permessi presi:</p>
+          <div *ngIf="summary.loggedHolidaysHours > 0" class="info-card">
+            <div class="info-container-label">
+              <p class="info-text-label">Ferie prese:</p>
+            </div>
+            <div class="info-container-value">
+              <p class="info-text-value">{{this.summary.loggedHolidaysHours}}</p>
+            </div>
           </div>
-          <div class="info-container-value">
-            <p class="info-text-value">100</p>
-          </div>
-        </div>
-        <div class="info-card">
-          <div class="info-container-label">
-            <p class="info-text-label">Ferie prese:</p>
-          </div>
-          <div class="info-container-value">
-            <p class="info-text-value">100</p>
-          </div>
-        </div>
-        <div class="info-card">
-          <div class="info-container-label">
-            <p class="info-text-label">Straordinari:</p>
-          </div>
-          <div class="info-container-value">
-            <p class="info-text-value">100</p>
-          </div>
-        </div>
-      </div>
-      <!-- right summary -->
-      <div class="info-summary">
-        <div class="info-card">
-          <div class="info-container-label">
-            <p class="info-text-label">Ore da segnare:</p>
-          </div>
-          <div class="info-container-value">
-            <p class="info-text-value">100</p>
+          <div *ngIf="summary.loggedExtraHours > 0" class="info-card">
+            <div class="info-container-label">
+              <p class="info-text-label">Straordinari:</p>
+            </div>
+            <div class="info-container-value">
+              <p class="info-text-value">{{this.summary.loggedExtraHours}}</p>
+            </div>
           </div>
         </div>
-        <div class="info-card">
-          <div class="info-container-label">
-            <p class="info-text-label">Notturni:</p>
+        <!-- right summary -->
+        <div class="info-summary">
+          <div class="info-card">
+            <div class="info-container-label">
+              <p class="info-text-label">Ore da segnare:</p>
+            </div>
+            <div class="info-container-value">
+              <p class="info-text-value">{{this.summary.toLogHours}}</p>
+            </div>
           </div>
-          <div class="info-container-value">
-            <p class="info-text-value">100</p>
+          <div *ngIf="summary.loggedNightHours > 0" class="info-card">
+            <div class="info-container-label">
+              <p class="info-text-label">Notturni:</p>
+            </div>
+            <div class="info-container-value">
+              <p class="info-text-value">{{this.summary.loggedNightHours}}</p>
+            </div>
+          </div>
+          <div *ngIf="summary.loggedSicknessHours > 0" class="info-card">
+            <div class="info-container-label">
+              <p class="info-text-label">Malattia:</p>
+            </div>
+            <div class="info-container-value">
+              <p class="info-text-value">{{this.summary.loggedSicknessHours}}</p>
+            </div>
+          </div>
+          <div *ngIf="summary.loggedAccidentAtWorkHours > 0" class="info-card">
+            <div class="info-container-label">
+              <p class="info-text-label">Infortuni:</p>
+            </div>
+            <div class="info-container-value">
+              <p class="info-text-value">{{this.summary.loggedAccidentAtWorkHours}}</p>
+            </div>
+          </div>
+          <div *ngIf="summary.loggedFuneralLeaveHours > 0" class="info-card">
+            <div class="info-container-label">
+              <p class="info-text-label">Permessi per lutto:</p>
+            </div>
+            <div class="info-container-value">
+              <p class="info-text-value">{{this.summary.loggedFuneralLeaveHours}}</p>
+            </div>
           </div>
         </div>
-        <div class="info-card">
-          <div class="info-container-label">
-            <p class="info-text-label">Malattia:</p>
-          </div>
-          <div class="info-container-value">
-            <p class="info-text-value">100</p>
-          </div>
-        </div>
-        <div class="info-card">
-          <div class="info-container-label">
-            <p class="info-text-label">Infortuni:</p>
-          </div>
-          <div class="info-container-value">
-            <p class="info-text-value">100</p>
-          </div>
-        </div>
-        <div class="info-card">
-          <div class="info-container-label">
-            <p class="info-text-label">Permessi per lutto:</p>
-          </div>
-          <div class="info-container-value">
-            <p class="info-text-value">100</p>
-          </div>
-        </div>
-      </div>
       </div>
     </div>
   </div>

@@ -3,6 +3,7 @@ import {Observable} from "rxjs";
 import {HttpClient, HttpResponse} from "@angular/common/http";
 import {SERVER_API_URL} from "app.constants";
 import {Workday} from "app/models/workday.model";
+import {Summary} from "app/models/summary.model";
 
 @Injectable({
   providedIn: 'root'
@@ -35,9 +36,14 @@ export class WorkdayService {
     return this.httpClient.delete(`${SERVER_API_URL}/workday/${userId}/delete/${workdayId}`, {observe: 'response'});
   }
 
-  exportWorkdayMonth(year: number, month:number, userId: number): Observable<Blob> {
+  exportWorkdayMonth(year: number, month: number, userId: number): Observable<Blob> {
     const params = {year: year, month: month}
     return this.httpClient.get(`${SERVER_API_URL}/workday/${userId}/export`, {params: params, responseType: 'blob'});
+  }
+
+  getMonthSummaryData(year: number, month: number, userId: number): Observable<Summary> {
+    const params = {year: year, month: month}
+    return this.httpClient.get<Summary>(`${SERVER_API_URL}/workday/${userId}/summary`, {params: params});
   }
 
 }
