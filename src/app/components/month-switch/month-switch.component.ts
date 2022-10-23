@@ -1,12 +1,11 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, EventEmitter, OnInit, Output} from '@angular/core';
 import {WorkdayService} from "app/services/rest/workday.service";
 import {Account} from "app/models/account.model";
 import {getMonth, getYear} from "app/utils/date-utilities";
 import {AccountService} from "app/services/account.service";
 import {DateService} from "app/services/date.service";
-import {PageService} from "app/services/page.service";
 import {Subscription} from "rxjs";
-import { saveAs } from 'file-saver-es';
+import {saveAs} from 'file-saver-es';
 
 @Component({
   selector: 'app-month-switch',
@@ -15,16 +14,20 @@ import { saveAs } from 'file-saver-es';
 })
 export class MonthSwitchComponent implements OnInit {
 
-  account: Account = null;
-  date: Date;
+  @Output() calendarEmitter: EventEmitter<any> = new EventEmitter();
+  @Output() analyticsEmitter: EventEmitter<any> = new EventEmitter();
+
   private dateSubscription: Subscription;
   private accountSubscription: Subscription;
+
+  account: Account = null;
+  date: Date;
+  isLoading: boolean;
 
   constructor(
     private workdayService: WorkdayService,
     private accountService: AccountService,
     private dateService: DateService,
-    private pageService: PageService,
   ) {
   }
 
@@ -58,18 +61,20 @@ export class MonthSwitchComponent implements OnInit {
   }
 
   exportToExcel(): void {
+    this.isLoading = true
     const year = this.date.getFullYear();
     const month = this.date.getMonth() + 1;
     this.workdayService.exportWorkdayMonth(year, month, this.account.id).subscribe(blob => {
       saveAs(blob, `${this.account.lastName}_foglio_ore_${this.year}_${this.month}.xlsx`, {autoBom: false});
     });
+    this.isLoading = false
   }
 
   goToCalendar() {
-    this.pageService.setCurrentPage('calendar');
+    this.calendarEmitter.emit()
   }
 
   goToAnalytics() {
-    this.pageService.setCurrentPage('analytics');
+    this.analyticsEmitter.emit()
   }
 }

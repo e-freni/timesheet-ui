@@ -14,9 +14,20 @@
   </button>
 
 </div>
-<div class="flex w-full items-center justify-center pb-4 gap-x-5">
-  <button (click)="goToCalendar()"><icon-edit-data [height]="6" [width]="6"></icon-edit-data></button>
-  <button (click)="goToAnalytics()"><icon-analytics [height]="6" [width]="6"></icon-analytics></button>
-  <button (click)="exportToExcel()"><icon-export [height]="6" [width]="6"></icon-export></button>
-  <button><icon-share [height]="6" [width]="6"></icon-share></button>
+<div class="flex justify-center">
+  <div class="flex w-2/12 m-auto items-center justify-evenly py-4 gap-x-5 bg-primary text-white rounded-2xl">
+    <button class="top-menu-button" (click)="goToCalendar()">
+      <icon-edit-data [height]="6" [width]="6"></icon-edit-data>
+    </button>
+    <button class="top-menu-button" (click)="goToAnalytics()">
+      <icon-analytics [height]="6" [width]="6"></icon-analytics>
+    </button>
+    <button *ngIf="!isLoading" class="top-menu-button-loading" (click)="exportToExcel()">
+      <icon-export [height]="6" [width]="6"></icon-export>
+    </button>
+    <app-spinning-circle *ngIf="isLoading" [color]="'white'"></app-spinning-circle>
+    <button class="top-menu-button">
+      <icon-share [height]="6" [width]="6"></icon-share>
+    </button>
+  </div>
 </div>

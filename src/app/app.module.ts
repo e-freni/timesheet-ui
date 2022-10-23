@@ -22,10 +22,12 @@ import {CalendarComponent} from 'app/pages/dashboard/calendar/calendar.component
 import {LoginComponent} from "./pages/login/login.component";
 import {DropdownComponent} from './components/menu-elements/dropdown/dropdown.component';
 import {NavbarComponent} from './components/navbar/navbar.component';
-import { AlertComponent } from './components/alert/alert.component';
-import { MonthSwitchComponent } from './components/month-switch/month-switch.component';
-import { DashboardComponent } from 'app/pages/dashboard/dashboard.component';
-import { AnalyticsComponent } from './pages/dashboard/analytics/analytics.component';
+import {AlertComponent} from './components/alert/alert.component';
+import {MonthSwitchComponent} from './components/month-switch/month-switch.component';
+import {DashboardComponent} from 'app/pages/dashboard/dashboard.component';
+import {AnalyticsComponent} from './pages/dashboard/analytics/analytics.component';
+import {MatTabsModule} from "@angular/material/tabs";
+import {HeaderLessTabsDirective} from 'app/components/header-less-tabs.directive';
 
 @NgModule({
   declarations: [
@@ -39,30 +41,32 @@ import { AnalyticsComponent } from './pages/dashboard/analytics/analytics.compon
     AlertComponent,
     MonthSwitchComponent,
     DashboardComponent,
-    AnalyticsComponent
+    AnalyticsComponent,
+    HeaderLessTabsDirective
   ],
-    imports: [
-        BrowserModule,
-        AppRoutingModule,
-        RouterModule,
-        ReactiveFormsModule,
-        FormsModule,
-        NgSelectModule,
-        HttpClientModule,
-        NgxWebstorageModule.forRoot({
-            prefix: 'timesheet',
-            separator: '_'
-        }),
-        // Material imports
-        BrowserAnimationsModule,
-        MatDialogModule,
-        MatProgressSpinnerModule,
-        MatMenuModule,
-        MatTableModule,
-        MatPaginatorModule,
-        IconsModule,
-        MatTooltipModule
-    ],
+  imports: [
+    BrowserModule,
+    AppRoutingModule,
+    RouterModule,
+    ReactiveFormsModule,
+    FormsModule,
+    NgSelectModule,
+    HttpClientModule,
+    NgxWebstorageModule.forRoot({
+      prefix: 'timesheet',
+      separator: '_'
+    }),
+    // Material imports
+    BrowserAnimationsModule,
+    MatDialogModule,
+    MatProgressSpinnerModule,
+    MatMenuModule,
+    MatTableModule,
+    MatPaginatorModule,
+    IconsModule,
+    MatTooltipModule,
+    MatTabsModule
+  ],
   providers: [
     {
       provide: HTTP_INTERCEPTORS,

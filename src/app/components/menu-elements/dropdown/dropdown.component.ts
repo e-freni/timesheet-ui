@@ -4,7 +4,6 @@ import {DropDownOption} from "app/components/menu-elements/dropdown/dropdown-opt
 @Component({
   selector: 'app-dropdown',
   templateUrl: './dropdown.component.html',
-  styleUrls: ['./dropdown.component.css']
 })
 export class DropdownComponent {
   open: boolean = false;

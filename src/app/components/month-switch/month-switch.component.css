@@ -1,3 +1,11 @@
 .arrow-button {
-  @apply text-white bg-primary h-20 flex justify-center items-center rounded-xl
+  @apply text-white bg-primary h-20 flex justify-center items-center rounded-xl;
+}
+
+.top-menu-button {
+  @apply transition hover:opacity-50 hover:transition;
+}
+
+.top-menu-button-loading {
+  @apply top-menu-button ;
 }

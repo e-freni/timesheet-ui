@@ -1,4 +1,12 @@
 <app-navbar></app-navbar>
-<app-month-switch></app-month-switch>
-<app-calendar *ngIf="page == 'calendar'"></app-calendar>
-<app-analytics *ngIf="page == 'analytics'"></app-analytics>
+<app-month-switch (calendarEmitter)="switchToCalendar()"
+                  (analyticsEmitter)="switchToAnalytics()"></app-month-switch>
+<mat-tab-group no-header-tabs [selectedIndex]="selectedTab">
+  <mat-tab>
+    <app-calendar></app-calendar>
+  </mat-tab>
+  <mat-tab>
+    <app-analytics></app-analytics>
+  </mat-tab>
+</mat-tab-group>
+

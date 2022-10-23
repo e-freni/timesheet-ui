@@ -5,11 +5,11 @@ import {Subscription} from "rxjs";
 @Component({
   selector: 'app-dashboard',
   templateUrl: './dashboard.component.html',
-  styleUrls: ['./dashboard.component.css']
 })
 export class DashboardComponent implements OnInit {
   page: string;
   pageSubscription: Subscription;
+  selectedTab: number;
 
   constructor(
     private pageService: PageService,
@@ -22,5 +22,16 @@ export class DashboardComponent implements OnInit {
         this.page = page;
       }
     });
+  }
+
+  CALENDAR = 0
+  ANALYTICS = 1
+
+  switchToAnalytics() {
+    this.selectedTab = this.ANALYTICS;
+  }
+
+  switchToCalendar() {
+    this.selectedTab = this.CALENDAR;
   }
 }
