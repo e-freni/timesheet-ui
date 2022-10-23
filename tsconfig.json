@@ -30,5 +30,10 @@
     "strictInputAccessModifiers": true,
     "strictTemplates": true,
     "allowSyntheticDefaultImports": true
+  },
+  "paths": {
+    "file-saver-es": [
+      "@types/file-saver"
+    ]
   }
 }
