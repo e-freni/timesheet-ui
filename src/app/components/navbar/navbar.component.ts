@@ -10,7 +10,7 @@ import {Subscription} from 'rxjs';
   templateUrl: './navbar.component.html',
   styleUrls: ['./navbar.component.css']
 })
-export class NavbarComponent implements OnInit, OnDestroy {
+export class NavbarComponent implements OnInit {
 
   account: Account = null;
   dropdownOptions: DropDownOption[] = []
@@ -23,22 +23,19 @@ export class NavbarComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit(): void {
-    this.accountSubscription = this.accountService.getObservableAccount().subscribe(
-      (account: Account | null) => {
-      this.account = account;
-      if (isAdmin(this.account?.role)) {
-        this.dropdownOptions.push({text: "Aggiungi utente", operation: (() => this.accountService.logout())})
-        this.dropdownOptions.push({text: "Cambia password", operation: (() => this.accountService.logout())})
-      }
-      this.dropdownOptions.push({
-        text: "Log out", operation: (() => {
-          this.accountService.logout()
+    this.accountSubscription = this.accountService.getObservableAccount().subscribe({
+      next: (account: Account | null) => {
+        this.account = account;
+        if (isAdmin(this.account?.role)) {
+          this.dropdownOptions.push({text: "Aggiungi utente", operation: (() => this.accountService.logout())})
+          this.dropdownOptions.push({text: "Cambia password", operation: (() => this.accountService.logout())})
+        }
+        this.dropdownOptions.push({
+          text: "Log out", operation: (() => {
+            this.accountService.logout()
+          })
         })
-      })
+      }
     });
-  }
-
-  ngOnDestroy(): void {
-    this.accountSubscription.unsubscribe()
   }
 }

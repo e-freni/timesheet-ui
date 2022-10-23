@@ -1,5 +1,4 @@
-import {Component, OnDestroy, OnInit} from '@angular/core';
-import {DateService} from "app/services/date.service";
+import {Component, OnInit} from '@angular/core';
 import {PageService} from "app/services/page.service";
 import {Subscription} from "rxjs";
 
@@ -8,23 +7,20 @@ import {Subscription} from "rxjs";
   templateUrl: './dashboard.component.html',
   styleUrls: ['./dashboard.component.css']
 })
-export class DashboardComponent implements OnInit, OnDestroy {
+export class DashboardComponent implements OnInit {
   page: string;
   pageSubscription: Subscription;
 
   constructor(
     private pageService: PageService,
-
-  ) { }
+  ) {
+  }
 
   ngOnInit(): void {
-    this.pageSubscription = this.pageService.getCurrentPage().subscribe(page => {
-      this.page = page;
+    this.pageSubscription = this.pageService.getCurrentPage().subscribe({
+      next: page => {
+        this.page = page;
+      }
     });
   }
-
-  ngOnDestroy(): void {
-    this.pageSubscription.unsubscribe()
-  }
-
 }

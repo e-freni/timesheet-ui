@@ -44,17 +44,17 @@ export class CalendarComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit(): void {
-
-
     this.accountSubscription = this.accountService.getObservableAccount().subscribe((account: Account | null) => {
-      if(!account) {
-        return; // XXX FIXME had to check account after log out in order to not repeat api calls * (number of login after logout)
+      if (!account) {
+        return; // XXX FIXME had to check account after log out and login in order to not repeat api calls * (number of login after logout)
       }
-      this.dateSubscription = this.dateService.getObservableDate().subscribe((date: Date | null) => {
-        this.account = account;
-        this.date = date;
-        this.createMonthCalendar()
-        this.fetchWorkdays()
+      this.dateSubscription = this.dateService.getObservableDate().subscribe({
+        next: (date: Date | null) => {
+          this.account = account;
+          this.date = date;
+          this.createMonthCalendar()
+          this.fetchWorkdays()
+        }
       });
     });
   }
