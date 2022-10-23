@@ -2,20 +2,23 @@ import {Component, OnDestroy, OnInit} from '@angular/core';
 import * as FileSaver from "file-saver";
 import {WorkdayService} from "app/services/rest/workday.service";
 import {Account} from "app/models/account.model";
-import {getMonth, getTodaysDate, getYear} from "app/utils/date-utilities";
+import {getMonth, getYear} from "app/utils/date-utilities";
 import {AccountService} from "app/services/account.service";
 import {DateService} from "app/services/date.service";
 import {PageService} from "app/services/page.service";
+import {Subscription} from "rxjs";
 
 @Component({
   selector: 'app-month-switch',
   templateUrl: './month-switch.component.html',
   styleUrls: ['./month-switch.component.css']
 })
-export class MonthSwitchComponent implements OnInit {
+export class MonthSwitchComponent implements OnInit, OnDestroy {
 
   account: Account = null;
   date: Date;
+  private dateSubscription: Subscription;
+  private accountSubscription: Subscription;
 
   constructor(
     private workdayService: WorkdayService,
@@ -34,12 +37,17 @@ export class MonthSwitchComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.accountService.getObservableAccount().subscribe((account: Account | null) => {
-      this.dateService.getObservableDate().subscribe(date => {
+    this.accountSubscription = this.accountService.getObservableAccount().subscribe((account: Account | null) => {
+      this.dateSubscription = this.dateService.getObservableDate().subscribe(date => {
         this.date = date;
         this.account = account;
-      })
+      });
     });
+  }
+
+  ngOnDestroy():void {
+    this.dateSubscription.unsubscribe();
+    this.accountSubscription.unsubscribe();
   }
 
   previousMonth() {

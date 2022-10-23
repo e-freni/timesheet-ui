@@ -16,14 +16,16 @@ import {Subscription} from "rxjs";
   templateUrl: './calendar.component.html',
   styleUrls: ['./calendar.component.css']
 })
-export class CalendarComponent implements OnInit {
+export class CalendarComponent implements OnInit, OnDestroy {
   date: Date;
   account: Account = null;
 
   monthDays: Day[] = []
   workdays: Workday[] = [];
 
-  workdaySubscription: Subscription;
+  private workdaySubscription: Subscription;
+  private dateSubscription: Subscription;
+  private accountSubscription: Subscription;
 
   constructor(
     private matDialog: MatDialog,
@@ -42,14 +44,24 @@ export class CalendarComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.accountService.getObservableAccount().subscribe((account: Account | null) => {
-      this.dateService.getObservableDate().subscribe((date: Date | null) => {
+
+
+    this.accountSubscription = this.accountService.getObservableAccount().subscribe((account: Account | null) => {
+      if(!account) {
+        return; // XXX FIXME had to check account after log out in order to not repeat api calls * (number of login after logout)
+      }
+      this.dateSubscription = this.dateService.getObservableDate().subscribe((date: Date | null) => {
         this.account = account;
         this.date = date;
         this.createMonthCalendar()
         this.fetchWorkdays()
       });
     });
+  }
+
+  ngOnDestroy(): void {
+    this.dateSubscription.unsubscribe();
+    this.accountSubscription.unsubscribe();
   }
 
   createMonthCalendar() {
@@ -88,8 +100,11 @@ export class CalendarComponent implements OnInit {
     return new Date(this.date.getFullYear(), month, 0).toLocaleDateString();
   }
 
+  private readonly standardNonWorkingDaysNames = ['Domenica', 'Sabato'];
+  private readonly specialNonWorkingDaysDates = ['']; //TODO special days like christmas
+
   isNotWorkingDay(day: Day): boolean {
-    return day.dayName == 'Domenica' || day.dayName == 'Sabato'
+    return this.standardNonWorkingDaysNames.includes(day.dayName)
   }
 
   private addOtherMonthsDays() {

@@ -8,7 +8,6 @@ import {getTodaysDate} from "app/utils/date-utilities";
 export class DateService {
 
   dateSubject: Subject<Date> = new ReplaySubject<Date | null>(1);
-  date: Date;
 
   getObservableDate(): Observable<Date | null> {
     return this.dateSubject.asObservable();
@@ -20,7 +19,6 @@ export class DateService {
 
   unsubscribe(): void {
     this.dateSubject.next(null);
-    this.date = getTodaysDate()
   }
 
 }

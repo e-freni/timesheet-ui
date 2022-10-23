@@ -6,6 +6,7 @@ import {JwtToken} from "app/models/jwt-token.model";
 import {JWT_STORAGE_KEY} from "app.constants";
 import {AccountService} from "app/services/account.service";
 import {AlertService} from "app/services/alert.service";
+import {Subscription} from "rxjs";
 
 
 @Component({
@@ -20,6 +21,8 @@ export class LoginComponent {
     password: ['', Validators.required],
   });
 
+  private accountSubscription: Subscription;
+
   constructor(
     private formBuilder: FormBuilder,
     private httpClient: HttpClient,
@@ -30,7 +33,7 @@ export class LoginComponent {
   }
 
   login(): void {
-    this.accountService
+    this.accountSubscription = this.accountService
       .login({
         username: this.loginForm.get('username')!.value,
         password: this.loginForm.get('password')!.value
@@ -38,7 +41,6 @@ export class LoginComponent {
       .subscribe({
         next: (jwtToken: JwtToken) => {
           this.localStorageService.store(JWT_STORAGE_KEY, jwtToken.token);
-
           this.accountService.load();
         }, error: (res) => {
           if (res.status == 504)

@@ -7,6 +7,7 @@ import {Account} from "app/models/account.model";
 import {Login} from "app/models/login.model";
 import {JwtToken} from "app/models/jwt-token.model";
 import {Router} from "@angular/router";
+import {DateService} from "app/services/date.service";
 
 @Injectable({
   providedIn: 'root'
@@ -19,6 +20,7 @@ export class AccountService {
   constructor(
     private httpClient: HttpClient,
     private localStorageService: LocalStorageService,
+    private dateService: DateService,
     private router: Router,
   ) {
   }
