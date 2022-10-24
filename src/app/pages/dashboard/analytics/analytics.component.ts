@@ -46,4 +46,8 @@ export class AnalyticsComponent implements OnInit {
     });
   }
 
+  getHoursInDaysFormatter(hours: number): string {
+    return `(${hours / 8} giorni)`
+  }
+
 }

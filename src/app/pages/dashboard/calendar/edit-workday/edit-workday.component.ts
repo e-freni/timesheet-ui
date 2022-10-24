@@ -199,14 +199,13 @@ export class EditWorkdayComponent implements OnInit {
     return this.selectedBeginningWorkdayType == this.workingStatus;
   }
 
-  //TODO semplificare struttura codice che ora è poco leggibile
   setBeginningWorkdayType(selectedWorkdayType: WorkdayType) {
     this.addedHours = [];
     this.showedHours = this.addableHours.filter(h => !this.addedHours.includes(h));
     this.hourFilled = true;
     this.selectedBeginningWorkdayType = selectedWorkdayType;
 
-    this.resetFormToInitalState()
+    this.resetFormToInitialState()
 
     if (selectedWorkdayType == WorkdayType.WORKING) {
       this.workDayForm.patchValue({workingHours: 8});
@@ -288,7 +287,7 @@ export class EditWorkdayComponent implements OnInit {
     this.workDayForm.patchValue({workingHours: (8 - (permitHours + funeralLeaveHours))});
   }
 
-  private resetFormToInitalState() {
+  private resetFormToInitialState() {
     this.workDayForm.patchValue({workingHours: 0});
     this.workDayForm.patchValue({extraHours: 0});
     this.workDayForm.patchValue({nightWorkingHours: 0});

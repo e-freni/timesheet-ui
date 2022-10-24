@@ -16,6 +16,12 @@ export class DashboardComponent implements OnInit {
   ) {
   }
 
+  //TODO alert of missing hours on the last 7 or 5 or 3 days of the month?
+  //TODO send email popover
+  //TODO admin add user
+  //TODO user change password
+  //TODO tooltip for menu switch icons
+
   ngOnInit(): void {
     this.pageSubscription = this.pageService.getCurrentPage().subscribe({
       next: page => {
