@@ -42,6 +42,7 @@ export class AnalyticsComponent implements OnInit, OnChanges {
       this.dateSubscription = this.dateService.getObservableDate().subscribe((date: Date) => {
         let monthInHumanFormat = date.getMonth() + 1;
         this.showedMonth = monthInHumanFormat
+        this.currentMonth = getTodaysDate().getMonth() + 1
         this.daysToMonthsEnd = new Date(date.getFullYear(), monthInHumanFormat, 0).getDate() - getTodaysDate().getDate()
         this.workdaySubscription = this.workdayService.getMonthSummaryData(date.getFullYear(), monthInHumanFormat, account.id)
           .subscribe((summary: Summary) => {
