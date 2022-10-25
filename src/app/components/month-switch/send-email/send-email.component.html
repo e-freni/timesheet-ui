@@ -1,0 +1,38 @@
+<div class="min-h-[30rem] relative">
+  <!-- Title and close -->
+  <div class="flex items-center">
+    <icon-close [height]="10" [width]="10" class="ml-auto cursor-pointer" (click)="back()"></icon-close>
+  </div>
+  <h1 class="text-center text-5xl pb-5">
+    Invio per email</h1>
+  <form role="form" class="flex flex-col justify-between h-full gap-y-5" [formGroup]="emailForm"
+        (ngSubmit)="sendEmailRequest()">
+    <!-- email field -->
+    <div formArrayName="emailAddresses" class="pt-5 flex flex-col items-center h-full gap-y-5">
+      <div *ngFor="let email of emailAddresses.controls; let i = index"
+           class="flex w-full items-center">
+        <input type="email" [formControlName]="i" [defaultValue]="1"
+               class="w-10/12 h-10 border text-center">
+        <button *ngIf="emailAddresses.controls.length > 1" class="ml-auto text-red-400 hover:text-red-500"
+                (click)="trashEmail(i)">
+          <icon-delete [height]="10" [width]="10" class="w-2/12 ml-auto"></icon-delete>
+        </button>
+      </div>
+      <icon-add *ngIf="emailAddresses.controls.length < 4" (click)="addRecipient()" [height]="20" [width]="20"
+                class="h-full text-primary"></icon-add>
+    </div>
+    <!-- Actions -->
+    <div class="flex justify-evenly">
+      <button type="submit"
+              class="submit-button"
+              [disabled]="this.emailForm.invalid || isLoading">
+        Invia per email
+        <app-spinning-circle *ngIf="isLoading" [color]="'blue'"></app-spinning-circle>
+      </button>
+      <button type="button"
+              class="back-button"
+              (click)="back()">Indietro
+      </button>
+    </div>
+  </form>
+</div>

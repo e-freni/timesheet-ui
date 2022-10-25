@@ -1,4 +1,4 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, OnChanges, OnInit} from '@angular/core';
 import {WorkdayService} from "app/services/rest/workday.service";
 import {Subscription} from "rxjs";
 import {Account} from "app/models/account.model";
@@ -12,7 +12,7 @@ import {getTodaysDate} from "app/utils/date-utilities";
   templateUrl: './analytics.component.html',
   styleUrls: ['./analytics.component.css']
 })
-export class AnalyticsComponent implements OnInit {
+export class AnalyticsComponent implements OnInit, OnChanges {
 
   private workdaySubscription: Subscription;
   private accountSubscription: Subscription;
@@ -31,12 +31,17 @@ export class AnalyticsComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    this.load();
+  }
+
+  private load() {
     this.accountSubscription = this.accountService.getObservableAccount().subscribe((account: Account | null) => {
+      if (!account) {
+        return;
+      }
       this.dateSubscription = this.dateService.getObservableDate().subscribe((date: Date) => {
         let monthInHumanFormat = date.getMonth() + 1;
         this.showedMonth = monthInHumanFormat
-        this.currentMonth = getTodaysDate().getMonth() + 1
-
         this.daysToMonthsEnd = new Date(date.getFullYear(), monthInHumanFormat, 0).getDate() - getTodaysDate().getDate()
         this.workdaySubscription = this.workdayService.getMonthSummaryData(date.getFullYear(), monthInHumanFormat, account.id)
           .subscribe((summary: Summary) => {
@@ -45,6 +50,11 @@ export class AnalyticsComponent implements OnInit {
       })
     });
   }
+
+  ngOnChanges() {
+    this.load();
+  }
+
 
   getHoursInDaysFormatter(hours: number): string {
     return `(${hours / 8} giorni)`

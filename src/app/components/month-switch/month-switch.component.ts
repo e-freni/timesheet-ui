@@ -6,6 +6,8 @@ import {AccountService} from "app/services/account.service";
 import {DateService} from "app/services/date.service";
 import {Subscription} from "rxjs";
 import {saveAs} from 'file-saver-es';
+import {MatDialog} from "@angular/material/dialog";
+import {SendEmailComponent} from "app/components/month-switch/send-email/send-email.component";
 
 @Component({
   selector: 'app-month-switch',
@@ -28,6 +30,7 @@ export class MonthSwitchComponent implements OnInit {
     private workdayService: WorkdayService,
     private accountService: AccountService,
     private dateService: DateService,
+    private matDialog: MatDialog,
   ) {
   }
 
@@ -76,5 +79,18 @@ export class MonthSwitchComponent implements OnInit {
 
   goToAnalytics() {
     this.analyticsEmitter.emit()
+  }
+
+  sendExportByEmail() {
+    this.matDialog.open(SendEmailComponent, {
+      width: '50%',
+      disableClose: true,
+      hasBackdrop: true,
+      enterAnimationDuration: "100ms",
+      exitAnimationDuration: "100ms",
+      data: {
+        selectedMonthDate: new Date(this.date.getFullYear(), this.date.getMonth(), 1, 0, 0, 0)
+      }
+    })
   }
 }

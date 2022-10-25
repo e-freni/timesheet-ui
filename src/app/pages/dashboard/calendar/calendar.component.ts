@@ -46,7 +46,7 @@ export class CalendarComponent implements OnInit, OnDestroy {
   ngOnInit(): void {
     this.accountSubscription = this.accountService.getObservableAccount().subscribe((account: Account | null) => {
       if (!account) {
-        return; // XXX FIXME had to check account after log out and login in order to not repeat api calls * (number of login after logout)
+        return;
       }
       this.dateSubscription = this.dateService.getObservableDate().subscribe({
         next: (date: Date | null) => {
@@ -60,8 +60,8 @@ export class CalendarComponent implements OnInit, OnDestroy {
   }
 
   ngOnDestroy(): void {
-    this.dateSubscription.unsubscribe();
-    this.accountSubscription.unsubscribe();
+    this.dateSubscription?.unsubscribe();
+    this.accountSubscription?.unsubscribe();
   }
 
   createMonthCalendar() {
@@ -148,9 +148,13 @@ export class CalendarComponent implements OnInit, OnDestroy {
       if (workDayHasBeenChanged) {
         this.createMonthCalendar()
         this.fetchWorkdays()
+        this.reloadConnectedComponents();
       }
     })
   }
 
 
+  private reloadConnectedComponents() {
+    this.dateService.setDate(this.date);
+  }
 }

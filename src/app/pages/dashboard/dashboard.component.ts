@@ -1,6 +1,8 @@
 import {Component, OnInit} from '@angular/core';
 import {PageService} from "app/services/page.service";
 import {Subscription} from "rxjs";
+import {Account} from "app/models/account.model";
+import {AccountService} from "app/services/account.service";
 
 @Component({
   selector: 'app-dashboard',
@@ -13,6 +15,7 @@ export class DashboardComponent implements OnInit {
 
   constructor(
     private pageService: PageService,
+    private accountService: AccountService,
   ) {
   }
 
@@ -20,13 +23,20 @@ export class DashboardComponent implements OnInit {
   //TODO send email popover
   //TODO admin add user
   //TODO user change password
-  //TODO tooltip for menu switch icons
+  //TODO put all css in style classes and optimize it
+  //TODO make a mobile view
+  //TODO handle special days (like christmas!)
 
   ngOnInit(): void {
-    this.pageSubscription = this.pageService.getCurrentPage().subscribe({
-      next: page => {
-        this.page = page;
+    this.accountService.getObservableAccount().subscribe((account: Account | null) => {
+      if (!account) {
+        return;
       }
+      this.pageSubscription = this.pageService.getCurrentPage().subscribe({
+        next: page => {
+          this.page = page;
+        }
+      });
     });
   }
 

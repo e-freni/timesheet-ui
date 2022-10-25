@@ -15,18 +15,24 @@
 
 </div>
 <div class="flex justify-center">
-  <div class="flex w-2/12 m-auto items-center justify-evenly py-4 gap-x-5 bg-primary text-white rounded-2xl">
-    <button class="top-menu-button" (click)="goToCalendar()">
+  <!-- actions -->
+  <div
+    class="flex w-2/12 m-auto items-center justify-evenly py-4 gap-x-5 bg-primary text-white rounded-2xl big-tooltip">
+    <button class="top-menu-button" (click)="goToCalendar()" [matTooltip]="'Calendario del mese'"
+            [matTooltipClass]="'big-tooltip'">
       <icon-edit-data [height]="6" [width]="6"></icon-edit-data>
     </button>
-    <button class="top-menu-button" (click)="goToAnalytics()">
+    <button class="top-menu-button" (click)="goToAnalytics()" [matTooltip]="'Statistiche del mese'"
+            [matTooltipClass]="'big-tooltip'">
       <icon-analytics [height]="6" [width]="6"></icon-analytics>
     </button>
-    <button *ngIf="!isLoading" class="top-menu-button-loading" (click)="exportToExcel()">
+    <button *ngIf="!isLoading" class="top-menu-button-loading" (click)="exportToExcel()"
+            [matTooltip]="'Esporta in Excel'" [matTooltipClass]="'big-tooltip'">
       <icon-export [height]="6" [width]="6"></icon-export>
     </button>
     <app-spinning-circle *ngIf="isLoading" [color]="'white'"></app-spinning-circle>
-    <button class="top-menu-button">
+    <button class="top-menu-button" (click)="sendExportByEmail()" [matTooltip]="'invia per email'"
+            [matTooltipClass]="'big-tooltip'">
       <icon-share [height]="6" [width]="6"></icon-share>
     </button>
   </div>

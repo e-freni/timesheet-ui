@@ -19,7 +19,6 @@ export type SelectValue = {
 @Component({
   selector: 'app-edit-workday',
   templateUrl: './edit-workday.component.html',
-  styleUrls: ['./edit-workday.component.css']
 })
 
 export class EditWorkdayComponent implements OnInit {

@@ -19,10 +19,12 @@ import {ExportComponent} from "app/components/menu-elements/icons/export/export.
 import {AnalyticsComponent} from "app/components/menu-elements/icons/analytics/analytics.component";
 import {EditDataComponent} from "app/components/menu-elements/icons/edit-data/edit-data.component";
 import {NightHoursComponent} from "app/components/menu-elements/icons/night-hours/night-hours.component";
+import {AddComponent} from "app/components/menu-elements/icons/add/add.component";
 
 
 @NgModule({
   declarations: [
+    AddComponent,
     AccidentAtWorkComponent,
     CloseComponent,
     DeleteComponent,
@@ -44,6 +46,7 @@ import {NightHoursComponent} from "app/components/menu-elements/icons/night-hour
     WorkComponent
   ],
   exports: [
+    AddComponent,
     AccidentAtWorkComponent,
     CloseComponent,
     DeleteComponent,

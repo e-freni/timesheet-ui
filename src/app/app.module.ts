@@ -28,6 +28,7 @@ import {DashboardComponent} from 'app/pages/dashboard/dashboard.component';
 import {AnalyticsComponent} from './pages/dashboard/analytics/analytics.component';
 import {MatTabsModule} from "@angular/material/tabs";
 import {HeaderLessTabsDirective} from 'app/components/header-less-tabs.directive';
+import {SendEmailComponent} from './components/month-switch/send-email/send-email.component';
 
 @NgModule({
   declarations: [
@@ -42,7 +43,8 @@ import {HeaderLessTabsDirective} from 'app/components/header-less-tabs.directive
     MonthSwitchComponent,
     DashboardComponent,
     AnalyticsComponent,
-    HeaderLessTabsDirective
+    HeaderLessTabsDirective,
+    SendEmailComponent
   ],
   imports: [
     BrowserModule,
