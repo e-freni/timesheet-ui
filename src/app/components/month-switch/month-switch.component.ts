@@ -4,10 +4,10 @@ import { Account } from 'app/models/account.model';
 import { getMonth, getTodaysDate, getYear } from 'app/utils/date-utilities';
 import { AccountService } from 'app/services/account.service';
 import { DateService } from 'app/services/date.service';
-import { Subscription } from 'rxjs';
 import { saveAs } from 'file-saver-es';
 import { MatDialog } from '@angular/material/dialog';
 import { SendEmailComponent } from 'app/components/month-switch/send-email/send-email.component';
+import { ExportService } from 'app/services/rest/export.service';
 
 @Component({
   selector: 'app-month-switch',
@@ -20,11 +20,10 @@ export class MonthSwitchComponent implements OnInit {
   account: Account = null;
   date: Date;
   isLoading: boolean;
-  private dateSubscription: Subscription;
-  private accountSubscription: Subscription;
 
   constructor(
     private workdayService: WorkdayService,
+    private exportService: ExportService,
     private accountService: AccountService,
     private dateService: DateService,
     private matDialog: MatDialog
@@ -39,8 +38,8 @@ export class MonthSwitchComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.accountSubscription = this.accountService.getObservableAccount().subscribe((account: Account | null) => {
-      this.dateSubscription = this.dateService.getObservableDate().subscribe({
+    this.accountService.getObservableAccount().subscribe((account: Account | null) => {
+      this.dateService.getObservableDate().subscribe({
         next: date => {
           this.date = date;
           this.account = account;
@@ -63,7 +62,7 @@ export class MonthSwitchComponent implements OnInit {
     this.isLoading = true;
     const year = this.date.getFullYear();
     const month = this.date.getMonth() + 1;
-    this.workdayService.exportWorkdayMonth(year, month, this.account.id).subscribe(blob => {
+    this.exportService.exportWorkdayMonth(year, month, this.account.id).subscribe(blob => {
       saveAs(blob, `${this.account.lastName}_foglio_ore_${this.year}_${this.month}.xlsx`, { autoBom: false });
     });
     this.isLoading = false;
@@ -86,6 +85,7 @@ export class MonthSwitchComponent implements OnInit {
       exitAnimationDuration: '100ms',
       data: {
         selectedMonthDate: new Date(this.date.getFullYear(), this.date.getMonth(), 1, 0, 0, 0),
+        account: this.account,
       },
     });
   }
@@ -95,7 +95,10 @@ export class MonthSwitchComponent implements OnInit {
     this.dateService.setDate(this.date);
   }
 
-  isCurrentMonth() {
+  isCurrentMonth(): boolean {
+    if (!this.date) {
+      return false;
+    }
     return getTodaysDate().getMonth() == this.date.getMonth();
   }
 }
