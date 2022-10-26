@@ -2,6 +2,8 @@ import {Component, Inject} from '@angular/core';
 import {MAT_DIALOG_DATA, MatDialogRef} from "@angular/material/dialog";
 import {FormArray, FormBuilder, FormControl, Validators} from "@angular/forms";
 
+const EMAIL_VALIDATOR = Validators.pattern("^[a-zA-Z0-9_]+@[a-zA-Z0-9]+\\.[a-zA-Z]{2,5}$");
+
 @Component({
   selector: 'app-send-email',
   templateUrl: './send-email.component.html',
@@ -11,6 +13,7 @@ export class SendEmailComponent {
 
   private date: Date;
   isLoading: boolean = false;
+
 
   constructor(
     private formBuilder: FormBuilder,
@@ -22,7 +25,7 @@ export class SendEmailComponent {
 
   emailForm = this.formBuilder.group({
     emailAddresses: this.formBuilder.array([
-      new FormControl('', [Validators.required, Validators.pattern("^[a-zA-Z0-9_]+@[a-zA-Z0-9]+\\.[a-zA-Z]{2,5}$")])
+      new FormControl('', [Validators.required, EMAIL_VALIDATOR])
     ])
   });
 
@@ -31,8 +34,7 @@ export class SendEmailComponent {
   }
 
   addRecipient() {
-    //FIXME crashes after add
-    const emailRecipient = new FormControl('', [Validators.required, Validators.email]);
+    const emailRecipient = new FormControl('', [Validators.required, EMAIL_VALIDATOR]);
     this.emailAddresses.push(emailRecipient);
   }
 
@@ -50,6 +52,7 @@ export class SendEmailComponent {
   }
 
   sendEmailRequest() {
+    //TODO email service
     console.log("SEND!")
 
     this.close()
