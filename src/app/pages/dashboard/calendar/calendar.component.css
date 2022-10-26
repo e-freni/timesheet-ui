@@ -14,6 +14,10 @@
   @apply day-commons text-gray-300 bg-gray-50
 }
 
+.special-day {
+  @apply day-commons text-white bg-emerald-500
+}
+
 .logged-day {
   @apply day-commons bg-blue-50 cursor-pointer
 }

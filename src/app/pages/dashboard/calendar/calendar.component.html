@@ -1,61 +1,70 @@
-<div class="min-h-full px-10 pt-8">
-  <div class="w-full" id="calendar-container">
+<div class='min-h-full px-10 pt-8'>
+  <div class='w-full' id='calendar-container'>
     <!-- Calendar cells -->
-    <div class="grid grid-cols-7 gap-2" id="calendar-body">
-      <div *ngFor="let day of this.monthDays" id="calendar-day-cell">
+    <div class='grid grid-cols-7 gap-2' id='calendar-body'>
+      <div *ngFor='let day of this.monthDays' id='calendar-day-cell'>
+        <!-- Single day cell -->
         <div
-          id="single-day-cell"
+          (click)='openDay(day)'
           [ngClass]="
         day.workday ? 'logged-day' :
         day.outerMonths ? 'outer-months-day' :
+        isSpecialDay(day) ? 'special-day' :
         isNotWorkingDay(day) ? 'not-working-day' :
-        'working-day'" class="text-2xl"
-          (click)="openDay(day)"
+        'working-day'"
+          class='text-2xl'
         >
           <p>{{day.dayName}}</p>
-          <p class="text-5xl">{{day.monthDayNumber}}</p>
+          <p class='text-5xl'>{{day.monthDayNumber}}</p>
           <!-- Icons -->
-          <div class="flex">
-            <div *ngIf="day.workday?.workingHours > 0" class="day-info-panel" [matTooltipClass]="'tooltip'"
-                 [matTooltip]="'Giornata Lavorativa'">
-              <icon-work [height]="6" [width]="6"></icon-work>
-              <p class="text-lg">{{day.workday?.workingHours}}H</p>
+          <div class='flex'>
+            <div *ngIf='day.workday?.workingHours > 0' [matTooltipClass]="'tooltip'"
+                 [matTooltip]="'Giornata Lavorativa'"
+                 class='day-info-panel'>
+              <icon-work [height]='6' [width]='6'></icon-work>
+              <p class='text-lg'>{{day.workday?.workingHours}}H</p>
             </div>
-            <div *ngIf="day.workday?.workPermitHours > 0" class="day-info-panel" [matTooltipClass]="'tooltip'"
-                 [matTooltip]="'Permessi'">
-              <icon-permission [height]="6" [width]="6"></icon-permission>
-              <p class="text-lg">{{day.workday?.workPermitHours}}H</p>
+            <div *ngIf='day.workday?.workPermitHours > 0' [matTooltipClass]="'tooltip'" [matTooltip]="'Permessi'"
+                 class='day-info-panel'>
+              <icon-permission [height]='6' [width]='6'></icon-permission>
+              <p class='text-lg'>{{day.workday?.workPermitHours}}H</p>
             </div>
-            <div *ngIf="day.workday?.extraHours > 0" class="day-info-panel" [matTooltipClass]="'tooltip'"
-                 [matTooltip]="'Straordinari'">
-              <icon-extra [height]="6" [width]="6"></icon-extra>
-              <p class="text-lg">{{day.workday?.extraHours}}H</p>
+            <div *ngIf='day.workday?.extraHours > 0' [matTooltipClass]="'tooltip'" [matTooltip]="'Straordinari'"
+                 class='day-info-panel'>
+              <icon-extra [height]='6' [width]='6'></icon-extra>
+              <p class='text-lg'>{{day.workday?.extraHours}}H</p>
             </div>
-            <div *ngIf="day.workday?.nightWorkingHours > 0" class="day-info-panel" [matTooltipClass]="'tooltip'"
-                 [matTooltip]="'Notturno'">
-              <icon-night-hours [height]="6" [width]="6"></icon-night-hours>
-              <p class="text-lg">{{day.workday?.nightWorkingHours}}H</p>
+            <div *ngIf='day.workday?.nightWorkingHours > 0' [matTooltipClass]="'tooltip'" [matTooltip]="'Notturno'"
+                 class='day-info-panel'>
+              <icon-night-hours [height]='6' [width]='6'></icon-night-hours>
+              <p class='text-lg'>{{day.workday?.nightWorkingHours}}H</p>
             </div>
-            <div *ngIf="day.workday?.funeralLeaveHours > 0" class="day-info-panel" [matTooltipClass]="'tooltip'"
-                 [matTooltip]="'Permessi per lutto'">
-              <icon-funeral-leave [height]="6" [width]="6"></icon-funeral-leave>
-              <p class="text-lg">{{day.workday?.funeralLeaveHours}}H</p>
+            <div *ngIf='day.workday?.funeralLeaveHours > 0' [matTooltipClass]="'tooltip'"
+                 [matTooltip]="'Permessi per lutto'"
+                 class='day-info-panel'>
+              <icon-funeral-leave [height]='6' [width]='6'></icon-funeral-leave>
+              <p class='text-lg'>{{day.workday?.funeralLeaveHours}}H</p>
             </div>
-            <div *ngIf="day.workday?.holiday" class="day-info-panel" [matTooltipClass]="'tooltip'"
-                 [matTooltip]="'Ferie'">
-              <icon-holiday [height]="6" [width]="6"></icon-holiday>
+            <div *ngIf='day.workday?.holiday' [matTooltipClass]="'tooltip'" [matTooltip]="'Ferie'"
+                 class='day-info-panel'>
+              <icon-holiday [height]='6' [width]='6'></icon-holiday>
             </div>
-            <div *ngIf="day.workday?.sick" class="day-info-panel" [matTooltipClass]="'tooltip'"
-                 [matTooltip]="'Malattia'">
-              <icon-sick [height]="6" [width]="6"></icon-sick>
+            <div *ngIf='day.workday?.sick' [matTooltipClass]="'tooltip'" [matTooltip]="'Malattia'"
+                 class='day-info-panel'>
+              <icon-sick [height]='6' [width]='6'></icon-sick>
             </div>
-            <div *ngIf="day.workday?.accidentAtWork" class="day-info-panel" [matTooltipClass]="'tooltip'"
-                 [matTooltip]="'Infortunio sul lavoro'">
-              <icon-accident-at-work [height]="6" [width]="6"></icon-accident-at-work>
+            <div *ngIf='day.workday?.accidentAtWork' [matTooltipClass]="'tooltip'"
+                 [matTooltip]="'Infortunio sul lavoro'"
+                 class='day-info-panel'>
+              <icon-accident-at-work [height]='6' [width]='6'></icon-accident-at-work>
             </div>
           </div>
           <!-- Notes -->
-          <p class="w-5/6 font-bold text-center text-sm truncate hover:text-ellipsis ">{{day.workday?.notes}}</p>
+          <p *ngIf='!isSpecialDay(day)'
+             class='w-5/6 font-bold text-center text-sm truncate hover:text-ellipsis '>{{day.workday?.notes}}</p>
+          <!-- Special day annotation -->
+          <p *ngIf='isSpecialDay(day)' class='w-5/6 font-bold text-center text-sm break-words hover:text-ellipsis '>
+            {{getSpecialDayName(day)}}</p>
         </div>
       </div>
     </div>
