@@ -1,5 +1,5 @@
-import {WeekDay} from "@angular/common";
-import {Workday} from "app/models/workday.model";
+import { WeekDay } from '@angular/common';
+import { Workday } from 'app/models/workday.model';
 
 export class Day {
   monthDayNumber: number;
@@ -10,26 +10,26 @@ export class Day {
   constructor(monthDayNumber: number, dayValue: number, outerMonths?: boolean, workday?: Workday) {
     this.monthDayNumber = monthDayNumber;
     this.weekdayValue = dayValue;
-    this.outerMonths = outerMonths
-    this.workday = workday
+    this.outerMonths = outerMonths;
+    this.workday = workday;
   }
 
   get dayName(): string {
     switch (this.weekdayValue) {
       case WeekDay.Sunday:
-        return "Domenica"
+        return 'Domenica';
       case WeekDay.Monday:
-        return "Lunedì"
+        return 'Lunedì';
       case WeekDay.Tuesday:
-        return "Martedì"
+        return 'Martedì';
       case WeekDay.Wednesday:
-        return "Mercoledì"
+        return 'Mercoledì';
       case WeekDay.Thursday:
-        return "Giovedì"
+        return 'Giovedì';
       case WeekDay.Friday:
-        return "Venerdì"
+        return 'Venerdì';
       case WeekDay.Saturday:
-        return "Sabato"
+        return 'Sabato';
     }
   }
 }

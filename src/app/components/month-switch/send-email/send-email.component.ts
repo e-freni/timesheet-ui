@@ -1,33 +1,28 @@
-import {Component, Inject} from '@angular/core';
-import {MAT_DIALOG_DATA, MatDialogRef} from "@angular/material/dialog";
-import {FormArray, FormBuilder, FormControl, Validators} from "@angular/forms";
+import { Component, Inject } from '@angular/core';
+import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
+import { FormArray, FormBuilder, FormControl, Validators } from '@angular/forms';
 
-const EMAIL_VALIDATOR = Validators.pattern("^[a-zA-Z0-9_]+@[a-zA-Z0-9]+\\.[a-zA-Z]{2,5}$");
+const EMAIL_VALIDATOR = Validators.pattern('^[a-zA-Z0-9_]+@[a-zA-Z0-9]+\\.[a-zA-Z]{2,5}$');
 
 @Component({
   selector: 'app-send-email',
   templateUrl: './send-email.component.html',
-  styleUrls: ['./send-email.component.css']
+  styleUrls: ['./send-email.component.css'],
 })
 export class SendEmailComponent {
-
-  private date: Date;
   isLoading: boolean = false;
-
+  emailForm = this.formBuilder.group({
+    emailAddresses: this.formBuilder.array([new FormControl('', [Validators.required, EMAIL_VALIDATOR])]),
+  });
+  private date: Date;
 
   constructor(
     private formBuilder: FormBuilder,
     public dialogRef: MatDialogRef<SendEmailComponent>,
-    @Inject(MAT_DIALOG_DATA) data: any,
+    @Inject(MAT_DIALOG_DATA) data: any
   ) {
-    this.date = data.selectedMonthDate
+    this.date = data.selectedMonthDate;
   }
-
-  emailForm = this.formBuilder.group({
-    emailAddresses: this.formBuilder.array([
-      new FormControl('', [Validators.required, EMAIL_VALIDATOR])
-    ])
-  });
 
   get emailAddresses(): FormArray {
     return this.emailForm.controls['emailAddresses'] as FormArray;
@@ -43,20 +38,19 @@ export class SendEmailComponent {
   }
 
   back() {
-    this.dialogRef.close()
+    this.dialogRef.close();
   }
 
   close() {
-    this.isLoading = false
-    this.dialogRef.close()
+    this.isLoading = false;
+    this.dialogRef.close();
   }
 
   sendEmailRequest() {
-    this.isLoading = true
+    this.isLoading = true;
     //TODO email service
-    console.log("SEND!")
+    console.log('SEND!');
 
-    this.close()
+    this.close();
   }
-
 }

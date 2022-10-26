@@ -1,4 +1,4 @@
 export type DropDownOption = {
-  text: string,
-  operation: Function
-}
+  text: string;
+  operation: Function;
+};

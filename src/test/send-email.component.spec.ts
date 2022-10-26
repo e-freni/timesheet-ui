@@ -1,6 +1,6 @@
-import {ComponentFixture, TestBed} from '@angular/core/testing';
+import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import {SendEmailComponent} from 'app/components/month-switch/send-email/send-email.component';
+import { SendEmailComponent } from 'app/components/month-switch/send-email/send-email.component';
 
 describe('SendEmailComponent', () => {
   let component: SendEmailComponent;
@@ -8,9 +8,8 @@ describe('SendEmailComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [SendEmailComponent]
-    })
-      .compileComponents();
+      declarations: [SendEmailComponent],
+    }).compileComponents();
 
     fixture = TestBed.createComponent(SendEmailComponent);
     component = fixture.componentInstance;

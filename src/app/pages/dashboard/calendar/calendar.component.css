@@ -1,27 +1,27 @@
 .day-commons {
-  @apply py-1  justify-center items-center rounded-xl flex flex-col h-[10rem]
+  @apply py-1  justify-center items-center rounded-xl flex flex-col h-[10rem];
 }
 
 .not-working-day {
-  @apply day-commons text-red-300 bg-red-50 cursor-pointer
+  @apply day-commons text-red-300 bg-red-50 cursor-pointer;
 }
 
 .working-day {
-  @apply day-commons bg-amber-50 cursor-pointer
+  @apply day-commons bg-amber-50 cursor-pointer;
 }
 
 .outer-months-day {
-  @apply day-commons text-gray-300 bg-gray-50
+  @apply day-commons text-gray-300 bg-gray-50;
 }
 
 .special-day {
-  @apply day-commons text-white bg-emerald-500
+  @apply day-commons text-white bg-emerald-500;
 }
 
 .logged-day {
-  @apply day-commons bg-blue-50 cursor-pointer
+  @apply day-commons bg-blue-50 cursor-pointer;
 }
 
 .day-info-panel {
-  @apply flex flex-col px-2
+  @apply flex flex-col px-2;
 }

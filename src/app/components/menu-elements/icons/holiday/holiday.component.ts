@@ -1,13 +1,12 @@
-import {Component, Input} from '@angular/core';
+import { Component, Input } from '@angular/core';
 
 @Component({
   selector: 'icon-holiday',
-  templateUrl: './holiday.component.html'
+  templateUrl: './holiday.component.html',
 })
 export class HolidayComponent {
-
-  @Input() height: number = 6
-  @Input() width: number = 6
+  @Input() height: number = 6;
+  @Input() width: number = 6;
 
   get heightFromTailwindUnitsToPx() {
     return this.height * 4;

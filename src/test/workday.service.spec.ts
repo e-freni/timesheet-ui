@@ -1,6 +1,6 @@
-import {TestBed} from '@angular/core/testing';
+import { TestBed } from '@angular/core/testing';
 
-import {WorkdayService} from 'app/services/rest/workday.service';
+import { WorkdayService } from 'app/services/rest/workday.service';
 
 describe('WorkdayServiceService', () => {
   let service: WorkdayService;

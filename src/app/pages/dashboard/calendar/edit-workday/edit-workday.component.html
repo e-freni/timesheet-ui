@@ -1,103 +1,116 @@
-<div class="min-h-[30rem] relative">
+<div class='min-h-[30rem] relative'>
   <!-- Title and close -->
-  <div class="flex items-center">
-    <icon-close [height]="10" [width]="10" class="ml-auto cursor-pointer" (click)="back()"></icon-close>
+  <div class='flex items-center'>
+    <icon-close (click)='back()' [height]='10' [width]='10' class='ml-auto cursor-pointer'></icon-close>
   </div>
-  <h1 class="text-center text-5xl pb-5">
-    {{calendarDate.getDate()}}/{{calendarDate.getMonth() + 1}}/{{calendarDate.getFullYear()}}</h1>
-  <div class="flex flex-col justify-between h-full">
+  <h1 class='text-center text-5xl pb-5'>
+    {{ calendarDate.getDate() }}/{{ calendarDate.getMonth() + 1 }}/{{ calendarDate.getFullYear() }}
+  </h1>
+  <div class='flex flex-col justify-between h-full'>
     <!-- Day type Selection -->
-    <ng-select [(ngModel)]="selectedBeginningWorkdayType"
-               [ngModelOptions]="{standalone: true}"
-               [appearance]="'outline'"
-               [clearable]="false"
-               (change)="setBeginningWorkdayType($event);"
-    >
-      <ng-option [value]="workingStatus">Giornata lavorativa</ng-option>
-      <ng-option [value]="holidayStatus">Ferie</ng-option>
-      <ng-option [value]="sicknessStatus">Malattia</ng-option>
-      <ng-option [value]="accidentAtWorkStatus">Infortunio</ng-option>
+    <ng-select
+      (change)='setBeginningWorkdayType($event)'
+      [(ngModel)]='selectedBeginningWorkdayType'
+      [appearance]="'outline'"
+      [clearable]='false'
+      [ngModelOptions]='{ standalone: true }'>
+      <ng-option [value]='workingStatus'>Giornata lavorativa</ng-option>
+      <ng-option [value]='holidayStatus'>Ferie</ng-option>
+      <ng-option [value]='sicknessStatus'>Malattia</ng-option>
+      <ng-option [value]='accidentAtWorkStatus'>Infortunio</ng-option>
     </ng-select>
 
     <!-- normal day work log use cases -->
-    <form role="form" [formGroup]="workDayForm" (ngSubmit)="logWorkDay()">
-
-      <div *ngIf="this.workDayForm.get('workPermitHours')!.value" class="flex items-center pt-5">
-        <p class="w-8/12">Ore di permesso</p>
-        <input type="number" [formControlName]="'workPermitHours'" (change)="decreaseWorkingHours()" [defaultValue]="1"
-               min="1" max="8" class="w-2/12 h-10 border text-center focus:outline-primary hover:outline-primary">
-        <button class="ml-auto text-red-400 hover:text-red-500" (click)="trashHoursType('workPermitHours')">
-          <icon-delete [height]="10" [width]="10" class="w-1/12 h-10 ml-auto"></icon-delete>
+    <form (ngSubmit)='logWorkDay()' [formGroup]='workDayForm' role='form'>
+      <div *ngIf="this.workDayForm.get('workPermitHours')!.value" class='flex items-center pt-5'>
+        <p class='w-8/12'>Ore di permesso</p>
+        <input
+          (change)='decreaseWorkingHours()'
+          [defaultValue]='1'
+          [formControlName]="'workPermitHours'"
+          class='w-2/12 h-10 border text-center focus:outline-primary hover:outline-primary'
+          max='8'
+          min='1'
+          type='number' />
+        <button (click)="trashHoursType('workPermitHours')" class='ml-auto text-red-400 hover:text-red-500'>
+          <icon-delete [height]='10' [width]='10' class='w-1/12 h-10 ml-auto'></icon-delete>
         </button>
       </div>
 
-      <div *ngIf="this.workDayForm.get('extraHours')!.value" class="flex items-center pt-5">
-        <p class="w-8/12">Ore di straordinario</p>
-        <input type="number" [formControlName]="'extraHours'" [defaultValue]="1" min="1" max="10"
-               class="w-2/12 h-10 border text-center focus:outline-primary hover:outline-primary">
-        <button class="ml-auto text-red-400 hover:text-red-500" (click)="trashHoursType('extraHours')">
-          <icon-delete [height]="10" [width]="10" class="w-1/12 h-10 ml-auto"></icon-delete>
+      <div *ngIf="this.workDayForm.get('extraHours')!.value" class='flex items-center pt-5'>
+        <p class='w-8/12'>Ore di straordinario</p>
+        <input
+          [defaultValue]='1'
+          [formControlName]="'extraHours'"
+          class='w-2/12 h-10 border text-center focus:outline-primary hover:outline-primary'
+          max='10'
+          min='1'
+          type='number' />
+        <button (click)="trashHoursType('extraHours')" class='ml-auto text-red-400 hover:text-red-500'>
+          <icon-delete [height]='10' [width]='10' class='w-1/12 h-10 ml-auto'></icon-delete>
         </button>
       </div>
 
-      <div *ngIf="this.workDayForm.get('nightWorkingHours')!.value" class="flex items-center pt-5">
-        <p class="w-8/12">Ore di lavoro notturno</p>
-        <input type="number" [formControlName]="'nightWorkingHours'" [defaultValue]="1" min="1" max="5"
-               class="w-2/12 h-10 border text-center focus:outline-primary hover:outline-primary">
-        <button class="ml-auto text-red-400 hover:text-red-500" (click)="trashHoursType('nightWorkingHours')">
-          <icon-delete [height]="10" [width]="10" class="w-1/12 h-10 ml-auto"></icon-delete>
+      <div *ngIf="this.workDayForm.get('nightWorkingHours')!.value" class='flex items-center pt-5'>
+        <p class='w-8/12'>Ore di lavoro notturno</p>
+        <input
+          [defaultValue]='1'
+          [formControlName]="'nightWorkingHours'"
+          class='w-2/12 h-10 border text-center focus:outline-primary hover:outline-primary'
+          max='5'
+          min='1'
+          type='number' />
+        <button (click)="trashHoursType('nightWorkingHours')" class='ml-auto text-red-400 hover:text-red-500'>
+          <icon-delete [height]='10' [width]='10' class='w-1/12 h-10 ml-auto'></icon-delete>
         </button>
       </div>
 
-      <div *ngIf="this.workDayForm.get('funeralLeaveHours')!.value" class="flex items-center pt-5">
-        <p class="w-8/12">Ore di permesso per lutto</p>
-        <input type="number" [formControlName]="'funeralLeaveHours'" [defaultValue]="1" min="1" max="8"
-               class="w-2/12 h-10 border text-center focus:outline-primary hover:outline-primary">
-        <button class="ml-auto text-red-400 hover:text-red-500" (click)="trashHoursType('funeralLeaveHours')">
-          <icon-delete [height]="10" [width]="10" class="w-1/12 h-10 ml-auto"></icon-delete>
+      <div *ngIf="this.workDayForm.get('funeralLeaveHours')!.value" class='flex items-center pt-5'>
+        <p class='w-8/12'>Ore di permesso per lutto</p>
+        <input
+          [defaultValue]='1'
+          [formControlName]="'funeralLeaveHours'"
+          class='w-2/12 h-10 border text-center focus:outline-primary hover:outline-primary'
+          max='8'
+          min='1'
+          type='number' />
+        <button (click)="trashHoursType('funeralLeaveHours')" class='ml-auto text-red-400 hover:text-red-500'>
+          <icon-delete [height]='10' [width]='10' class='w-1/12 h-10 ml-auto'></icon-delete>
         </button>
       </div>
 
       <!-- Add hours select -->
-      <ng-select *ngIf="!hourFilled" class="w-full"
-                 [items]="showedHours"
-                 (change)="setAddedHours($event)"
-                 [isOpen]="true"
-      ></ng-select>
+      <ng-select
+        (change)='setAddedHours($event)'
+        *ngIf='!hourFilled'
+        [isOpen]='true'
+        [items]='showedHours'
+        class='w-full'></ng-select>
       <!-- Add hours button -->
-      <div *ngIf="addedHours.length < 4 && checkWorkingDay() && hourFilled" class="flex w-full justify-center ">
-        <button (click)="addHours()"
-                class="flex items-center w-full justify-center rounded-md border border-transparent bg-green-600 px-4 py-2 text-base font-medium text-white shadow-sm hover:bg-green-400 sm:ml-3 sm:w-auto sm:text-sm">
+      <div *ngIf='addedHours.length < 4 && checkWorkingDay() && hourFilled' class='flex w-full justify-center'>
+        <button
+          (click)='addHours()'
+          class='flex items-center w-full justify-center rounded-md border border-transparent bg-green-600 px-4 py-2 text-base font-medium text-white shadow-sm hover:bg-green-400 sm:ml-3 sm:w-auto sm:text-sm'>
           <icon-plus></icon-plus>
-          <p class="pl-2">Aggiungi altre ore</p>
+          <p class='pl-2'>Aggiungi altre ore</p>
         </button>
       </div>
       <!-- Notes -->
-      <div class="flex flex-col pb-24">
+      <div class='flex flex-col pb-24'>
         <label>Note:</label>
-        <textarea class="p-3 border focus:outline-primary hover:outline-primary" [formControlName]="'notes'"></textarea>
+        <textarea [formControlName]="'notes'" class='p-3 border focus:outline-primary hover:outline-primary'></textarea>
       </div>
       <!-- Actions -->
-      <div class="grid grid-cols-3 gap-14 absolute bottom-0 left-0 right-0">
-        <button type="submit"
-                class="submit-button"
-                [disabled]="this.workDayForm.invalid || isLoading"
-        >
+      <div class='grid grid-cols-3 gap-14 absolute bottom-0 left-0 right-0'>
+        <button [disabled]='this.workDayForm.invalid || isLoading' class='submit-button' type='submit'>
           Registra giornata
-          <app-spinning-circle *ngIf="isLoading" [color]="'blue'"></app-spinning-circle>
+          <app-spinning-circle *ngIf='isLoading' [color]="'blue'"></app-spinning-circle>
         </button>
-        <button type="button"
-                [disabled]="isCreation || isLoading"
-                class="delete-button"
-                (click)="deleteWorkDay()"
-        >
+        <button (click)='deleteWorkDay()' [disabled]='isCreation || isLoading' class='delete-button' type='button'>
           Cancella giornata
-          <app-spinning-circle *ngIf="isLoading" [color]="'red'"></app-spinning-circle>
+          <app-spinning-circle *ngIf='isLoading' [color]="'red'"></app-spinning-circle>
         </button>
-        <button type="button"
-                class="back-button"
-                (click)="back()">Indietro
-        </button>
+        <button (click)='back()' class='back-button' type='button'>Indietro</button>
       </div>
     </form>
   </div>

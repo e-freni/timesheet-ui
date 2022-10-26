@@ -1,13 +1,12 @@
-import {Component, Input} from '@angular/core';
+import { Component, Input } from '@angular/core';
 
 @Component({
   selector: 'icon-rightarrow',
   templateUrl: './rightarrow.component.html',
 })
 export class RightarrowComponent {
-
-  @Input() height: number = 6
-  @Input() width: number = 6
+  @Input() height: number = 6;
+  @Input() width: number = 6;
 
   get heightFromTailwindUnitsToPx() {
     return this.height * 4;
@@ -16,6 +15,4 @@ export class RightarrowComponent {
   get widthFromTailwindUnitsToPx() {
     return this.height * 4;
   }
-
-
 }

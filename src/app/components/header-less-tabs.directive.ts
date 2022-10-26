@@ -1,13 +1,12 @@
-import {Directive, ElementRef, OnInit} from "@angular/core";
+import { Directive, ElementRef, OnInit } from '@angular/core';
 
 @Directive({
-  selector: "[no-header-tabs]",
+  selector: '[no-header-tabs]',
 })
 export class HeaderLessTabsDirective implements OnInit {
-  constructor(private eleRef: ElementRef) {
-  }
+  constructor(private eleRef: ElementRef) {}
 
   ngOnInit(): void {
-    this.eleRef.nativeElement.firstChild.style.display = "none";
+    this.eleRef.nativeElement.firstChild.style.display = 'none';
   }
 }

@@ -1,14 +1,14 @@
-@import "~@angular/material/prebuilt-themes/indigo-pink.css";
-@import "~@ng-select/ng-select/themes/material.theme.css";
-@import "ng-select";
+@import '~@angular/material/prebuilt-themes/indigo-pink.css';
+@import '~@ng-select/ng-select/themes/material.theme.css';
+@import 'ng-select';
 
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
 @font-face {
-  font-family: "open-sans";
-  src: local("OpenSans"), url(./assets/fonts/open-sans.ttf) format("truetype");
+  font-family: 'open-sans';
+  src: local('OpenSans'), url(./assets/fonts/open-sans.ttf) format('truetype');
 }
 
 body {
@@ -16,33 +16,31 @@ body {
 }
 
 .page {
-  @apply h-screen bg-gray-50
+  @apply h-screen bg-gray-50;
 }
 
 .big-tooltip {
-  @apply text-xl font-sans
+  @apply text-xl font-sans;
 }
 
 .common-button {
-  @apply inline-flex w-full justify-center rounded-md border px-4 py-2 text-base font-medium sm:ml-3 sm:w-auto sm:text-sm items-center
+  @apply inline-flex w-full justify-center rounded-md border px-4 py-2 text-base font-medium sm:ml-3 sm:w-auto sm:text-sm items-center;
 }
 
 .submit-button {
   @apply common-button border-transparent bg-primary text-white shadow-sm hover:bg-blue-400
-  disabled
+  disabled;
 }
 
 .delete-button {
   @apply common-button border-transparent bg-red-600 text-white shadow-sm hover:bg-red-400
-  disabled
+  disabled;
 }
 
 .back-button {
-  @apply common-button border-gray-300 bg-white text-gray-700 shadow-sm hover:bg-gray-50 focus:outline-none
+  @apply common-button border-gray-300 bg-white text-gray-700 shadow-sm hover:bg-gray-50 focus:outline-none;
 }
 
 .disabled {
-  @apply disabled:bg-slate-50 disabled:text-slate-500 disabled:border-slate-200 disabled:shadow-none disabled:hover:bg-slate-50
+  @apply disabled:bg-slate-50 disabled:text-slate-500 disabled:border-slate-200 disabled:shadow-none disabled:hover:bg-slate-50;
 }
-
-

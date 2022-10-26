@@ -1,12 +1,11 @@
-import {Injectable} from '@angular/core';
-import {Observable, ReplaySubject} from "rxjs";
-import {Alert} from "app/models/alert.model";
+import { Injectable } from '@angular/core';
+import { Observable, ReplaySubject } from 'rxjs';
+import { Alert } from 'app/models/alert.model';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class AlertService {
-
   private alert: ReplaySubject<Alert> = new ReplaySubject<Alert>(1);
 
   getAlertState(): Observable<Alert> {

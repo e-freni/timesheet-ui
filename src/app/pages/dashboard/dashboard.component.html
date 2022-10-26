@@ -1,7 +1,6 @@
 <app-navbar></app-navbar>
-<app-month-switch (calendarEmitter)="switchToCalendar()"
-                  (analyticsEmitter)="switchToAnalytics()"></app-month-switch>
-<mat-tab-group no-header-tabs [selectedIndex]="selectedTab">
+<app-month-switch (analyticsEmitter)='switchToAnalytics()' (calendarEmitter)='switchToCalendar()'></app-month-switch>
+<mat-tab-group [selectedIndex]='selectedTab' no-header-tabs>
   <mat-tab>
     <app-calendar></app-calendar>
   </mat-tab>
@@ -9,4 +8,3 @@
     <app-analytics></app-analytics>
   </mat-tab>
 </mat-tab-group>
-

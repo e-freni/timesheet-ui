@@ -4,40 +4,56 @@
     <icon-leftarrow [height]='12' [width]='12'></icon-leftarrow>
   </button>
   <!-- formatted date = "month - year" -->
-  <div class='flex justify-center items-center xl:text-7xl lg:text-5xl sm:text-6xl text-xl col-start-3 col-end-9'
-       id='month-year'>
-    <h1>{{(month | uppercase) + " - " + year}}</h1>
+  <div
+    class='flex justify-center items-center xl:text-7xl lg:text-5xl sm:text-6xl text-xl col-start-3 col-end-9'
+    id='month-year'>
+    <h1>{{ (month | uppercase) + ' - ' + year }}</h1>
   </div>
   <!-- right arrow -->
   <button (click)='nextMonth()' class='arrow-button col-start-9 col-end-11'>
     <icon-rightarrow [height]='12' [width]='12'></icon-rightarrow>
   </button>
-
 </div>
 <div class='flex justify-center'>
   <!-- actions -->
   <div
     class='flex w-3/12 m-auto items-center justify-evenly py-4 gap-x-5 bg-primary text-white rounded-2xl big-tooltip'>
-    <button (click)='goToCalendar()' [matTooltipClass]="'big-tooltip'" [matTooltip]="'Calendario del mese'"
-            class='top-menu-button'>
+    <button
+      (click)='goToCalendar()'
+      [matTooltipClass]="'big-tooltip'"
+      [matTooltip]="'Calendario del mese'"
+      class='top-menu-button'>
       <icon-edit-data [height]='6' [width]='6'></icon-edit-data>
     </button>
-    <button (click)='goToAnalytics()' [matTooltipClass]="'big-tooltip'" [matTooltip]="'Statistiche del mese'"
-            class='top-menu-button'>
+    <button
+      (click)='goToAnalytics()'
+      [matTooltipClass]="'big-tooltip'"
+      [matTooltip]="'Statistiche del mese'"
+      class='top-menu-button'>
       <icon-analytics [height]='6' [width]='6'></icon-analytics>
     </button>
-    <button (click)='exportToExcel()' *ngIf='!isLoading' [matTooltipClass]="'big-tooltip'"
-            [matTooltip]="'Esporta in Excel'" class='top-menu-button-loading'>
+    <button
+      (click)='exportToExcel()'
+      *ngIf='!isLoading'
+      [matTooltipClass]="'big-tooltip'"
+      [matTooltip]="'Esporta in Excel'"
+      class='top-menu-button-loading'>
       <icon-export [height]='6' [width]='6'></icon-export>
     </button>
     <app-spinning-circle *ngIf='isLoading' [color]="'white'"></app-spinning-circle>
-    <button (click)='sendExportByEmail()' [matTooltipClass]="'big-tooltip'" [matTooltip]="'Invia per email'"
-            class='top-menu-button'>
+    <button
+      (click)='sendExportByEmail()'
+      [matTooltipClass]="'big-tooltip'"
+      [matTooltip]="'Invia per email'"
+      class='top-menu-button'>
       <icon-share [height]='6' [width]='6'></icon-share>
     </button>
-    <button (click)='getToCurrentMonth()' *ngIf='!isCurrentMonth()' [matTooltipClass]="'big-tooltip'"
-            [matTooltip]="'Torna a ' + (this.month | titlecase)"
-            class='top-menu-button'>
+    <button
+      (click)='getToCurrentMonth()'
+      *ngIf='!isCurrentMonth()'
+      [matTooltipClass]="'big-tooltip'"
+      [matTooltip]="'Torna a ' + (this.month | titlecase)"
+      class='top-menu-button'>
       <icon-today [height]='6' [width]='6'></icon-today>
     </button>
   </div>

@@ -1,19 +1,18 @@
-import {Injectable} from '@angular/core';
-import {JWT_STORAGE_KEY, SERVER_API_URL} from "app.constants";
-import {HttpClient} from "@angular/common/http";
-import {Observable, ReplaySubject} from "rxjs";
-import {LocalStorageService} from "ngx-webstorage";
-import {Account} from "app/models/account.model";
-import {Login} from "app/models/login.model";
-import {JwtToken} from "app/models/jwt-token.model";
-import {Router} from "@angular/router";
-import {DateService} from "app/services/date.service";
+import { Injectable } from '@angular/core';
+import { JWT_STORAGE_KEY, SERVER_API_URL } from 'app.constants';
+import { HttpClient } from '@angular/common/http';
+import { Observable, ReplaySubject } from 'rxjs';
+import { LocalStorageService } from 'ngx-webstorage';
+import { Account } from 'app/models/account.model';
+import { Login } from 'app/models/login.model';
+import { JwtToken } from 'app/models/jwt-token.model';
+import { Router } from '@angular/router';
+import { DateService } from 'app/services/date.service';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class AccountService {
-
   private accountSubject = new ReplaySubject<Account | null>(1);
   private account: Account;
 
@@ -21,14 +20,12 @@ export class AccountService {
     private httpClient: HttpClient,
     private localStorageService: LocalStorageService,
     private dateService: DateService,
-    private router: Router,
-  ) {
-  }
+    private router: Router
+  ) {}
 
   login(credentials: Login): Observable<JwtToken> {
     return this.httpClient.post<JwtToken>(SERVER_API_URL + '/account/login', credentials);
   }
-
 
   logout(): void {
     this.localStorageService.clear(JWT_STORAGE_KEY);
@@ -40,27 +37,23 @@ export class AccountService {
     return this.accountSubject.asObservable();
   }
 
-
   public load(): void {
-    this.httpClient.get<Account>(SERVER_API_URL + '/account/info')
-      .subscribe(
-        {
-          next: (account: Account) => {
-            this.account = account;
-            this.accountSubject.next(account);
-          },
-          error: () => {
-            this.account = null;
-            this.accountSubject.next(null);
-          }
-        }
-      );
+    this.httpClient.get<Account>(SERVER_API_URL + '/account/info').subscribe({
+      next: (account: Account) => {
+        this.account = account;
+        this.accountSubject.next(account);
+      },
+      error: () => {
+        this.account = null;
+        this.accountSubject.next(null);
+      },
+    });
   }
 
   redirect() {
     if (!this.account) {
       return;
     }
-    this.router.navigateByUrl("/dashboard");
+    this.router.navigateByUrl('/dashboard');
   }
 }

@@ -1,4 +1,4 @@
-import {HeaderLessTabsDirective} from 'app/components/header-less-tabs.directive';
+import { HeaderLessTabsDirective } from 'app/components/header-less-tabs.directive';
 
 describe('HeaderLessTabsDirectiveDirective', () => {
   it('should create an instance', () => {
