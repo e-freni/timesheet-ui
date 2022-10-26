@@ -83,7 +83,7 @@ export class MonthSwitchComponent implements OnInit {
 
   sendExportByEmail() {
     this.matDialog.open(SendEmailComponent, {
-      width: '50%',
+      width: '25%',
       disableClose: true,
       hasBackdrop: true,
       enterAnimationDuration: "100ms",

@@ -1,5 +1,6 @@
 @import "~@angular/material/prebuilt-themes/indigo-pink.css";
 @import "~@ng-select/ng-select/themes/material.theme.css";
+@import "ng-select";
 
 @tailwind base;
 @tailwind components;
@@ -43,3 +44,5 @@ body {
 .disabled {
   @apply disabled:bg-slate-50 disabled:text-slate-500 disabled:border-slate-200 disabled:shadow-none disabled:hover:bg-slate-50
 }
+
+

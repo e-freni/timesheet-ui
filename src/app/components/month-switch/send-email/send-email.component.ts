@@ -52,6 +52,7 @@ export class SendEmailComponent {
   }
 
   sendEmailRequest() {
+    this.isLoading = true
     //TODO email service
     console.log("SEND!")
 
