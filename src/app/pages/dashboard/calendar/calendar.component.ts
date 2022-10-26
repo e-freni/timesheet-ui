@@ -7,7 +7,7 @@ import { AccountService } from 'app/services/account.service';
 import { WorkdayService } from 'app/services/rest/workday.service';
 import { Workday } from 'app/models/workday.model';
 import { EditWorkdayComponent } from 'app/pages/dashboard/calendar/edit-workday/edit-workday.component';
-import { getMonth, getYear } from 'app/utils/date-utilities';
+import { getMonth } from 'app/utils/date-utilities';
 import { DateService } from 'app/services/date.service';
 import { Subscription } from 'rxjs';
 import {
@@ -68,10 +68,6 @@ export class CalendarComponent implements OnInit, OnDestroy {
 
   get month(): string {
     return getMonth(this.date);
-  }
-
-  get year(): string {
-    return getYear(this.date);
   }
 
   ngOnInit(): void {

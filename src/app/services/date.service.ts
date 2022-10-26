@@ -1,12 +1,10 @@
-import {Injectable} from '@angular/core';
-import {Observable, ReplaySubject, Subject} from "rxjs";
-import {getTodaysDate} from "app/utils/date-utilities";
+import { Injectable } from '@angular/core';
+import { Observable, ReplaySubject, Subject } from 'rxjs';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class DateService {
-
   dateSubject: Subject<Date> = new ReplaySubject<Date | null>(1);
 
   getObservableDate(): Observable<Date | null> {
@@ -20,5 +18,4 @@ export class DateService {
   unsubscribe(): void {
     this.dateSubject.next(null);
   }
-
 }

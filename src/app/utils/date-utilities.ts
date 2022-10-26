@@ -7,16 +7,16 @@ export function getTodaysDate(): Date {
   return date;
 }
 
-export function getFormattedDate(year: number, month: number, day:number): string {
+export function getFormattedDate(year: number, month: number, day: number): string {
   let date = getTodaysDate();
-  date.setFullYear(year, month, day)
+  date.setFullYear(year, month, day);
   return date.toISOString().split('T')[0];
 }
 
 export function getMonth(date: Date): string {
-  return new Intl.DateTimeFormat("it-IT", {month: "long"}).format(date).toUpperCase();
+  return new Intl.DateTimeFormat('it-IT', { month: 'long' }).format(date);
 }
 
 export function getYear(date: Date): string {
-  return new Intl.DateTimeFormat("it-IT", {year: "numeric"}).format(date).toUpperCase();
+  return new Intl.DateTimeFormat('it-IT', { year: 'numeric' }).format(date);
 }
