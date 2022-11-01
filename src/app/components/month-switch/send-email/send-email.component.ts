@@ -17,7 +17,8 @@ export class SendEmailComponent {
   isLoading: boolean = false;
   emailForm = this.formBuilder.group({
     emailAddresses: this.formBuilder.array([new FormControl('', [Validators.required, EMAIL_VALIDATOR])]),
-  });
+    sendYourself: [false, []],
+});
   private date: Date;
   private account: Account;
 
@@ -42,6 +43,7 @@ export class SendEmailComponent {
   }
 
   getRecipients() {
+
     return this.emailForm.get('emailAddresses')!.value;
   }
 
@@ -60,9 +62,17 @@ export class SendEmailComponent {
 
   sendEmailRequest() {
     this.isLoading = true;
+    this.addYourself();
     this.exportService
       .exportAndSendByEmail(this.date.getFullYear(), this.date.getMonth() + 1, this.account.id, this.getRecipients())
       .subscribe(() => {});
     this.close();
+  }
+
+  private addYourself() {
+    console.log(this.emailForm.get('sendYourself')!.value)
+    if (this.emailForm.get('sendYourself')!.value) {
+      this.emailAddresses.push(new FormControl(this.account?.email, [Validators.required, EMAIL_VALIDATOR]))
+    }
   }
 }
