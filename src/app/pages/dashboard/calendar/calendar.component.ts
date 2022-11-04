@@ -7,7 +7,7 @@ import { AccountService } from 'app/services/account.service';
 import { WorkdayService } from 'app/services/rest/workday.service';
 import { Workday } from 'app/models/workday.model';
 import { EditWorkdayComponent } from 'app/pages/dashboard/calendar/edit-workday/edit-workday.component';
-import { getMonth } from 'app/utils/date-utilities';
+import { getMonth, getTodaysDate } from 'app/utils/date-utilities';
 import { DateService } from 'app/services/date.service';
 import { Subscription } from 'rxjs';
 import {
@@ -144,6 +144,12 @@ export class CalendarComponent implements OnInit, OnDestroy {
           this.fetchWorkdays();
         }
       });
+  }
+
+  isToday(day: Day) {
+    const dateToCheck = new Date(this.date);
+    dateToCheck.setDate(day.monthDayNumber);
+    return dateToCheck.getTime() == getTodaysDate().getTime();
   }
 
   private fetchWorkdays() {
