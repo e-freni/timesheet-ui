@@ -121,7 +121,6 @@ export class EditWorkdayComponent implements OnInit {
   logWorkDay() {
     this.isLoading = true;
     const workday = this.createFromForm();
-    workday.workingHours = 8;
 
     if (this.isCreation) {
       this.workdayService.createWorkday(workday).subscribe({

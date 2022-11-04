@@ -25,3 +25,7 @@
 .day-info-panel {
   @apply flex flex-col px-2;
 }
+
+.today-cell {
+  @apply border-t-2 border-t-primary rounded-2xl;
+}
