@@ -18,6 +18,7 @@
       <ng-option [value]='holidayStatus'>Ferie</ng-option>
       <ng-option [value]='sicknessStatus'>Malattia</ng-option>
       <ng-option [value]='accidentAtWorkStatus'>Infortunio</ng-option>
+      <ng-option [value]='funeralLeaveStatus'>Permesso per funerale</ng-option>
     </ng-select>
 
     <!-- normal day work log use cases -->
@@ -64,21 +65,6 @@
           <icon-delete [height]='10' [width]='10' class='w-1/12 h-10 ml-auto'></icon-delete>
         </button>
       </div>
-
-      <div *ngIf="this.workDayForm.get('funeralLeaveHours')!.value" class='flex items-center pt-5'>
-        <p class='w-8/12'>Ore di permesso per lutto</p>
-        <input
-          [defaultValue]='1'
-          [formControlName]="'funeralLeaveHours'"
-          class='w-2/12 h-10 border text-center focus:outline-primary hover:outline-primary'
-          max='8'
-          min='1'
-          type='number' />
-        <button (click)="trashHoursType('funeralLeaveHours')" class='ml-auto text-red-400 hover:text-red-500'>
-          <icon-delete [height]='10' [width]='10' class='w-1/12 h-10 ml-auto'></icon-delete>
-        </button>
-      </div>
-
       <!-- Add hours select -->
       <ng-select
         (change)='setAddedHours($event)'
@@ -87,7 +73,7 @@
         [items]='showedHours'
         class='w-full'></ng-select>
       <!-- Add hours button -->
-      <div *ngIf='addedHours.length < 4 && checkWorkingDay() && hourFilled' class='flex w-full justify-center'>
+      <div *ngIf='addedHours.length < 3 && checkWorkingDay() && hourFilled' class='flex w-full justify-center'>
         <button
           (click)='addHours()'
           class='flex items-center w-full justify-center rounded-md border border-transparent bg-green-600 px-4 py-2 text-base font-medium text-white shadow-sm hover:bg-green-400 sm:ml-3 sm:w-auto sm:text-sm'>

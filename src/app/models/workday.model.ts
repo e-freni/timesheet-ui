@@ -6,7 +6,7 @@ export type Workday = {
   extraHours: number;
   nightWorkingHours: number;
   workPermitHours: number;
-  funeralLeaveHours: number;
+  funeralLeave: boolean;
   holiday: boolean;
   sick: boolean;
   accidentAtWork: boolean;

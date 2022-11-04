@@ -3,4 +3,5 @@ export const enum WorkdayType {
   WORKING = 'working',
   SICKNESS = 'sick',
   ACCIDENT_AT_WORK = 'accidentAtWork',
+  FUNERAL_LEAVE = 'funeralLeave',
 }

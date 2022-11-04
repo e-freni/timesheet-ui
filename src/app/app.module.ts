@@ -39,7 +39,6 @@ import { SendEmailComponent } from './components/month-switch/send-email/send-em
     NavbarComponent,
     DropdownComponent,
     EditWorkdayComponent,
-    AlertComponent,
     MonthSwitchComponent,
     DashboardComponent,
     AnalyticsComponent,

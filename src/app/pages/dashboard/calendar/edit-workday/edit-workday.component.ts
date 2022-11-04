@@ -8,6 +8,7 @@ import { Workday } from 'app/models/workday.model';
 import { AccountService } from 'app/services/account.service';
 import { WorkdayService } from 'app/services/rest/workday.service';
 import { getFormattedDate } from 'app/utils/date-utilities';
+import { AlertService } from 'app/services/alert.service';
 
 export type SelectValue = {
   id: number;
@@ -31,6 +32,7 @@ export class EditWorkdayComponent implements OnInit {
   public holidayStatus: string = WorkdayType.HOLIDAY;
   public sicknessStatus: string = WorkdayType.SICKNESS;
   public accidentAtWorkStatus: string = WorkdayType.ACCIDENT_AT_WORK;
+  public funeralLeaveStatus: string = WorkdayType.FUNERAL_LEAVE;
 
   workDayForm = this.formBuilder.group({
     id: null,
@@ -40,7 +42,7 @@ export class EditWorkdayComponent implements OnInit {
     extraHours: [0, [Validators.required, Validators.min(0), Validators.max(10)]],
     nightWorkingHours: [0, [Validators.required, Validators.min(0), Validators.max(5)]],
     workPermitHours: [0, [Validators.required, Validators.min(0), Validators.max(8)]],
-    funeralLeaveHours: [0, [Validators.required, Validators.min(0), Validators.max(8)]],
+    funeralLeave: [false, [Validators.required, Validators.min(0), Validators.max(8)]],
     holiday: false,
     sick: false,
     accidentAtWork: false,
@@ -52,7 +54,6 @@ export class EditWorkdayComponent implements OnInit {
     { id: 1, value: 'workPermitHours', label: 'Ore di permesso' },
     { id: 2, value: 'extraHours', label: 'Ore di straordinario' },
     { id: 3, value: 'nightWorkingHours', label: 'Ore di lavoro notturno' },
-    { id: 4, value: 'funeralLeaveHours', label: 'Ore di permesso per lutto' },
   ];
 
   showedHours = this.addableHours.filter(h => !this.addedHours.includes(h));
@@ -62,6 +63,7 @@ export class EditWorkdayComponent implements OnInit {
     private formBuilder: FormBuilder,
     private accountService: AccountService,
     private workdayService: WorkdayService,
+    private alertService: AlertService,
     public dialogRef: MatDialogRef<EditWorkdayComponent>,
     @Inject(MAT_DIALOG_DATA) data: any
   ) {
@@ -98,7 +100,7 @@ export class EditWorkdayComponent implements OnInit {
       extraHours: workday.extraHours,
       nightWorkingHours: workday.nightWorkingHours,
       workPermitHours: workday.workPermitHours,
-      funeralLeaveHours: workday.funeralLeaveHours,
+      funeralLeave: workday.funeralLeave,
       holiday: workday.holiday,
       sick: workday.sick,
       accidentAtWork: workday.accidentAtWork,
@@ -119,22 +121,44 @@ export class EditWorkdayComponent implements OnInit {
   logWorkDay() {
     this.isLoading = true;
     const workday = this.createFromForm();
+    workday.workingHours = 8;
 
     if (this.isCreation) {
-      this.workdayService.createWorkday(workday).subscribe(() => {
-        this.close();
+      this.workdayService.createWorkday(workday).subscribe({
+        error: response => {
+          this.alertService.addAlert({ msg: `${response.status} - ${response.error.message}`, type: 'alert' });
+          this.isLoading = false;
+        },
+        complete: () => {
+          this.alertService.addAlert({ msg: 'Salvataggio effettuato', type: 'primary' });
+          this.close();
+        },
       });
     } else {
-      this.workdayService.editWorkday(workday).subscribe(() => {
-        this.close();
+      this.workdayService.editWorkday(workday).subscribe({
+        error: response => {
+          this.alertService.addAlert({ msg: `${response.status} - ${response.error.message}`, type: 'alert' });
+          this.isLoading = false;
+        },
+        complete: () => {
+          this.alertService.addAlert({ msg: 'Salvataggio effettuato', type: 'primary' });
+          this.close();
+        },
       });
     }
   }
 
   deleteWorkDay() {
     this.isLoading = true;
-    this.workdayService.deleteWorkday(this.workDayForm.get(['id'])!.value, this.account.id).subscribe(() => {
-      this.close();
+    this.workdayService.deleteWorkday(this.workDayForm.get(['id'])!.value, this.account.id).subscribe({
+      error: response => {
+        this.alertService.addAlert({ msg: `${response.status} - ${response.error.message}`, type: 'alert' });
+        this.isLoading = false;
+      },
+      complete: () => {
+        this.alertService.addAlert({ msg: 'Cancellazione effettuata', type: 'primary' });
+        this.close();
+      },
     });
   }
 
@@ -160,10 +184,6 @@ export class EditWorkdayComponent implements OnInit {
 
     if (hoursType.value == 'nightWorkingHours') {
       this.workDayForm.patchValue({ nightWorkingHours: initHours });
-    }
-
-    if (hoursType.value == 'funeralLeaveHours') {
-      this.workDayForm.patchValue({ funeralLeaveHours: initHours });
     }
 
     this.decreaseWorkingHours();
@@ -194,6 +214,9 @@ export class EditWorkdayComponent implements OnInit {
     if (selectedWorkdayType == WorkdayType.ACCIDENT_AT_WORK) {
       this.workDayForm.patchValue({ accidentAtWork: true });
     }
+    if (selectedWorkdayType == WorkdayType.FUNERAL_LEAVE) {
+      this.workDayForm.patchValue({ funeralLeave: true });
+    }
   }
 
   trashHoursType(hoursType: string) {
@@ -213,17 +236,12 @@ export class EditWorkdayComponent implements OnInit {
       this.workDayForm.patchValue({ nightWorkingHours: 0 });
     }
 
-    if (hoursType == 'funeralLeaveHours') {
-      this.correctWorkingHours('funeralLeaveHours');
-      this.workDayForm.patchValue({ funeralLeaveHours: 0 });
-    }
     this.workDayForm.get(hoursType).setErrors(null);
   }
 
   decreaseWorkingHours() {
     const permitHours = this.workDayForm.get('workPermitHours')!.value;
-    const funeralLeaveHours = this.workDayForm.get('funeralLeaveHours')!.value;
-    this.workDayForm.patchValue({ workingHours: 8 - (permitHours + funeralLeaveHours) });
+    this.workDayForm.patchValue({ workingHours: 8 - permitHours });
   }
 
   private createFromForm(): Workday {
@@ -235,7 +253,7 @@ export class EditWorkdayComponent implements OnInit {
       extraHours: this.workDayForm.get(['extraHours'])!.value,
       nightWorkingHours: this.workDayForm.get(['nightWorkingHours'])!.value,
       workPermitHours: this.workDayForm.get(['workPermitHours'])!.value,
-      funeralLeaveHours: this.workDayForm.get(['funeralLeaveHours'])!.value,
+      funeralLeave: this.workDayForm.get(['funeralLeave'])!.value,
       holiday: this.workDayForm.get(['holiday'])!.value,
       sick: this.workDayForm.get(['sick'])!.value,
       accidentAtWork: this.workDayForm.get(['accidentAtWork'])!.value,
@@ -270,9 +288,6 @@ export class EditWorkdayComponent implements OnInit {
     if (workday.nightWorkingHours > 0) {
       this.addedHours.push({ id: 3, value: 'nightWorkingHours', label: 'Ore di lavoro notturno' });
     }
-    if (workday.funeralLeaveHours > 0) {
-      this.addedHours.push({ id: 4, value: 'funeralLeaveHours', label: 'Ore di permesso per lutto' });
-    }
     this.showedHours = this.addableHours.filter(h1 => !this.addedHours.find(h2 => h1.id == h2.id));
   }
 
@@ -287,7 +302,7 @@ export class EditWorkdayComponent implements OnInit {
     this.workDayForm.patchValue({ workingHours: 0 });
     this.workDayForm.patchValue({ extraHours: 0 });
     this.workDayForm.patchValue({ nightWorkingHours: 0 });
-    this.workDayForm.patchValue({ funeralLeaveHours: 0 });
+    this.workDayForm.patchValue({ funeralLeave: false });
     this.workDayForm.patchValue({ workPermitHours: 0 });
     this.workDayForm.patchValue({ holiday: false });
     this.workDayForm.patchValue({ sick: false });

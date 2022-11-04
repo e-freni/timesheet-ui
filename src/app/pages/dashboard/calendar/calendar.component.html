@@ -55,12 +55,11 @@
               <p class='text-lg'>{{ day.workday?.nightWorkingHours }}H</p>
             </div>
             <div
-              *ngIf='day.workday?.funeralLeaveHours > 0'
+              *ngIf='day.workday?.funeralLeave'
               [matTooltipClass]="'tooltip'"
               [matTooltip]="'Permessi per lutto'"
               class='day-info-panel'>
               <icon-funeral-leave [height]='6' [width]='6'></icon-funeral-leave>
-              <p class='text-lg'>{{ day.workday?.funeralLeaveHours }}H</p>
             </div>
             <div
               *ngIf='day.workday?.holiday'

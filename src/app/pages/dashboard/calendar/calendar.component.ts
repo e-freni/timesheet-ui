@@ -129,7 +129,7 @@ export class CalendarComponent implements OnInit, OnDestroy {
       .open(EditWorkdayComponent, {
         width: '50%',
         disableClose: true,
-        hasBackdrop: true,
+        backdropClass: 'ts-backdrop',
         enterAnimationDuration: '100ms',
         exitAnimationDuration: '100ms',
         data: {

@@ -44,3 +44,11 @@ body {
 .disabled {
   @apply disabled:bg-slate-50 disabled:text-slate-500 disabled:border-slate-200 disabled:shadow-none disabled:hover:bg-slate-50;
 }
+
+.ts-backdrop {
+  @apply backdrop-blur-lg;
+}
+
+.over-the-top-position {
+  z-index: 1001;
+}

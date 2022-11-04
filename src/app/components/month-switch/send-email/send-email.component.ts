@@ -4,6 +4,7 @@ import { FormArray, FormBuilder, FormControl, Validators } from '@angular/forms'
 import { ExportService } from 'app/services/rest/export.service';
 import { Account } from 'app/models/account.model';
 import { AccountService } from 'app/services/account.service';
+import { AlertService } from 'app/services/alert.service';
 
 const EMAIL_VALIDATOR = Validators.pattern('^[a-zA-Z0-9_]+.+@[a-zA-Z0-9]+\\.[a-zA-Z]{2,5}$');
 
@@ -13,12 +14,12 @@ const EMAIL_VALIDATOR = Validators.pattern('^[a-zA-Z0-9_]+.+@[a-zA-Z0-9]+\\.[a-z
   styleUrls: ['./send-email.component.css'],
 })
 export class SendEmailComponent {
-  //TODO implement send yourself functionality and unique check
+  //TODO implement send yourself unique check
   isLoading: boolean = false;
   emailForm = this.formBuilder.group({
     emailAddresses: this.formBuilder.array([new FormControl('', [Validators.required, EMAIL_VALIDATOR])]),
     sendYourself: [false, []],
-});
+  });
   private date: Date;
   private account: Account;
 
@@ -26,6 +27,7 @@ export class SendEmailComponent {
     private formBuilder: FormBuilder,
     private exportService: ExportService,
     private accountService: AccountService,
+    private alertService: AlertService,
     public dialogRef: MatDialogRef<SendEmailComponent>,
     @Inject(MAT_DIALOG_DATA) data: any
   ) {
@@ -43,7 +45,6 @@ export class SendEmailComponent {
   }
 
   getRecipients() {
-
     return this.emailForm.get('emailAddresses')!.value;
   }
 
@@ -65,14 +66,22 @@ export class SendEmailComponent {
     this.addYourself();
     this.exportService
       .exportAndSendByEmail(this.date.getFullYear(), this.date.getMonth() + 1, this.account.id, this.getRecipients())
-      .subscribe(() => {});
+      .subscribe({
+        error: response => {
+          this.alertService.addAlert({ msg: `${response.status} - ${response.error.message}`, type: 'alert' });
+          this.isLoading = false;
+        },
+        complete: () => {
+          this.alertService.addAlert({ msg: 'Invio email effettuato', type: 'primary' });
+          this.close();
+        },
+      });
     this.close();
   }
 
   private addYourself() {
-    console.log(this.emailForm.get('sendYourself')!.value)
     if (this.emailForm.get('sendYourself')!.value) {
-      this.emailAddresses.push(new FormControl(this.account?.email, [Validators.required, EMAIL_VALIDATOR]))
+      this.emailAddresses.push(new FormControl(this.account?.email, [Validators.required, EMAIL_VALIDATOR]));
     }
   }
 }
