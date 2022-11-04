@@ -39,6 +39,9 @@ export class MonthSwitchComponent implements OnInit {
 
   ngOnInit(): void {
     this.accountService.getObservableAccount().subscribe((account: Account | null) => {
+      if (!account) {
+        return;
+      }
       this.dateService.getObservableDate().subscribe({
         next: date => {
           this.date = date;
@@ -80,7 +83,7 @@ export class MonthSwitchComponent implements OnInit {
     this.matDialog.open(SendEmailComponent, {
       width: '25%',
       disableClose: true,
-      hasBackdrop: true,
+      backdropClass: 'ts-backdrop',
       enterAnimationDuration: '100ms',
       exitAnimationDuration: '100ms',
       data: {
@@ -92,6 +95,7 @@ export class MonthSwitchComponent implements OnInit {
 
   getToCurrentMonth() {
     this.date.setMonth(getTodaysDate().getMonth());
+    this.date.setFullYear(getTodaysDate().getFullYear());
     this.dateService.setDate(this.date);
   }
 

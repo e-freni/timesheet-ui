@@ -1,5 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import { PageService } from 'app/services/page.service';
 import { Subscription } from 'rxjs';
 import { Account } from 'app/models/account.model';
 import { AccountService } from 'app/services/account.service';
@@ -16,26 +15,21 @@ export class DashboardComponent implements OnInit {
   ANALYTICS = 1;
 
   //TODO alert of missing hours on the last 7 or 5 or 3 days of the month?
-  //TODO send email for real
   //TODO admin add user
+  //TODO highlight current day
   //TODO user change password
   //TODO put all css in style classes and optimize it
   //TODO make a mobile view
   //TODO alert when logging in special days (like christmas!)
   //TODO DARK MODE!
 
-  constructor(private pageService: PageService, private accountService: AccountService) {}
+  constructor(private accountService: AccountService) {}
 
   ngOnInit(): void {
     this.accountService.getObservableAccount().subscribe((account: Account | null) => {
       if (!account) {
         return;
       }
-      this.pageSubscription = this.pageService.getCurrentPage().subscribe({
-        next: page => {
-          this.page = page;
-        },
-      });
     });
   }
 

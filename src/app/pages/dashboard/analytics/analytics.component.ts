@@ -1,11 +1,11 @@
 import { Component, OnChanges, OnInit } from '@angular/core';
 import { WorkdayService } from 'app/services/rest/workday.service';
-import { Subscription } from 'rxjs';
 import { Account } from 'app/models/account.model';
 import { AccountService } from 'app/services/account.service';
 import { DateService } from 'app/services/date.service';
 import { Summary } from 'app/models/summary.model';
 import { getTodaysDate } from 'app/utils/date-utilities';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-analytics',
@@ -18,8 +18,6 @@ export class AnalyticsComponent implements OnInit, OnChanges {
   showedMonth: number;
   currentMonth: number;
   private workdaySubscription: Subscription;
-  private accountSubscription: Subscription;
-  private dateSubscription: Subscription;
 
   constructor(
     private workdayService: WorkdayService,
@@ -40,20 +38,28 @@ export class AnalyticsComponent implements OnInit, OnChanges {
   }
 
   private load() {
-    this.accountSubscription = this.accountService.getObservableAccount().subscribe((account: Account | null) => {
+    this.accountService.getObservableAccount().subscribe((account: Account | null) => {
       if (!account) {
         return;
       }
-      this.dateSubscription = this.dateService.getObservableDate().subscribe((date: Date) => {
+      this.dateService.getObservableDate().subscribe((date: Date) => {
         let monthInHumanFormat = date.getMonth() + 1;
         this.showedMonth = monthInHumanFormat;
         this.currentMonth = getTodaysDate().getMonth() + 1;
         this.daysToMonthsEnd =
           new Date(date.getFullYear(), monthInHumanFormat, 0).getDate() - getTodaysDate().getDate();
+
+        if (this.workdaySubscription) {
+          this.workdaySubscription.unsubscribe();
+        }
+
         this.workdaySubscription = this.workdayService
           .getMonthSummaryData(date.getFullYear(), monthInHumanFormat, account.id)
-          .subscribe((summary: Summary) => {
-            this.summary = summary;
+          .subscribe({
+            //FIXME duplicated calls after logout
+            next: (summary: Summary) => {
+              this.summary = summary;
+            },
           });
       });
     });

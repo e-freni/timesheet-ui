@@ -142,7 +142,6 @@ export class CalendarComponent implements OnInit, OnDestroy {
         if (workDayHasBeenChanged) {
           this.createMonthCalendar();
           this.fetchWorkdays();
-          this.reloadConnectedComponents();
         }
       });
   }
@@ -198,9 +197,5 @@ export class CalendarComponent implements OnInit, OnDestroy {
         this.monthDays.push(new Day(now.getDate(), now.getDay(), true));
       }
     }
-  }
-
-  private reloadConnectedComponents() {
-    this.dateService.setDate(this.date);
   }
 }
