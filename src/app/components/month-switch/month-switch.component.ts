@@ -6,7 +6,7 @@ import { AccountService } from 'app/services/account.service';
 import { DateService } from 'app/services/date.service';
 import { saveAs } from 'file-saver-es';
 import { MatDialog } from '@angular/material/dialog';
-import { SendEmailComponent } from 'app/components/month-switch/send-email/send-email.component';
+import { SendEmailComponent } from 'app/components/dialog/send-email/send-email.component';
 import { ExportService } from 'app/services/rest/export.service';
 
 @Component({

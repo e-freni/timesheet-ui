@@ -10,7 +10,6 @@ import { EMAIL_PATTERN_VALIDATOR, uniqueFormArray } from 'app/utils/custom-valid
 @Component({
   selector: 'app-send-email',
   templateUrl: './send-email.component.html',
-  styleUrls: ['./send-email.component.css'],
 })
 export class SendEmailComponent {
   isLoading: boolean = false;
@@ -49,7 +48,7 @@ export class SendEmailComponent {
     return this.emailForm.get('emailAddresses')!.value;
   }
 
-  trashEmail(index: number) {
+  trashRecipient(index: number) {
     this.emailAddresses.removeAt(index);
   }
 

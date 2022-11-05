@@ -21,12 +21,12 @@ export type SelectValue = {
   templateUrl: './edit-workday.component.html',
 })
 export class EditWorkdayComponent implements OnInit {
+  account: Account = null;
+  isLoading: boolean = false;
+  isCreation: boolean = true;
   public day: Day;
   public calendarDate: Date;
   public selectedBeginningWorkdayType: WorkdayType = null;
-  isCreation: boolean = true;
-  isLoading: boolean = false;
-  account: Account = null;
 
   public workingStatus: string = WorkdayType.WORKING;
   public holidayStatus: string = WorkdayType.HOLIDAY;

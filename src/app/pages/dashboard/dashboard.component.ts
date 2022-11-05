@@ -13,11 +13,11 @@ export class DashboardComponent implements OnInit {
   ANALYTICS = 1;
 
   //TODO alert of missing hours on the last 3 days of the month if current logged hours are not in line
-  //TODO admin add user
+  //TODO alert when logging in special days (like christmas!)
+  //TODO user reset password
   //TODO user change password
   //TODO put all css in style classes and optimize it
   //TODO make a mobile view
-  //TODO alert when logging in special days (like christmas!)
   //TODO DARK MODE!
 
   constructor(private accountService: AccountService) {}

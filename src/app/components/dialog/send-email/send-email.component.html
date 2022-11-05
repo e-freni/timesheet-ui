@@ -10,12 +10,11 @@
       *ngFor='let email of emailAddresses.controls; let i = index'
       class='flex w-10/12 items-center justify-center gap-x-5'>
       <input
-        [defaultValue]="1"
-        [formControlName]="i"
+        [formControlName]='i'
         class='w-full h-10 border text-center focus:outline-0'
         type='email' />
       <button
-        (click)='trashEmail(i)'
+        (click)='trashRecipient(i)'
         *ngIf='emailAddresses.controls.length > 1'
         class='text-red-400 hover:text-red-500'>
         <icon-delete [height]='10' [width]='10' class='w-2/12 ml-auto'></icon-delete>
@@ -31,7 +30,7 @@
   <!-- invia a te stesso -->
   <div class='flex text-sm items-center justify-center gap-x-4 font-black'>
     <p>Invia una copia al mio indirizzo email</p>
-    <input class='h-5 border' type='checkbox' [formControlName]="'sendYourself'"/>
+    <input [formControlName]="'sendYourself'" class='h-5 border' type='checkbox' />
   </div>
   <!-- Actions -->
   <div class='flex justify-evenly items-end'>

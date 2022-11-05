@@ -11,7 +11,7 @@ import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { RouterModule } from '@angular/router';
 import { NgSelectModule } from '@ng-select/ng-select';
-import { EditWorkdayComponent } from 'app/pages/dashboard/calendar/edit-workday/edit-workday.component';
+import { EditWorkdayComponent } from 'app/components/dialog/edit-workday/edit-workday.component';
 import { IconsModule } from 'app/components/menu-elements/icons/icons.module';
 import { AuthInterceptor } from 'app/interceptor/auth.interceptor.service';
 import { NgxWebstorageModule } from 'ngx-webstorage';
@@ -28,7 +28,8 @@ import { DashboardComponent } from 'app/pages/dashboard/dashboard.component';
 import { AnalyticsComponent } from './pages/dashboard/analytics/analytics.component';
 import { MatTabsModule } from '@angular/material/tabs';
 import { HeaderLessTabsDirective } from 'app/components/header-less-tabs.directive';
-import { SendEmailComponent } from './components/month-switch/send-email/send-email.component';
+import { SendEmailComponent } from './components/dialog/send-email/send-email.component';
+import { AddUserComponent } from './components/dialog/add-user/add-user.component';
 
 @NgModule({
   declarations: [
@@ -44,6 +45,7 @@ import { SendEmailComponent } from './components/month-switch/send-email/send-em
     AnalyticsComponent,
     HeaderLessTabsDirective,
     SendEmailComponent,
+    AddUserComponent,
   ],
   imports: [
     BrowserModule,
