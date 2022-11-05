@@ -76,7 +76,6 @@ export class SendEmailComponent {
           this.close();
         },
       });
-    this.close();
   }
 
   private addYourself() {
