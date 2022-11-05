@@ -15,7 +15,7 @@
 }
 
 .special-day {
-  @apply day-commons text-white bg-emerald-500;
+  @apply day-commons text-white bg-emerald-500 cursor-pointer;
 }
 
 .logged-day {

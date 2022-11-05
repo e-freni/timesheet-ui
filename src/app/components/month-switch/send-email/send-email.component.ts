@@ -5,8 +5,7 @@ import { ExportService } from 'app/services/rest/export.service';
 import { Account } from 'app/models/account.model';
 import { AccountService } from 'app/services/account.service';
 import { AlertService } from 'app/services/alert.service';
-
-const EMAIL_VALIDATOR = Validators.pattern('^[a-zA-Z0-9_]+.+@[a-zA-Z0-9]+\\.[a-zA-Z]{2,5}$');
+import { EMAIL_PATTERN_VALIDATOR, uniqueFormArray } from 'app/utils/custom-validators';
 
 @Component({
   selector: 'app-send-email',
@@ -14,10 +13,12 @@ const EMAIL_VALIDATOR = Validators.pattern('^[a-zA-Z0-9_]+.+@[a-zA-Z0-9]+\\.[a-z
   styleUrls: ['./send-email.component.css'],
 })
 export class SendEmailComponent {
-  //TODO implement send yourself unique check
   isLoading: boolean = false;
   emailForm = this.formBuilder.group({
-    emailAddresses: this.formBuilder.array([new FormControl('', [Validators.required, EMAIL_VALIDATOR])]),
+    emailAddresses: this.formBuilder.array(
+      [new FormControl('', [Validators.required, EMAIL_PATTERN_VALIDATOR])],
+      [uniqueFormArray]
+    ),
     sendYourself: [false, []],
   });
   private date: Date;
@@ -40,7 +41,7 @@ export class SendEmailComponent {
   }
 
   addRecipient() {
-    const emailRecipient = new FormControl('', [Validators.required, EMAIL_VALIDATOR]);
+    const emailRecipient = new FormControl('', [Validators.required, EMAIL_PATTERN_VALIDATOR]);
     this.emailAddresses.push(emailRecipient);
   }
 
@@ -80,7 +81,7 @@ export class SendEmailComponent {
 
   private addYourself() {
     if (this.emailForm.get('sendYourself')!.value) {
-      this.emailAddresses.push(new FormControl(this.account?.email, [Validators.required, EMAIL_VALIDATOR]));
+      this.emailAddresses.push(new FormControl(this.account?.email, [Validators.required, EMAIL_PATTERN_VALIDATOR]));
     }
   }
 }
