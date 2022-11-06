@@ -30,6 +30,8 @@ import { MatTabsModule } from '@angular/material/tabs';
 import { HeaderLessTabsDirective } from 'app/components/header-less-tabs.directive';
 import { SendEmailComponent } from './components/dialog/send-email/send-email.component';
 import { AddUserComponent } from './components/dialog/add-user/add-user.component';
+import { ChangePasswordComponent } from 'app/components/dialog/edit-password/change-password.component';
+import { PasswordEyeComponent } from './components/password-eye/password-eye.component';
 
 @NgModule({
   declarations: [
@@ -46,6 +48,8 @@ import { AddUserComponent } from './components/dialog/add-user/add-user.componen
     HeaderLessTabsDirective,
     SendEmailComponent,
     AddUserComponent,
+    ChangePasswordComponent,
+    PasswordEyeComponent,
   ],
   imports: [
     BrowserModule,

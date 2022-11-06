@@ -21,6 +21,9 @@ import { EditDataComponent } from 'app/components/menu-elements/icons/edit-data/
 import { NightHoursComponent } from 'app/components/menu-elements/icons/night-hours/night-hours.component';
 import { AddComponent } from 'app/components/menu-elements/icons/add/add.component';
 import { TodayComponent } from 'app/components/menu-elements/icons/today/today.component';
+import { FingerPrintComponent } from 'app/components/menu-elements/icons/finger-print/finger-print.component';
+import { EyeOpenedComponent } from 'app/components/menu-elements/icons/eye/eye-opened.component';
+import { EyeClosedComponent } from 'app/components/menu-elements/icons/eye/eye-closed.component';
 
 @NgModule({
   declarations: [
@@ -32,6 +35,9 @@ import { TodayComponent } from 'app/components/menu-elements/icons/today/today.c
     EditDataComponent,
     ExportComponent,
     ExtraComponent,
+    EyeOpenedComponent,
+    EyeClosedComponent,
+    FingerPrintComponent,
     FuneralLeaveComponent,
     HolidayComponent,
     LeftarrowComponent,
@@ -54,7 +60,10 @@ import { TodayComponent } from 'app/components/menu-elements/icons/today/today.c
     DeleteComponent,
     EditDataComponent,
     ExportComponent,
+    EyeOpenedComponent,
+    EyeClosedComponent,
     ExtraComponent,
+    FingerPrintComponent,
     FuneralLeaveComponent,
     HolidayComponent,
     LeftarrowComponent,
