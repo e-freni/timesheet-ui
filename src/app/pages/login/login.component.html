@@ -16,14 +16,8 @@
             class='field'
             formControlName='password'
             placeholder='Password' />
-          <div (click)='hidePassword = false' *ngIf='hidePassword; else showPassword' id='hide-password'>
-            <icon-eye-opened></icon-eye-opened>
-          </div>
-          <ng-template #showPassword>
-            <div (click)='hidePassword = true' id='show-password'>
-              <icon-eye-closed></icon-eye-closed>
-            </div>
-          </ng-template>
+          <app-password-eye (passwordStatus)='changeHidePassword($event)'
+                            [hidePassword]='hidePassword'></app-password-eye>
         </div>
         <button [disabled]='this.loginForm.invalid' class='login-button' disabled type='submit'>Login</button>
       </form>
