@@ -28,7 +28,7 @@
   letter-spacing: 1px;
 }
 
-.login-icon {
+.icon {
   @apply w-5 h-5 drop-shadow-lg;
 }
 

@@ -1,16 +1,17 @@
 <div class='page' id='login-page'>
   <div class='flex flex-col h-full pt-20'>
     <img alt='logo' class='justify-start' src='../../../assets/img/logo_app.png' />
-    <div class='input-container' id='input-container'>
+    <!-- input container -->
+    <div class='input-container'>
       <form (submit)='login()' [formGroup]='loginForm' class='form'>
         <div class='field-container' id='username-field'>
-          <svg class='login-icon' fill='currentColor' viewBox='0 0 20 20' xmlns='http://www.w3.org/2000/svg'>
-            <path clip-rule='evenodd' d='M10 9a3 3 0 100-6 3 3 0 000 6zm-7 9a7 7 0 1114 0H3z' fill-rule='evenodd' />
-          </svg>
+          <icon-user [height]='5' [width]='5' class='icon'></icon-user>
+          <!-- user -->
           <input class='field' formControlName='username' placeholder='Username' />
         </div>
         <div class='field-container' id='password-field'>
-          <icon-finger-print [height]='5' [width]='5'></icon-finger-print>
+          <icon-finger-print [height]='5' [width]='5' class='icon'></icon-finger-print>
+          <!-- password -->
           <input
             [type]="hidePassword ? 'password' : 'text'"
             class='field'
@@ -20,6 +21,8 @@
                             [hidePassword]='hidePassword'></app-password-eye>
         </div>
         <button [disabled]='this.loginForm.invalid' class='login-button' disabled type='submit'>Login</button>
+        <!-- password dimenticata -->
+        <p class='font-black text-xs cursor-pointer'>Password dimenticata?</p>
       </form>
     </div>
   </div>

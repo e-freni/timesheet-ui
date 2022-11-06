@@ -24,6 +24,7 @@ import { TodayComponent } from 'app/components/menu-elements/icons/today/today.c
 import { FingerPrintComponent } from 'app/components/menu-elements/icons/finger-print/finger-print.component';
 import { EyeOpenedComponent } from 'app/components/menu-elements/icons/eye/eye-opened.component';
 import { EyeClosedComponent } from 'app/components/menu-elements/icons/eye/eye-closed.component';
+import { UserComponent } from 'app/components/menu-elements/icons/user/user.component';
 
 @NgModule({
   declarations: [
@@ -50,6 +51,7 @@ import { EyeClosedComponent } from 'app/components/menu-elements/icons/eye/eye-c
     SpinningCircleComponent,
     TimeComponent,
     TodayComponent,
+    UserComponent,
     WorkComponent,
   ],
   exports: [
@@ -76,6 +78,7 @@ import { EyeClosedComponent } from 'app/components/menu-elements/icons/eye/eye-c
     SpinningCircleComponent,
     TimeComponent,
     TodayComponent,
+    UserComponent,
     WorkComponent,
   ],
   imports: [CommonModule],
