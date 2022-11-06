@@ -2,7 +2,7 @@ import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { WorkdayService } from 'app/services/rest/workday.service';
 import { Account } from 'app/models/account.model';
 import { getMonth, getTodaysDate, getYear } from 'app/utils/date-utilities';
-import { AccountService } from 'app/services/account.service';
+import { AccountService } from 'app/services/rest/account.service';
 import { DateService } from 'app/services/date.service';
 import { saveAs } from 'file-saver-es';
 import { MatDialog } from '@angular/material/dialog';

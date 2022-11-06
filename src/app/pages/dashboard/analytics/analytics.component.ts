@@ -1,7 +1,7 @@
 import { Component, OnChanges, OnInit } from '@angular/core';
 import { WorkdayService } from 'app/services/rest/workday.service';
 import { Account } from 'app/models/account.model';
-import { AccountService } from 'app/services/account.service';
+import { AccountService } from 'app/services/rest/account.service';
 import { DateService } from 'app/services/date.service';
 import { Summary } from 'app/models/summary.model';
 import { getTodaysDate } from 'app/utils/date-utilities';

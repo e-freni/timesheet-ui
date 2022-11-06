@@ -3,7 +3,7 @@ import { MatDialog } from '@angular/material/dialog';
 import { WeekDay } from '@angular/common';
 import { Day } from 'app/models/day';
 import { Account } from 'app/models/account.model';
-import { AccountService } from 'app/services/account.service';
+import { AccountService } from 'app/services/rest/account.service';
 import { WorkdayService } from 'app/services/rest/workday.service';
 import { Workday } from 'app/models/workday.model';
 import { EditWorkdayComponent } from 'app/components/dialog/edit-workday/edit-workday.component';

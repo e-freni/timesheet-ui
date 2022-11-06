@@ -4,7 +4,7 @@ import { LocalStorageService } from 'ngx-webstorage';
 import { FormBuilder, Validators } from '@angular/forms';
 import { JwtToken } from 'app/models/jwt-token.model';
 import { JWT_STORAGE_KEY } from 'app.constants';
-import { AccountService } from 'app/services/account.service';
+import { AccountService } from 'app/services/rest/account.service';
 import { AlertService } from 'app/services/alert.service';
 import { Subscription } from 'rxjs';
 

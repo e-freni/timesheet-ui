@@ -5,7 +5,7 @@ import { Account } from 'app/models/account.model';
 import { Day } from 'app/models/day';
 import { WorkdayType } from 'app/models/workday-type.model';
 import { Workday } from 'app/models/workday.model';
-import { AccountService } from 'app/services/account.service';
+import { AccountService } from 'app/services/rest/account.service';
 import { WorkdayService } from 'app/services/rest/workday.service';
 import { getFormattedDate } from 'app/utils/date-utilities';
 import { AlertService } from 'app/services/alert.service';

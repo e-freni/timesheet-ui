@@ -8,28 +8,20 @@ import { ApplicationUser } from 'app/models/application-user.model';
 import { AlertService } from 'app/services/alert.service';
 
 @Component({
-  selector: 'app-add-user',
+  selector: 'app-add-eye',
   templateUrl: './add-user.component.html',
 })
 export class AddUserComponent {
   isLoading: boolean = false;
 
-  userForm = this.formBuilder.group(
-    {
-      id: null,
-      firstName: ['', [Validators.required, Validators.minLength(3), Validators.maxLength(100)]],
-      lastName: ['', [Validators.required, Validators.minLength(3), Validators.maxLength(100)]],
-      username: ['', [Validators.required, Validators.minLength(3), Validators.maxLength(100)]],
-      email: ['', [Validators.required, EMAIL_PATTERN_VALIDATOR]],
-      role: ['', [Validators.required]],
-      //TODO reuse for password change
-      // password: ['', [Validators.required, Validators.minLength(8), Validators.maxLength(100)]],
-      // passwordConfirmation: ['', [Validators.required, Validators.minLength(8), Validators.maxLength(100)]],
-    }
-    // {
-    //   validators: matchPasswordsValidator,
-    // }
-  );
+  userForm = this.formBuilder.group({
+    id: null,
+    firstName: ['', [Validators.required, Validators.minLength(3), Validators.maxLength(100)]],
+    lastName: ['', [Validators.required, Validators.minLength(3), Validators.maxLength(100)]],
+    username: ['', [Validators.required, Validators.minLength(3), Validators.maxLength(100)]],
+    email: ['', [Validators.required, EMAIL_PATTERN_VALIDATOR]],
+    role: ['', [Validators.required]],
+  });
 
   availableRoles: string[] = [Authorities.USER, Authorities.ADMINISTRATOR];
 

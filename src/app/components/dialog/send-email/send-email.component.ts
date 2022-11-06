@@ -3,7 +3,7 @@ import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
 import { FormArray, FormBuilder, FormControl, Validators } from '@angular/forms';
 import { ExportService } from 'app/services/rest/export.service';
 import { Account } from 'app/models/account.model';
-import { AccountService } from 'app/services/account.service';
+import { AccountService } from 'app/services/rest/account.service';
 import { AlertService } from 'app/services/alert.service';
 import { EMAIL_PATTERN_VALIDATOR, uniqueFormArray } from 'app/utils/custom-validators';
 
