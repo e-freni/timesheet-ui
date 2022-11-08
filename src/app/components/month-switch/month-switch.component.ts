@@ -105,4 +105,8 @@ export class MonthSwitchComponent implements OnInit {
     }
     return getTodaysDate().getMonth() == this.date.getMonth();
   }
+
+  getCurrentMonth(): string {
+    return getMonth(getTodaysDate());
+  }
 }

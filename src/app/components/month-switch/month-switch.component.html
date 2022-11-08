@@ -52,7 +52,7 @@
       (click)='getToCurrentMonth()'
       *ngIf='!isCurrentMonth()'
       [matTooltipClass]="'big-tooltip'"
-      [matTooltip]="'Torna a ' + (this.month | titlecase)"
+      [matTooltip]="'Torna a ' + (getCurrentMonth() | titlecase)"
       class='top-menu-button'>
       <icon-today [height]='6' [width]='6'></icon-today>
     </button>
