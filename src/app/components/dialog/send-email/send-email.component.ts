@@ -68,7 +68,7 @@ export class SendEmailComponent {
       .exportAndSendByEmail(this.date.getFullYear(), this.date.getMonth() + 1, this.account.id, this.getRecipients())
       .subscribe({
         error: response => {
-          this.alertService.addAlert({ msg: `${response.status} - ${response.error.message}`, type: 'alert' });
+          this.alertService.addAlert({ msg: `${response.status} - ${response.error?.message}`, type: 'alert' });
           this.isLoading = false;
         },
         complete: () => {

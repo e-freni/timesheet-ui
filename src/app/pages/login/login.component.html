@@ -4,12 +4,12 @@
     <!-- input container -->
     <div class='input-container'>
       <form (submit)='login()' [formGroup]='loginForm' class='form'>
-        <div class='field-container' id='username-field'>
+        <div class='field-container'>
           <icon-user [height]='5' [width]='5' class='icon'></icon-user>
           <!-- user -->
           <input class='field' formControlName='username' placeholder='Username' />
         </div>
-        <div class='field-container' id='password-field'>
+        <div class='field-container'>
           <icon-finger-print [height]='5' [width]='5' class='icon'></icon-finger-print>
           <!-- password -->
           <input
@@ -22,7 +22,7 @@
         </div>
         <button [disabled]='this.loginForm.invalid' class='login-button' disabled type='submit'>Login</button>
         <!-- password dimenticata -->
-        <p class='font-black text-xs cursor-pointer'>Password dimenticata?</p>
+        <p [routerLink]='"reset-password"' class='font-black text-xs cursor-pointer'>Password dimenticata?</p>
       </form>
     </div>
   </div>

@@ -52,7 +52,7 @@ export class ChangePasswordComponent {
     const password = this.editPasswordForm.get('password')!.value;
     this.accountService.changePassword(this.username, currentPassword, password).subscribe({
       error: response => {
-        this.alertService.addAlert({ msg: `${response.status} - ${response.error.message}`, type: 'alert' });
+        this.alertService.addAlert({ msg: `${response.status} - ${response.error?.message}`, type: 'alert' });
         this.isLoading = false;
       },
       complete: () => {

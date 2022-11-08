@@ -125,7 +125,7 @@ export class EditWorkdayComponent implements OnInit {
     if (this.isCreation) {
       this.workdayService.createWorkday(workday).subscribe({
         error: response => {
-          this.alertService.addAlert({ msg: `${response.status} - ${response.error.message}`, type: 'alert' });
+          this.alertService.addAlert({ msg: `${response.status} - ${response.error?.message}`, type: 'alert' });
           this.isLoading = false;
         },
         complete: () => {
@@ -136,7 +136,7 @@ export class EditWorkdayComponent implements OnInit {
     } else {
       this.workdayService.editWorkday(workday).subscribe({
         error: response => {
-          this.alertService.addAlert({ msg: `${response.status} - ${response.error.message}`, type: 'alert' });
+          this.alertService.addAlert({ msg: `${response.status} - ${response.error?.message}`, type: 'alert' });
           this.isLoading = false;
         },
         complete: () => {
@@ -151,7 +151,7 @@ export class EditWorkdayComponent implements OnInit {
     this.isLoading = true;
     this.workdayService.deleteWorkday(this.workDayForm.get(['id'])!.value, this.account.id).subscribe({
       error: response => {
-        this.alertService.addAlert({ msg: `${response.status} - ${response.error.message}`, type: 'alert' });
+        this.alertService.addAlert({ msg: `${response.status} - ${response.error?.message}`, type: 'alert' });
         this.isLoading = false;
       },
       complete: () => {

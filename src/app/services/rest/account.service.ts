@@ -58,6 +58,18 @@ export class AccountService {
     });
   }
 
+  requestResetPassword(username: string): Observable<HttpResponse<{}>> {
+    return this.httpClient.post<string>(`${SERVER_API_URL}/account/request-reset-password`, username, {
+      observe: 'response',
+    });
+  }
+
+  resetPassword(token: string): Observable<HttpResponse<{}>> {
+    return this.httpClient.post<string>(`${SERVER_API_URL}/account/reset-password`, token, {
+      observe: 'response',
+    });
+  }
+
   redirect() {
     if (!this.account) {
       return;

@@ -32,6 +32,11 @@ import { SendEmailComponent } from './components/dialog/send-email/send-email.co
 import { AddUserComponent } from './components/dialog/add-user/add-user.component';
 import { ChangePasswordComponent } from 'app/components/dialog/edit-password/change-password.component';
 import { PasswordEyeComponent } from './components/password-eye/password-eye.component';
+import { ResetPasswordComponent } from './pages/reset-password/reset-password.component';
+import { MatStepperModule } from '@angular/material/stepper';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatInputModule } from '@angular/material/input';
+import { MatIconModule } from '@angular/material/icon';
 
 @NgModule({
   declarations: [
@@ -50,6 +55,7 @@ import { PasswordEyeComponent } from './components/password-eye/password-eye.com
     AddUserComponent,
     ChangePasswordComponent,
     PasswordEyeComponent,
+    ResetPasswordComponent,
   ],
   imports: [
     BrowserModule,
@@ -65,6 +71,7 @@ import { PasswordEyeComponent } from './components/password-eye/password-eye.com
     }),
     // Material imports
     BrowserAnimationsModule,
+    MatIconModule,
     MatDialogModule,
     MatProgressSpinnerModule,
     MatMenuModule,
@@ -73,6 +80,9 @@ import { PasswordEyeComponent } from './components/password-eye/password-eye.com
     IconsModule,
     MatTooltipModule,
     MatTabsModule,
+    MatStepperModule,
+    MatFormFieldModule,
+    MatInputModule,
   ],
   providers: [
     {

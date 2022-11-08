@@ -47,7 +47,7 @@ export class AddUserComponent {
     this.applicationUserService.addUser(user).subscribe({
       error: response => {
         this.isLoading = false;
-        this.alertService.addAlert({ msg: `${response.status} - ${response.error.message}`, type: 'alert' });
+        this.alertService.addAlert({ msg: `${response.status} - ${response.error?.message}`, type: 'alert' });
       },
       complete: () => {
         this.isLoading = false;
