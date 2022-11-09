@@ -20,3 +20,7 @@ export function getMonth(date: Date): string {
 export function getYear(date: Date): string {
   return new Intl.DateTimeFormat('it-IT', { year: 'numeric' }).format(date);
 }
+
+export function getHoursInDaysFormatter(hours: number): string {
+  return `(${hours / 8} giorni)`;
+}

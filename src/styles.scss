@@ -8,8 +8,8 @@
 @tailwind utilities;
 
 @font-face {
-  font-family: 'open-sans';
-  src: local('OpenSans'), url(./assets/fonts/open-sans.ttf) format('truetype');
+  font-family: 'sans';
+  src: local('Sans'), url(./assets/fonts/timesheet-font.ttf) format('truetype');
 }
 
 body {
@@ -25,7 +25,7 @@ body {
 }
 
 .common-button {
-  @apply inline-flex w-full justify-center rounded-md border px-4 py-2 text-base font-medium sm:ml-3 sm:w-auto sm:text-sm items-center;
+  @apply inline-flex w-full justify-center rounded-md border px-4 py-2 text-base font-medium sm:ml-3 sm:w-auto sm:text-sm items-center focus:ring-0 focus:ring-offset-0;
 }
 
 .submit-button {

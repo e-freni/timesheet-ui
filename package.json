@@ -21,6 +21,7 @@
     "@angular/router": "^14.2.7",
     "@ng-select/ng-select": "^9.0.2",
     "file-saver-es": "^2.0.5",
+    "moment": "^2.29.4",
     "ngx-webstorage": "^10.0.1",
     "rxjs": "~7.5.0",
     "tslib": "^2.3.0",

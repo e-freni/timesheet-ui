@@ -4,7 +4,7 @@ import { Account } from 'app/models/account.model';
 import { AccountService } from 'app/services/rest/account.service';
 import { DateService } from 'app/services/date.service';
 import { Summary } from 'app/models/summary.model';
-import { getTodaysDate } from 'app/utils/date-utilities';
+import { getHoursInDaysFormatter, getTodaysDate } from 'app/utils/date-utilities';
 import { Subscription } from 'rxjs';
 
 @Component({
@@ -33,8 +33,8 @@ export class AnalyticsComponent implements OnInit, OnChanges {
     this.load();
   }
 
-  getHoursInDaysFormatter(hours: number): string {
-    return `(${hours / 8} giorni)`;
+  getHoursInDaysFormat(hours: number): string {
+    return getHoursInDaysFormatter(hours);
   }
 
   private load() {

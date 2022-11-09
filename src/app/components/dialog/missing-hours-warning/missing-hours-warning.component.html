@@ -1,0 +1,19 @@
+<!-- Title and close -->
+<div class='flex items-center'>
+  <icon-close (click)='back()' [height]='10' [width]='10' class='ml-auto cursor-pointer'></icon-close>
+</div>
+<div class='h-[40%] text-red-500 flex flex-col gap-y-10'>
+  <p class='text-6xl font-black text-center text-red-500 text-4xl'>ATTENZIONE</p>
+  <div class='flex font-bold flex-col h-full items-center justify-center gap-y-10'>
+    <p>Mancano {{missingDaysToMonthEnd}} giorni alla fine del mese</p>
+    <p>Devi ancora registrare <span class='font-black'>{{getHoursInDaysFormat(toLogHours)}}</span>.</p>
+    <p>Per favore registra le giornate mancanti e invia il foglio a Valeriano.</p>
+  </div>
+  <div class='flex justify-end gap-y-5'>
+    <button (click)='back()' class='submit-button' type='submit'>Ok</button>
+    <button (click)='dontShowForThisMonth()'
+            class='common-button bg-green-500 text-white hover:bg-green-400'
+            type='button'>Non mostrare più per questo mese
+    </button>
+  </div>
+</div>
