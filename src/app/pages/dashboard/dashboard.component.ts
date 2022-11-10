@@ -67,8 +67,6 @@ export class DashboardComponent implements OnInit {
     const endOfMonth = moment().endOf('month');
     const alertPeriod = moment().endOf('month').subtract(3, 'days');
     let isTheEndOfTheMonth = today.isAfter(alertPeriod) && today.isBefore(moment().endOf('month'));
-    console.log(isTheEndOfTheMonth);
-    console.log(this.summary.toLogHours);
     if (isTheEndOfTheMonth && this.summary.toLogHours > 0) {
       this.matDialog.open(MissingHoursWarning, {
         width: '50%',

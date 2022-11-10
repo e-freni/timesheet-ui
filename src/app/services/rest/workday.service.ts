@@ -4,6 +4,7 @@ import { HttpClient, HttpResponse } from '@angular/common/http';
 import { SERVER_API_URL } from 'app.constants';
 import { Workday } from 'app/models/workday.model';
 import { Summary } from 'app/models/summary.model';
+import { SpecialDay } from 'app/models/special-days';
 
 @Injectable({
   providedIn: 'root',
@@ -35,5 +36,10 @@ export class WorkdayService {
   getMonthSummaryData(year: number, month: number, userId: number): Observable<Summary> {
     const params = { year: year, month: month };
     return this.httpClient.get<Summary>(`${SERVER_API_URL}/workday/${userId}/summary`, { params: params });
+  }
+
+  getMonthSpecialDays(year: number, month: number) {
+    const params = { year: year, month: month };
+    return this.httpClient.get<SpecialDay[]>(`${SERVER_API_URL}/workday/special-days`, { params: params });
   }
 }

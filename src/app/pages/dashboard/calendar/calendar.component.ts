@@ -10,22 +10,7 @@ import { EditWorkdayComponent } from 'app/components/dialog/edit-workday/edit-wo
 import { getMonth, getTodaysDate } from 'app/utils/date-utilities';
 import { DateService } from 'app/services/date.service';
 import { Subscription } from 'rxjs';
-import {
-  ALL_SAINTS_DAY,
-  APRIL_TWENTY_FIFTH,
-  BOXING_DAY,
-  calculateEaster,
-  calculateEasterMonday,
-  CHRISTMAS,
-  EPIPHANY,
-  IMMACULATE_CONCEPTION,
-  MID_AUGUST,
-  MIDSUMMER,
-  NEW_YEARS_EVE,
-  REPUBLIC_DAY,
-  SpecialDay,
-  WORKERS_DAY,
-} from 'app/models/special-days';
+import { SpecialDay } from 'app/models/special-days';
 
 @Component({
   selector: 'app-calendar',
@@ -43,21 +28,7 @@ export class CalendarComponent implements OnInit, OnDestroy {
   private dateSubscription: Subscription;
   private accountSubscription: Subscription;
   private readonly standardNonWorkingDaysNames: string[] = ['Domenica', 'Sabato'];
-  private specialDays: SpecialDay[] = [
-    NEW_YEARS_EVE,
-    APRIL_TWENTY_FIFTH,
-    calculateEaster(new Date().getFullYear()),
-    calculateEasterMonday(new Date().getFullYear()),
-    WORKERS_DAY,
-    EPIPHANY,
-    MIDSUMMER,
-    REPUBLIC_DAY,
-    MID_AUGUST,
-    ALL_SAINTS_DAY,
-    IMMACULATE_CONCEPTION,
-    CHRISTMAS,
-    BOXING_DAY,
-  ];
+  private specialDays: SpecialDay[] = [];
 
   constructor(
     private matDialog: MatDialog,
@@ -79,6 +50,7 @@ export class CalendarComponent implements OnInit, OnDestroy {
         next: (date: Date | null) => {
           this.account = account;
           this.date = date;
+          this.fetchSpecialDays();
           this.createMonthCalendar();
           this.fetchWorkdays();
         },
@@ -89,6 +61,14 @@ export class CalendarComponent implements OnInit, OnDestroy {
   ngOnDestroy(): void {
     this.dateSubscription?.unsubscribe();
     this.accountSubscription?.unsubscribe();
+  }
+
+  fetchSpecialDays() {
+    this.workdayService
+      .getMonthSpecialDays(this.date.getFullYear(), this.date.getMonth() + 1)
+      .subscribe((response: SpecialDay[]) => {
+        this.specialDays = response;
+      });
   }
 
   createMonthCalendar() {
@@ -103,22 +83,22 @@ export class CalendarComponent implements OnInit, OnDestroy {
     this.addOtherMonthsDays();
   }
 
-  isNotWorkingDay(day: Day): boolean {
+  isStandardNotWorkingDay(day: Day): boolean {
     return this.standardNonWorkingDaysNames.includes(day.dayName);
   }
 
   isSpecialDay(day: Day): boolean {
     const dateInStringFormat: string = `${day.monthDayNumber}/${this.date.getMonth() + 1}`;
     return this.specialDays.some((d: SpecialDay) => {
-      return d.holidayDate === dateInStringFormat;
+      return d.dayAndMonth === dateInStringFormat;
     });
   }
 
   getSpecialDayName(day: Day): string {
     const dateInStringFormat: string = `${day.monthDayNumber}/${this.date.getMonth() + 1}`;
     return this.specialDays.find((d: SpecialDay) => {
-      return d.holidayDate === dateInStringFormat;
-    }).holidayName;
+      return d.dayAndMonth === dateInStringFormat;
+    }).name;
   }
 
   openDay(day: Day) {
