@@ -1,25 +1,30 @@
 .day-commons {
-  @apply py-1  justify-center items-center rounded-xl flex flex-col h-[10rem];
+  @apply py-1 justify-center items-center rounded-xl flex flex-col h-[10rem] dark:text-dark-text;
 }
 
 .not-working-day {
   @apply day-commons text-red-300 bg-red-50 cursor-pointer;
+  @apply dark:bg-dark-not-working-bg;
 }
 
 .working-day {
   @apply day-commons bg-amber-50 cursor-pointer;
+  @apply dark:bg-dark-working-bg;
 }
 
 .outer-months-day {
   @apply day-commons text-gray-300 bg-gray-50;
+  @apply dark:bg-dark-outer-bg;
 }
 
 .special-day {
   @apply day-commons text-white bg-emerald-500 cursor-pointer;
+  @apply dark:bg-dark-special-bg;
 }
 
 .logged-day {
   @apply day-commons bg-blue-50 cursor-pointer;
+  @apply dark:bg-dark-logged-bg;
 }
 
 .day-info-panel {
@@ -28,4 +33,11 @@
 
 .today-cell {
   @apply border-t-2 border-t-primary rounded-2xl;
+}
+
+.calendar-page {
+  /*understand why dark conflicts with another bg for light theme*/
+  @apply min-h-full px-10 pt-8;
+  @apply bg-light-bg;
+  @apply dark:bg-dark-bg;
 }

@@ -1,4 +1,4 @@
-import { Component, OnDestroy, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit, ViewEncapsulation } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { WeekDay } from '@angular/common';
 import { Day } from 'app/models/day';
@@ -17,6 +17,7 @@ import { NonWorkingDayLogWarning } from 'app/components/dialog/non-working-day-l
   selector: 'app-calendar',
   templateUrl: './calendar.component.html',
   styleUrls: ['./calendar.component.css'],
+  encapsulation: ViewEncapsulation.None,
 })
 export class CalendarComponent implements OnInit, OnDestroy {
   date: Date;
