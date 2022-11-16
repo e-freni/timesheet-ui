@@ -13,7 +13,7 @@ module.exports = {
         'navbar-hover': '#374151',
 
         // Dark theme colors
-        'dark-primary': '#ff500b',
+        'dark-primary': '#004db9',
         'dark-navbar-bg': '#3b3f41',
         'dark-text': '#fff',
         'dark-switch-bar': '#494e50',

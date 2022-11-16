@@ -1,29 +1,32 @@
-<div class='page' id='login-page'>
-  <div class='flex flex-col h-full justify-center'>
-    <img alt='logo' class='justify-start' src='../../../assets/img/logo_app.png' />
-    <!-- input container -->
-    <div class='input-container'>
-      <form (submit)='login()' [formGroup]='loginForm' class='form'>
-        <div class='field-container'>
-          <icon-user [height]='5' [width]='5' class='icon'></icon-user>
-          <!-- user -->
-          <input class='field' formControlName='username' placeholder='Username' />
-        </div>
-        <div class='field-container'>
-          <icon-finger-print [height]='5' [width]='5' class='icon'></icon-finger-print>
-          <!-- password -->
-          <input
-            [type]="hidePassword ? 'password' : 'text'"
-            class='field'
-            formControlName='password'
-            placeholder='Password' />
-          <app-password-eye (passwordStatus)='changeHidePassword($event)'
-                            [hidePassword]='hidePassword'></app-password-eye>
-        </div>
-        <button [disabled]='this.loginForm.invalid' class='login-button' disabled type='submit'>Login</button>
-        <!-- password dimenticata -->
-        <p [routerLink]='"reset-password"' class='font-black text-xs cursor-pointer'>Password dimenticata?</p>
-      </form>
+<div [ngClass]='isDark() ? "dark" : ""' id='login-page'>
+  <div class='page'>
+    <div class='flex flex-col h-full justify-center'>
+      <img *ngIf='!isDark()' alt='logo' class='justify-start' src='../../../assets/img/logo_app.png' />
+      <img *ngIf='isDark()' alt='logo' class='justify-start' src='../../../assets/img/logo_app_dark.png' />
+      <!-- input container -->
+      <div class='input-container'>
+        <form (submit)='login()' [formGroup]='loginForm' class='form'>
+          <div class='field-container'>
+            <icon-user [height]='5' [width]='5' class='icon'></icon-user>
+            <!-- user -->
+            <input class='field' formControlName='username' placeholder='Username' />
+          </div>
+          <div class='field-container'>
+            <icon-finger-print [height]='5' [width]='5' class='icon'></icon-finger-print>
+            <!-- password -->
+            <input
+              [type]="hidePassword ? 'password' : 'text'"
+              class='field'
+              formControlName='password'
+              placeholder='Password' />
+            <app-password-eye (passwordStatus)='changeHidePassword($event)'
+                              [hidePassword]='hidePassword'></app-password-eye>
+          </div>
+          <button [disabled]='this.loginForm.invalid' class='login-button' disabled type='submit'>Login</button>
+          <!-- password dimenticata -->
+          <p [routerLink]='"reset-password"' class='font-black text-xs cursor-pointer'>Password dimenticata?</p>
+        </form>
+      </div>
     </div>
   </div>
 </div>

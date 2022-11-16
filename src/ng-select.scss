@@ -2,7 +2,19 @@
 .ng-dropdown-panel,
 .ng-dropdown-panel-items,
 .ng-option.ng-option-selected.ng-option-marked {
-  @apply text-primary;
+  @apply text-primary dark:bg-dark-bg dark:text-dark-text;
+}
+
+.ng-option.ng-option-marked {
+  @apply transition ease-in duration-300 dark:hover:bg-primary dark:text-dark-text;
+}
+
+.ng-option.ng-option-marked span {
+  @apply dark:text-dark-text;
+}
+
+.ng-option span {
+  @apply dark:text-dark-text;
 }
 
 .ng-select.ng-select-focused .ng-select-container:after {

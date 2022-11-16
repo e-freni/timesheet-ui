@@ -56,4 +56,8 @@ export class LoginComponent {
   changeHidePassword(hidePassword: boolean) {
     this.hidePassword = hidePassword;
   }
+
+  isDark() {
+    return this.localStorageService.retrieve('ui_theme') == 'dark';
+  }
 }

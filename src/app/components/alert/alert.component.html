@@ -1,5 +1,6 @@
 <div *ngFor='let alert of alertList' class='fixed over-the-top-position w-1/2 left-1/4 my-5' role='alert'>
-  <div class='bg-white border-gray-300 border p-3 shadow-lg'>
+  <div
+    class='bg-white dark:bg-dark-bg dark:text-dark-text border-gray-300 dark:border-dark-navbar-bg border p-3 shadow-lg'>
     <div class='flex flex-row'>
       <div *ngIf="alert.type === 'primary'" class='px-2'>
         <svg

@@ -25,6 +25,7 @@ import { FingerPrintComponent } from 'app/components/menu-elements/icons/finger-
 import { EyeOpenedComponent } from 'app/components/menu-elements/icons/eye/eye-opened.component';
 import { EyeClosedComponent } from 'app/components/menu-elements/icons/eye/eye-closed.component';
 import { UserComponent } from 'app/components/menu-elements/icons/user/user.component';
+import { SunComponent } from 'app/components/menu-elements/icons/sun/sun.component';
 
 @NgModule({
   declarations: [
@@ -48,6 +49,7 @@ import { UserComponent } from 'app/components/menu-elements/icons/user/user.comp
     RightarrowComponent,
     ShareComponent,
     SickComponent,
+    SunComponent,
     SpinningCircleComponent,
     TimeComponent,
     TodayComponent,
@@ -75,6 +77,7 @@ import { UserComponent } from 'app/components/menu-elements/icons/user/user.comp
     RightarrowComponent,
     ShareComponent,
     SickComponent,
+    SunComponent,
     SpinningCircleComponent,
     TimeComponent,
     TodayComponent,

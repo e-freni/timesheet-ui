@@ -1,4 +1,4 @@
-<div class='pt-8'>
+<div class='pt-8 analytics-page'>
   <!-- header -->
   <div>
     <p class='text-5xl text-center'>Statistiche del mese</p>
@@ -8,13 +8,12 @@
     <!-- remaining days to month end -->
     <div *ngIf='currentMonth == showedMonth' class='info-card flex flex-col gap-y-2'>
       <div class='flex justify-center items-center'>
-        <p class='w-[98%] font-bold mr-4 text-xl'>Giorni rimanenti alla fine del mese:</p>
+        <p class='w-[98%] font-bold mr-4 text-xl'>Giorni rimanenti alla fine del
+                                                  mese:</p>
         <div [ngClass]="this.daysToMonthsEnd <= 7 ? 'text-red-500' : 'text-black'">
-          <p class='info-text-value text-4xl font-black'>{{ this.daysToMonthsEnd }}</p>
+          <p class='info-text-value text-4xl font-black  text-black dark:text-dark-text'>{{ this.daysToMonthsEnd }}</p>
         </div>
       </div>
-      <!--     TODO make it appear in a proper way <p *ngIf="this.daysToMonthsEnd <= 7 && this.summary.toLogHours > 0"-->
-      <!--         class="text-4xl text-red-500 font-black">{{'Ricordati di loggare le ' + this.summary.toLogHours + ' ore mancanti!'}}</p>-->
     </div>
     <!-- summary table -->
     <div class='flex justify-center'>

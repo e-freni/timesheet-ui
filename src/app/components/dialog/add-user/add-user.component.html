@@ -1,62 +1,64 @@
 <!-- Title and close -->
-<div class='flex items-center'>
-  <icon-close (click)='back()' [height]='10' [width]='10' class='ml-auto cursor-pointer'></icon-close>
+<div class='dark:bg-dark-bg dark:text-white'>
+  <div class='flex items-center'>
+    <icon-close (click)='back()' [height]='10' [width]='10' class='ml-auto cursor-pointer'></icon-close>
+  </div>
+  <h1 class='text-center text-4xl'>Aggiungi nuovo utente</h1>
+  <form (ngSubmit)='addUserRequest()' [formGroup]='userForm'
+        class='flex flex-col gap-y-5 w-full items-center justify-center pt-6' role='form'>
+    <!-- role field -->
+    <div class='flex flex-col w-10/12 items-center'>
+      <p>Ruolo</p>
+      <ng-select
+        [clearable]='false'
+        [formControlName]="'role'"
+        [items]='availableRoles'
+        class='w-1/3 items-center justify-center'
+        type='text'></ng-select>
+    </div>
+    <div class='flex w-10/12 gap-x-5'>
+      <!-- firstname field -->
+      <div class='flex flex-col w-full'>
+        <p>Nome</p>
+        <input
+          [formControlName]="'firstName'"
+          class='h-10 border text-center focus:outline-primary hover:outline-primary text-black'
+          type='text' />
+      </div>
+      <!-- lastname field -->
+      <div class='flex flex-col w-full'>
+        <p>Cognome</p>
+        <input
+          [formControlName]="'lastName'"
+          class='h-10 border text-center focus:outline-primary hover:outline-primary text-black'
+          type='text' />
+      </div>
+    </div>
+    <div class='flex w-10/12 gap-x-5'>
+      <div class='flex flex-col w-full'>
+        <!-- username field -->
+        <p>Username</p>
+        <input
+          [formControlName]="'username'"
+          class='h-10 border text-center focus:outline-primary hover:outline-primary text-black'
+          type='text' />
+      </div>
+      <!-- email field -->
+      <div class='flex flex-col w-full'>
+        <p>Email</p>
+        <input
+          [formControlName]="'email'"
+          class='h-10 border text-center focus:outline-primary hover:outline-primary text-black'
+          type='text' />
+      </div>
+    </div>
+    <!-- Actions -->
+    <div class='flex justify-evenly items-end'>
+      <button [disabled]='this.userForm.invalid || isLoading' class='submit-button' type='submit'>
+        Aggiungi utente
+        <app-spinning-circle *ngIf='isLoading' [color]="'blue'"></app-spinning-circle>
+      </button>
+      <button (click)='back()' class='back-button' type='button'>Indietro</button>
+    </div>
+  </form>
 </div>
-<h1 class='text-center text-4xl'>Aggiungi nuovo utente</h1>
-<form (ngSubmit)='addUserRequest()' [formGroup]='userForm'
-      class='flex flex-col gap-y-5 w-full items-center justify-center pt-6' role='form'>
-  <!-- role field -->
-  <div class='flex flex-col w-10/12 items-center'>
-    <p>Ruolo</p>
-    <ng-select
-      [clearable]='false'
-      [formControlName]="'role'"
-      [items]='availableRoles'
-      class='w-1/3 items-center justify-center'
-      type='text'></ng-select>
-  </div>
-  <div class='flex w-10/12 gap-x-5'>
-    <!-- firstname field -->
-    <div class='flex flex-col w-full'>
-      <p>Nome</p>
-      <input
-        [formControlName]="'firstName'"
-        class='h-10 border text-center focus:outline-primary hover:outline-primary'
-        type='text' />
-    </div>
-    <!-- lastname field -->
-    <div class='flex flex-col w-full'>
-      <p>Cognome</p>
-      <input
-        [formControlName]="'lastName'"
-        class='h-10 border text-center focus:outline-primary hover:outline-primary'
-        type='text' />
-    </div>
-  </div>
-  <div class='flex w-10/12 gap-x-5'>
-    <div class='flex flex-col w-full'>
-      <!-- username field -->
-      <p>Username</p>
-      <input
-        [formControlName]="'username'"
-        class='h-10 border text-center focus:outline-primary hover:outline-primary'
-        type='text' />
-    </div>
-    <!-- email field -->
-    <div class='flex flex-col w-full'>
-      <p>Email</p>
-      <input
-        [formControlName]="'email'"
-        class='h-10 border text-center focus:outline-primary hover:outline-primary'
-        type='text' />
-    </div>
-  </div>
-  <!-- Actions -->
-  <div class='flex justify-evenly items-end'>
-    <button [disabled]='this.userForm.invalid || isLoading' class='submit-button' type='submit'>
-      Aggiungi utente
-      <app-spinning-circle *ngIf='isLoading' [color]="'blue'"></app-spinning-circle>
-    </button>
-    <button (click)='back()' class='back-button' type='button'>Indietro</button>
-  </div>
-</form>

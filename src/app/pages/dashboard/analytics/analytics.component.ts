@@ -1,4 +1,4 @@
-import { Component, OnDestroy, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit, ViewEncapsulation } from '@angular/core';
 import { WorkdayService } from 'app/services/rest/workday.service';
 import { Account } from 'app/models/account.model';
 import { AccountService } from 'app/services/rest/account.service';
@@ -11,6 +11,7 @@ import { Subscription } from 'rxjs';
   selector: 'app-analytics',
   templateUrl: './analytics.component.html',
   styleUrls: ['./analytics.component.css'],
+  encapsulation: ViewEncapsulation.None,
 })
 export class AnalyticsComponent implements OnInit, OnDestroy {
   summary: Summary;

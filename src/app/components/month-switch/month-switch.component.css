@@ -1,8 +1,15 @@
 @import '../../../dark-mode.css';
 
-
 .arrow-button {
-  @apply text-white bg-primary h-20 flex justify-center items-center rounded-xl;
+  @apply text-white bg-primary dark-transition dark:bg-dark-primary h-20 flex justify-center items-center rounded-xl;
+}
+
+.month-switch {
+  @apply w-full grid grid-cols-10 pb-2 mt-4 bg-white dark-transition dark:bg-dark-bg;
+}
+
+.month-switch-action-bar {
+  @apply flex w-3/12 m-auto items-center justify-evenly py-4 gap-x-5 bg-primary dark-transition dark:bg-dark-primary text-white rounded-2xl dark:text-dark-text;
 }
 
 .top-menu-button {

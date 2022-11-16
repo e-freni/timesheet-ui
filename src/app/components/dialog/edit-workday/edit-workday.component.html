@@ -1,4 +1,4 @@
-<div class='min-h-[30rem] relative'>
+<div class='min-h-[30rem] relative text-black dark:text-dark-text'>
   <!-- Title and close -->
   <div class='flex items-center'>
     <icon-close (click)='back()' [height]='10' [width]='10' class='ml-auto cursor-pointer'></icon-close>
@@ -29,7 +29,7 @@
           (change)='decreaseWorkingHours()'
           [defaultValue]='1'
           [formControlName]="'workPermitHours'"
-          class='w-2/12 h-10 border text-center focus:outline-primary hover:outline-primary'
+          class='w-2/12 h-10 border text-center focus:outline-primary hover:outline-primary text-black'
           max='8'
           min='1'
           type='number' />
@@ -43,7 +43,7 @@
         <input
           [defaultValue]='1'
           [formControlName]="'extraHours'"
-          class='w-2/12 h-10 border text-center focus:outline-primary hover:outline-primary'
+          class='w-2/12 h-10 border text-center focus:outline-primary hover:outline-primary text-black'
           max='10'
           min='1'
           type='number' />
@@ -57,7 +57,7 @@
         <input
           [defaultValue]='1'
           [formControlName]="'nightWorkingHours'"
-          class='w-2/12 h-10 border text-center focus:outline-primary hover:outline-primary'
+          class='w-2/12 h-10 border text-center focus:outline-primary hover:outline-primary text-black'
           max='5'
           min='1'
           type='number' />
@@ -84,7 +84,8 @@
       <!-- Notes -->
       <div class='flex flex-col pb-24'>
         <label>Note:</label>
-        <textarea [formControlName]="'notes'" class='p-3 border focus:outline-primary hover:outline-primary'></textarea>
+        <textarea [formControlName]="'notes'"
+                  class='p-3 border focus:outline-primary hover:outline-primary text-black'></textarea>
       </div>
       <!-- Actions -->
       <div class='grid grid-cols-3 gap-14 absolute bottom-0 left-0 right-0'>

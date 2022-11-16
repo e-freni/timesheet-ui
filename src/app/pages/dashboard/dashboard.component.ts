@@ -30,7 +30,6 @@ export class DashboardComponent implements OnInit, OnDestroy {
   //TODO user edit details (es. email)
   //TODO put all css in style classes and optimize it
   //TODO make a mobile view
-  //TODO DARK MODE!
   //TODO (maybe) massive normal working days log
 
   constructor(

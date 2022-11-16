@@ -1,4 +1,4 @@
-import { Component, EventEmitter, OnInit, Output } from '@angular/core';
+import { Component, EventEmitter, OnInit, Output, ViewEncapsulation } from '@angular/core';
 import { WorkdayService } from 'app/services/rest/workday.service';
 import { Account } from 'app/models/account.model';
 import { getMonth, getTodaysDate, getYear } from 'app/utils/date-utilities';
@@ -13,6 +13,7 @@ import { ExportService } from 'app/services/rest/export.service';
   selector: 'app-month-switch',
   templateUrl: './month-switch.component.html',
   styleUrls: ['./month-switch.component.css'],
+  encapsulation: ViewEncapsulation.None,
 })
 export class MonthSwitchComponent implements OnInit {
   @Output() calendarEmitter: EventEmitter<any> = new EventEmitter();

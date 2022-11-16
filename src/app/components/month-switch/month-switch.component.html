@@ -1,6 +1,6 @@
-<div class='w-full grid grid-cols-10 pb-2 mt-4 dark-transition dark:bg-dark-bg dark:text-dark-text'>
+<div class='month-switch dark:text-dark-text'>
   <!-- left arrow -->
-  <button (click)='previousMonth()' class='arrow-button col-start-1 col-end-3'>
+  <button (click)='previousMonth()' class='arrow-button col-start-2 col-end-3'>
     <icon-leftarrow [height]='12' [width]='12'></icon-leftarrow>
   </button>
   <!-- formatted date = "month - year" -->
@@ -10,14 +10,14 @@
     <h1>{{ (month | uppercase) + ' - ' + year }}</h1>
   </div>
   <!-- right arrow -->
-  <button (click)='nextMonth()' class='arrow-button col-start-9 col-end-11'>
+  <button (click)='nextMonth()' class='arrow-button col-start-9 col-end-10'>
     <icon-rightarrow [height]='12' [width]='12'></icon-rightarrow>
   </button>
 </div>
 <div class='flex justify-center'>
   <!-- actions -->
   <div
-    class='flex w-3/12 m-auto items-center justify-evenly py-4 gap-x-5 bg-primary text-white rounded-2xl big-tooltip'>
+    class='month-switch-action-bar'>
     <button
       (click)='goToCalendar()'
       [matTooltipClass]="'big-tooltip'"

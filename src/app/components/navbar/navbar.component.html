@@ -6,7 +6,10 @@
         <span class='font-medium px-2'>Jaewa Timesheet</span>
       </div>
       <div class='flex items-center gap-x-5'>
-        <mat-slide-toggle (input)='changeTheme()' [(ngModel)]='checked'></mat-slide-toggle>
+        <button (click)='changeTheme()' class='h-10'>
+          <icon-sun *ngIf='checked'></icon-sun>
+          <icon-night-hours *ngIf='!checked'></icon-night-hours>
+        </button>
         <app-dropdown [menuOptions]='dropdownOptions' [menuTitle]='account?.username'></app-dropdown>
       </div>
     </div>

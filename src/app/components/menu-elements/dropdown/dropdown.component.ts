@@ -1,9 +1,11 @@
-import { Component, HostListener, Input } from '@angular/core';
+import { Component, HostListener, Input, ViewEncapsulation } from '@angular/core';
 import { DropDownOption } from 'app/components/menu-elements/dropdown/dropdown-option.model';
 
 @Component({
   selector: 'app-dropdown',
   templateUrl: './dropdown.component.html',
+  styleUrls: ['./dropdown.component.css'],
+  encapsulation: ViewEncapsulation.None,
 })
 export class DropdownComponent {
   open: boolean = false;

@@ -1,3 +1,7 @@
+.analytics-page {
+  @apply text-black dark:text-dark-text;
+}
+
 .info-card {
   @apply flex flex-col justify-center items-center;
 }
@@ -11,7 +15,7 @@
 }
 
 .info-container-value {
-  @apply flex  gap-x-1;
+  @apply flex gap-x-1 dark:text-dark-text;
 }
 
 .info-summary {

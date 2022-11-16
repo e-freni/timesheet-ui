@@ -12,7 +12,7 @@
 }
 
 .form {
-  @apply flex flex-1 text-primary bg-white border-blue-300 border-2 rounded-xl flex-col items-center h-full justify-evenly;
+  @apply flex flex-1 text-primary bg-white dark:bg-dark-bg border-blue-300 border-2 rounded-xl flex-col items-center h-full justify-evenly;
 }
 
 .input-container {
@@ -33,5 +33,5 @@
 }
 
 .page {
-  @apply flex justify-center items-center;
+  @apply flex justify-center items-center bg-white dark:bg-dark-bg;
 }
