@@ -1,4 +1,4 @@
-import { Component, OnDestroy, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit, ViewEncapsulation } from '@angular/core';
 import { Account } from 'app/models/account.model';
 import { AccountService } from 'app/services/rest/account.service';
 import { MatDialog } from '@angular/material/dialog';
@@ -15,6 +15,8 @@ import { SKIP_MONTH_KEY } from 'app.constants';
 @Component({
   selector: 'app-dashboard',
   templateUrl: './dashboard.component.html',
+  styleUrls: ['./dashboard.component.css'],
+  encapsulation: ViewEncapsulation.None,
 })
 export class DashboardComponent implements OnInit, OnDestroy {
   CALENDAR = 0;

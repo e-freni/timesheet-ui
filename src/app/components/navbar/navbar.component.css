@@ -1,6 +1,4 @@
-.dark-transition {
-  @apply transition ease-in duration-300
-}
+@import '../../../dark-mode.css';
 
 .nav-bar {
   @apply relative w-full flex flex-wrap items-center justify-between py-1 shadow-lg;

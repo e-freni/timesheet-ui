@@ -1,3 +1,6 @@
+@import '../../../dark-mode.css';
+
+
 .arrow-button {
   @apply text-white bg-primary h-20 flex justify-center items-center rounded-xl;
 }

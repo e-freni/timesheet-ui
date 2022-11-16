@@ -1,0 +1,3 @@
+.dark-transition {
+  @apply transition ease-in duration-300
+}
