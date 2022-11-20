@@ -1,13 +1,13 @@
 <div class='group inline-block'>
   <button
-    class='drop-down-main-button'>
+    class='main-button'>
     <span class='pr-1 font-semibold w-32'>{{menuTitle}}</span>
   </button>
   <ul
-    class='drop-down-unordered-list'>
+    class='unordered-list'>
     <li (click)='menuOption.operation()'
         *ngFor='let menuOption of menuOptions'
-        class='drop-down-menu-options'
+        class='option'
         role='menuitem'
         tabindex='-1'>
       {{ menuOption.text }}

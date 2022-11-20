@@ -15,7 +15,3 @@
 .top-menu-button {
   @apply transition hover:opacity-50 hover:transition;
 }
-
-.top-menu-button-loading {
-  @apply top-menu-button;
-}

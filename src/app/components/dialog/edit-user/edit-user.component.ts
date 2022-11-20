@@ -6,6 +6,7 @@ import { Account, Authorities } from 'app/models/account.model';
 import { ApplicationUserService } from 'app/services/rest/application-user.service';
 import { ApplicationUser } from 'app/models/application-user.model';
 import { AlertService } from 'app/services/alert.service';
+import { AccountService } from 'app/services/rest/account.service';
 
 @Component({
   selector: 'app-user-component',
@@ -22,34 +23,36 @@ export class EditUserComponent implements OnInit {
     role: ['', [Validators.required]],
   });
   availableRoles: string[] = [Authorities.USER, Authorities.ADMINISTRATOR];
-  readonly account: Account;
+  account: Account;
   isEdit: boolean = false;
 
   constructor(
     private formBuilder: FormBuilder,
     public alertService: AlertService,
     public applicationUserService: ApplicationUserService,
+    public accountService: AccountService,
     public dialogRef: MatDialogRef<EditUserComponent>,
-    @Inject(MAT_DIALOG_DATA) data: { user?: Account; isEdit?: boolean }
+    @Inject(MAT_DIALOG_DATA) data: { isEdit?: boolean }
   ) {
     if (data?.isEdit) {
-      this.account = data.user;
       this.isEdit = data.isEdit;
     }
   }
 
   ngOnInit(): void {
-    console.log(this.account);
     if (this.isEdit) {
-      this.userForm.patchValue({
-        firstName: this.account.firstName,
-        lastName: this.account.lastName,
-        username: this.account.username,
-        email: this.account.email,
-        role: this.account.role,
+      this.accountService.getAccount().subscribe((account: Account | null) => {
+        this.account = account;
+        this.userForm.patchValue({
+          firstName: this.account.firstName,
+          lastName: this.account.lastName,
+          username: this.account.username,
+          email: this.account.email,
+          role: this.account.role,
+        });
+        this.userForm.get('username').disable();
+        this.userForm.get('role').disable();
       });
-      this.userForm.get('username').disable();
-      this.userForm.get('role').disable();
     }
   }
 
@@ -100,6 +103,7 @@ export class EditUserComponent implements OnInit {
           type: 'primary',
         });
         this.close();
+        location.reload();
       },
     });
   }

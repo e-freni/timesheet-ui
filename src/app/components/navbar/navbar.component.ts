@@ -76,7 +76,7 @@ export class NavbarComponent implements OnInit {
       backdropClass: 'ts-backdrop',
       enterAnimationDuration: '100ms',
       exitAnimationDuration: '100ms',
-      data: { user: this.account, isEdit: true },
+      data: { isEdit: true },
     });
   }
 }

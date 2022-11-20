@@ -2,22 +2,22 @@
   @apply text-black dark:text-dark-text;
 }
 
-.info-card {
+.card {
   @apply flex flex-col justify-center items-center;
 }
 
-.info-container-label {
+.container-label {
   @apply flex justify-end;
 }
 
-.info-text-label {
+.text-label {
   @apply font-bold mr-4;
 }
 
-.info-container-value {
+.container-value {
   @apply flex gap-x-1 dark:text-dark-text;
 }
 
-.info-summary {
+.summary {
   @apply flex flex-col gap-y-10 p-4;
 }

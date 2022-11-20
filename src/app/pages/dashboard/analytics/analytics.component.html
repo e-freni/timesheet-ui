@@ -6,7 +6,7 @@
   <!-- body -->
   <div class='w-full flex flex-col gap-y-6 mt-4'>
     <!-- remaining days to month end -->
-    <div *ngIf='currentMonth == showedMonth' class='info-card flex flex-col gap-y-2'>
+    <div *ngIf='currentMonth == showedMonth' class='card flex flex-col gap-y-2'>
       <div class='flex justify-center items-center'>
         <p class='w-[98%] font-bold mr-4 text-xl'>Giorni rimanenti alla fine del
                                                   mese:</p>
@@ -19,87 +19,87 @@
     <div class='flex justify-center'>
       <div class='w-3/8 flex justify-center border-2 border-primary rounded-2xl'>
         <!-- left summary -->
-        <div class='info-summary'>
-          <div class='info-card'>
-            <div class='info-container-label'>
-              <p class='info-text-label'>Ore segnate:</p>
+        <div class='summary'>
+          <div class='card'>
+            <div class='container-label'>
+              <p class='text-label'>Ore segnate:</p>
             </div>
-            <div class='info-container-value'>
+            <div class='container-value'>
               <p>{{ this.summary?.loggedHours }}</p>
               <p>{{ getHoursInDaysFormat(this.summary?.loggedHours) }}</p>
             </div>
           </div>
-          <div *ngIf='summary?.loggedPermitHours > 0' class='info-card'>
-            <div class='info-container-label'>
-              <p class='info-text-label'>Permessi usufruiti:</p>
+          <div *ngIf='summary?.loggedPermitHours > 0' class='card'>
+            <div class='container-label'>
+              <p class='text-label'>Permessi usufruiti:</p>
             </div>
-            <div class='info-container-value'>
+            <div class='container-value'>
               <p>{{ this.summary?.loggedPermitHours }}</p>
               <p>{{ getHoursInDaysFormat(this.summary?.loggedPermitHours) }}</p>
             </div>
           </div>
-          <div *ngIf='summary?.loggedHolidaysHours > 0' class='info-card'>
-            <div class='info-container-label'>
-              <p class='info-text-label'>Ferie usufruite:</p>
+          <div *ngIf='summary?.loggedHolidaysHours > 0' class='card'>
+            <div class='container-label'>
+              <p class='text-label'>Ferie usufruite:</p>
             </div>
-            <div class='info-container-value'>
+            <div class='container-value'>
               <p>{{ this.summary?.loggedHolidaysHours }}</p>
               <p>{{ getHoursInDaysFormat(this.summary?.loggedHolidaysHours) }}</p>
             </div>
           </div>
-          <div *ngIf='summary?.loggedExtraHours > 0' class='info-card'>
-            <div class='info-container-label'>
-              <p class='info-text-label'>Straordinari:</p>
+          <div *ngIf='summary?.loggedExtraHours > 0' class='card'>
+            <div class='container-label'>
+              <p class='text-label'>Straordinari:</p>
             </div>
-            <div class='info-container-value'>
+            <div class='container-value'>
               <p>{{ this.summary?.loggedExtraHours }}</p>
               <p>{{ getHoursInDaysFormat(this.summary?.loggedExtraHours) }}</p>
             </div>
           </div>
         </div>
         <!-- right summary -->
-        <div class='info-summary'>
-          <div class='info-card'>
-            <div class='info-container-label'>
-              <p class='info-text-label'>Ore da segnare:</p>
+        <div class='summary'>
+          <div class='card'>
+            <div class='container-label'>
+              <p class='text-label'>Ore da segnare:</p>
             </div>
-            <div class='info-container-value'>
+            <div class='container-value'>
               <p>{{ this.summary?.toLogHours }}</p>
               <p>{{ getHoursInDaysFormat(this.summary?.toLogHours) }}</p>
             </div>
           </div>
-          <div *ngIf='summary?.loggedNightHours > 0' class='info-card'>
-            <div class='info-container-label'>
-              <p class='info-text-label'>Notturni:</p>
+          <div *ngIf='summary?.loggedNightHours > 0' class='card'>
+            <div class='container-label'>
+              <p class='text-label'>Notturni:</p>
             </div>
-            <div class='info-container-value'>
+            <div class='container-value'>
               <p>{{ this.summary?.loggedNightHours }}</p>
               <p>{{ getHoursInDaysFormat(this.summary?.loggedNightHours) }}</p>
             </div>
           </div>
-          <div *ngIf='summary?.loggedSicknessHours > 0' class='info-card'>
-            <div class='info-container-label'>
-              <p class='info-text-label'>Malattia:</p>
+          <div *ngIf='summary?.loggedSicknessHours > 0' class='card'>
+            <div class='container-label'>
+              <p class='text-label'>Malattia:</p>
             </div>
-            <div class='info-container-value'>
+            <div class='container-value'>
               <p>{{ this.summary?.loggedSicknessHours }}</p>
               <p>{{ getHoursInDaysFormat(this.summary?.loggedSicknessHours) }}</p>
             </div>
           </div>
-          <div *ngIf='summary?.loggedAccidentAtWorkHours > 0' class='info-card'>
-            <div class='info-container-label'>
-              <p class='info-text-label'>Infortuni:</p>
+          <div *ngIf='summary?.loggedAccidentAtWorkHours > 0' class='card'>
+            <div class='container-label'>
+              <p class='text-label'>Infortuni:</p>
             </div>
-            <div class='info-container-value'>
+            <div class='container-value'>
               <p>{{ this.summary?.loggedAccidentAtWorkHours }}</p>
               <p>{{ getHoursInDaysFormat(this.summary?.loggedAccidentAtWorkHours) }}</p>
             </div>
           </div>
-          <div *ngIf='summary?.loggedFuneralLeaveHours > 0' class='info-card'>
-            <div class='info-container-label'>
-              <p class='info-text-label'>Permessi per lutto:</p>
+          <div *ngIf='summary?.loggedFuneralLeaveHours > 0' class='card'>
+            <div class='container-label'>
+              <p class='text-label'>Permessi per lutto:</p>
             </div>
-            <div class='info-container-value'>
+            <div class='container-value'>
               <p>{{ this.summary?.loggedFuneralLeaveHours }}</p>
               <p>{{ getHoursInDaysFormat(this.summary?.loggedFuneralLeaveHours) }}</p>
             </div>

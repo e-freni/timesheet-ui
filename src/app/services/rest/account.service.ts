@@ -38,6 +38,10 @@ export class AccountService {
     return this.accountSubject;
   }
 
+  public updateUser(account: Account): void {
+    this.account = account;
+  }
+
   public load(): void {
     this.httpClient.get<Account>(SERVER_API_URL + '/account/info').subscribe({
       next: (account: Account) => {
