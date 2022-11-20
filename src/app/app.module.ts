@@ -40,6 +40,7 @@ import { MatIconModule } from '@angular/material/icon';
 import { MissingHoursWarning } from 'app/components/dialog/missing-hours-warning/missing-hours-warning.component';
 import { NonWorkingDayLogWarning } from 'app/components/dialog/non-working-day-log-warning/non-working-day-log-working.component';
 import { MatSlideToggleModule } from '@angular/material/slide-toggle';
+import { DarkModeSwitchComponent } from './components/dark-mode-switch/dark-mode-switch.component';
 
 @NgModule({
   declarations: [
@@ -61,6 +62,7 @@ import { MatSlideToggleModule } from '@angular/material/slide-toggle';
     PasswordEyeComponent,
     ResetPasswordComponent,
     SendEmailComponent,
+    DarkModeSwitchComponent,
   ],
   imports: [
     AppRoutingModule,

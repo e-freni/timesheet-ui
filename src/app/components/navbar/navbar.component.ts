@@ -30,7 +30,6 @@ export class NavbarComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    this.updateTheme();
     this.accountSubscription = this.accountService.getAccount().subscribe({
       next: (account: Account | null) => {
         this.account = account;
@@ -47,31 +46,6 @@ export class NavbarComponent implements OnInit {
         });
       },
     });
-  }
-
-  changeTheme() {
-    const theme = this.localStorageService.retrieve('ui_theme');
-
-    if (theme === 'dark') {
-      this.localStorageService.store('ui_theme', 'light');
-      this.checked = false;
-    } else {
-      this.localStorageService.store('ui_theme', 'dark');
-      this.checked = true;
-    }
-    this.updateTheme();
-  }
-
-  private updateTheme() {
-    const theme = this.localStorageService.retrieve('ui_theme');
-
-    if (theme === 'dark') {
-      document.documentElement.classList.add('dark');
-      this.checked = true;
-    } else {
-      document.documentElement.classList.remove('dark');
-      this.checked = false;
-    }
   }
 
   private openAddUserDialog() {

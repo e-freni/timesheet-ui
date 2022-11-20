@@ -1,0 +1,6 @@
+<button (click)='changeTheme()' class='h-10 flex items-center gap-x-2'>
+  <icon-sun [ngClass]='{"text-primary":!checked}'></icon-sun>
+  <mat-slide-toggle (click)='changeTheme()' (toggleChange)='changeTheme()'
+                    [(ngModel)]='checked'></mat-slide-toggle>
+  <icon-night-hours [ngClass]='{"text-primary":checked}'></icon-night-hours>
+</button>

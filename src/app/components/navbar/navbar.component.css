@@ -5,12 +5,3 @@
   @apply bg-navbar-bg text-navbar-text hover:text-navbar-hover focus:text-navbar-hover;
   @apply dark-transition dark:bg-dark-navbar-bg dark:text-dark-text dark:hover:text-dark-navbar-hover dark:focus:text-dark-navbar-hover;
 }
-
-.mat-slide-toggle.mat-checked:not(.mat-disabled) .mat-slide-toggle-thumb {
-  @apply bg-primary;
-}
-
-.mat-slide-toggle.mat-checked:not(.mat-disabled) .mat-slide-toggle-bar {
-  @apply bg-light-bg;
-  @apply dark-transition dark:bg-dark-switch-bar;
-}
