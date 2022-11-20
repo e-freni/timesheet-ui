@@ -29,7 +29,7 @@ import { AnalyticsComponent } from './pages/dashboard/analytics/analytics.compon
 import { MatTabsModule } from '@angular/material/tabs';
 import { HeaderLessTabsDirective } from 'app/components/header-less-tabs.directive';
 import { SendEmailComponent } from './components/dialog/send-email/send-email.component';
-import { AddUserComponent } from './components/dialog/add-user/add-user.component';
+import { EditUserComponent } from 'app/components/dialog/edit-user/edit-user.component';
 import { ChangePasswordComponent } from 'app/components/dialog/edit-password/change-password.component';
 import { PasswordEyeComponent } from './components/password-eye/password-eye.component';
 import { ResetPasswordComponent } from './pages/reset-password/reset-password.component';
@@ -44,7 +44,7 @@ import { DarkModeSwitchComponent } from './components/dark-mode-switch/dark-mode
 
 @NgModule({
   declarations: [
-    AddUserComponent,
+    EditUserComponent,
     AlertComponent,
     AnalyticsComponent,
     AppComponent,

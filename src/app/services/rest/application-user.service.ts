@@ -13,4 +13,8 @@ export class ApplicationUserService {
   addUser(user: ApplicationUser): Observable<HttpResponse<ApplicationUser>> {
     return this.httpClient.post<ApplicationUser>(`${SERVER_API_URL}/user/new`, user, { observe: 'response' });
   }
+
+  editUser(user: ApplicationUser): Observable<HttpResponse<ApplicationUser>> {
+    return this.httpClient.put<ApplicationUser>(`${SERVER_API_URL}/user/edit`, user, { observe: 'response' });
+  }
 }

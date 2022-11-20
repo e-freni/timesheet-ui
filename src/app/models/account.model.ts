@@ -5,7 +5,7 @@ export type Account = {
   email: string;
   username: string;
   password?: string;
-  role: string[];
+  role: string;
 };
 
 export const Authorities = {

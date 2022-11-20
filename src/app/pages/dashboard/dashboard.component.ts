@@ -27,7 +27,6 @@ export class DashboardComponent implements OnInit, OnDestroy {
   private dateSubscription: Subscription;
   private date: Date;
 
-  //TODO user edit details (es. email)
   //TODO put all css in style classes and optimize it
   //TODO make a mobile view
   //TODO (maybe) massive normal working days log

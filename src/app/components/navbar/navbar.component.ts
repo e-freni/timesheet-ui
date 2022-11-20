@@ -5,7 +5,7 @@ import { DropDownOption } from 'app/components/menu-elements/dropdown/dropdown-o
 import { isAdmin } from 'app/utils/admin-utilities';
 import { Subscription } from 'rxjs';
 import { MatDialog } from '@angular/material/dialog';
-import { AddUserComponent } from 'app/components/dialog/add-user/add-user.component';
+import { EditUserComponent } from 'app/components/dialog/edit-user/edit-user.component';
 import { ChangePasswordComponent } from 'app/components/dialog/edit-password/change-password.component';
 import { LocalStorageService } from 'ngx-webstorage';
 
@@ -36,7 +36,7 @@ export class NavbarComponent implements OnInit {
         if (isAdmin(this.account?.role)) {
           this.dropdownOptions.push({ text: 'Aggiungi utente', operation: () => this.openAddUserDialog() });
         }
-        this.dropdownOptions.push({ text: 'Modifica dati', operation: () => this.accountService.logout() });
+        this.dropdownOptions.push({ text: 'Modifica dati', operation: () => this.openEditUserDialog() });
         this.dropdownOptions.push({ text: 'Cambia password', operation: () => this.openChangePasswordDialog() });
         this.dropdownOptions.push({
           text: 'Log out',
@@ -49,7 +49,7 @@ export class NavbarComponent implements OnInit {
   }
 
   private openAddUserDialog() {
-    this.matDialog.open(AddUserComponent, {
+    this.matDialog.open(EditUserComponent, {
       width: '40%',
       disableClose: true,
       backdropClass: 'ts-backdrop',
@@ -66,6 +66,17 @@ export class NavbarComponent implements OnInit {
       enterAnimationDuration: '100ms',
       exitAnimationDuration: '100ms',
       data: this.account.username,
+    });
+  }
+
+  private openEditUserDialog() {
+    this.matDialog.open(EditUserComponent, {
+      width: '40%',
+      disableClose: true,
+      backdropClass: 'ts-backdrop',
+      enterAnimationDuration: '100ms',
+      exitAnimationDuration: '100ms',
+      data: { user: this.account, isEdit: true },
     });
   }
 }
