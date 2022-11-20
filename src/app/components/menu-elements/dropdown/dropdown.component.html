@@ -1,40 +1,16 @@
-<div class='relative inline-block text-left z-50'>
-  <div>
-    <button
-      aria-expanded='true'
-      aria-haspopup='true'
-      class='drop-down-main-button'
-      id='menu-button'
-      type='button'>
-      {{ menuTitle }}
-      <svg
-        aria-hidden='true'
-        class='-mr-1 ml-2 h-5 w-5'
-        fill='currentColor'
-        viewBox='0 0 20 20'
-        xmlns='http://www.w3.org/2000/svg'>
-        <path
-          clip-rule='evenodd'
-          d='M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z'
-          fill-rule='evenodd' />
-      </svg>
-    </button>
-  </div>
-  <div
-    *ngIf='open'
-    aria-labelledby='menu-button'
-    aria-orientation='vertical'
-    class='container-drop-down-menu-options'
-    role='menu'
-    tabindex='-1'>
-    <div *ngFor='let menuOption of menuOptions' class='py-1' role='none'>
-      <button
-        (click)='menuOption.operation()'
+<div class='group inline-block'>
+  <button
+    class='drop-down-main-button'>
+    <span class='pr-1 font-semibold flex-1'>{{menuTitle}}</span>
+  </button>
+  <ul
+    class='drop-down-unordered-list'>
+    <li (click)='menuOption.operation()'
+        *ngFor='let menuOption of menuOptions'
         class='drop-down-menu-options'
         role='menuitem'
         tabindex='-1'>
-        {{ menuOption.text }}
-      </button>
-    </div>
-  </div>
+      {{ menuOption.text }}
+    </li>
+  </ul>
 </div>
