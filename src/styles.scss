@@ -17,220 +17,23 @@ body {
   font-family: 'OpenSans', open-sans, sans-serif;
 }
 
-.page {
-  @apply bg-gray-50 h-screen;
+::placeholder {
+  @apply text-blue-300;
+  opacity: 1;
 }
 
-.big-tooltip {
-  @apply font-sans text-xl;
+.analytics-body {
+  @apply flex flex-col;
 }
 
-.common-button {
-  @apply border border-0 focus:outline-0 focus:outline-offset-0 font-medium inline-flex items-center justify-center px-4 py-2 ring-0 rounded-md sm:ml-3 sm:text-sm sm:w-auto text-base w-full;
+.analytics-days-to-month-end {
+  @apply text-4xl font-black text-black;
+  @apply dark-text;
 }
 
-.submit-button {
-  @apply bg-primary border-transparent common-button hover:bg-blue-400 shadow-sm text-white;
-  @apply disabled;
-}
-
-.delete-button {
-  @apply bg-red-600 border-transparent common-button hover:bg-red-400 shadow-sm text-white;
-  @apply disabled;
-}
-
-.back-button {
-  @apply bg-white border-gray-300 common-button focus:outline-none hover:bg-gray-50 shadow-sm text-gray-700;
-}
-
-.disabled {
-  @apply disabled:bg-slate-50 disabled:text-slate-500 disabled:border-slate-200 disabled:shadow-none disabled:hover:bg-slate-50;
-}
-
-.ts-backdrop {
-  @apply backdrop-blur-lg;
-}
-
-.over-the-top-position {
-  z-index: 1001;
-}
-
-.mat-dialog-container {
-  @apply dark:bg-dark-bg;
-}
-
-.dialog-title {
-  @apply text-4xl text-center;
-}
-
-.dialog-close {
-  @apply flex items-center;
-}
-
-.edit-user-input {
-  @apply border focus:outline-primary h-10 hover:outline-primary text-black text-center;
-}
-
-.edit-user-actions {
-  @apply flex items-end justify-evenly;
-}
-
-.edit-user-double-input-container {
-  @apply flex gap-x-5 w-10/12;
-}
-
-.edit-user-single-input-container {
-  @apply flex flex-col w-full;
-}
-
-.edit-user-select-container {
-  @apply flex flex-col items-center w-10/12;
-}
-
-.edit-user-form {
-  @apply flex flex-col gap-y-5 items-center justify-center pt-6 w-full;
-}
-
-.edit-user-dialog-container {
-  @apply dark:bg-dark-bg dark:text-white;
-}
-
-.edit-workday-dialog-container {
-  @apply min-h-[30rem] relative text-black;
-  @apply dark:text-dark-text;
-}
-
-.edit-workday-body {
-  @apply flex flex-col h-full justify-between;
-}
-
-.edit-workday-title {
-  @apply pb-5 text-5xl text-center;
-}
-
-.edit-workday-input {
-  @apply border focus:outline-primary h-10 hover:outline-primary text-black text-center;
-}
-
-.edit-workday-cancel-button {
-  @apply hover:text-red-500 ml-auto text-red-400;
-}
-
-.edit-workday-optional-field {
-  @apply flex items-center pt-5;
-}
-
-.edit-workday-add-button {
-  @apply bg-green-600 border border-transparent flex font-medium hover:bg-green-400 items-center justify-center px-4 py-2 rounded-md shadow-sm sm:ml-3 sm:text-sm sm:w-auto text-base text-white w-full;
-}
-
-.edit-workday-textarea {
-  @apply border focus:outline-primary hover:outline-primary p-3 text-black;
-}
-
-.edit-workday-actions-container {
-  @apply absolute bottom-0 gap-14 grid grid-cols-3 left-0 right-0;
-}
-
-.missing-hours-dialog-container {
-  @apply flex flex-col h-full;
-}
-
-.dark-text {
-  @apply dark:text-white;
-}
-
-.missing-hours-body-container {
-  @apply flex flex-col gap-y-5 h-full text-red-500;
-}
-
-.missing-hours-warning-title {
-  @apply font-black text-4xl text-6xl text-center text-red-500;
-}
-
-.missing-hours-body-message-container {
-  @apply flex flex-col font-bold gap-y-5 h-full items-center justify-center;
-}
-
-.missing-hours-actions {
-  @apply flex flex-col h-full justify-end;
-}
-
-.missing-hours-dont-show-button {
-  @apply bg-green-500 common-button hover:bg-green-400 text-white;
-}
-
-.non-working-day-log-warning-message-container {
-  @apply flex flex-col font-bold gap-y-10 h-full items-center justify-center;
-}
-
-.send-mail-dialog-container {
-  @apply dark:text-dark-text;
-}
-
-.send-mail-form {
-  @apply flex flex-col gap-y-5;
-}
-
-.send-mail-form-body-container {
-  @apply flex flex-col gap-y-5 h-full items-center pt-5;
-}
-
-.send-mail-input-container {
-  @apply flex gap-x-5 items-center justify-center w-10/12;
-}
-
-.send-mail-input-container-2 {
-  @apply flex font-bold gap-x-4 items-center justify-center text-sm;
-}
-
-.send-mail-input {
-  @apply border focus:outline-0 h-10 text-black text-center w-full;
-}
-
-.container-drop-down-menu-options {
-  @apply absolute
-  bg-white focus:outline-none mt-2 origin-top-right right-0 ring-1 ring-black ring-opacity-5 rounded-xl shadow-lg w-56;
-  @apply dark-transition dark:bg-dark-bg dark:text-dark-text;
-}
-
-.drop-down-main-button {
-  @apply bg-white border flex focus:outline-none items-center outline-none px-3 py-1 rounded-xl;
-  @apply dark-transition dark:bg-dark-bg dark:border-dark-navbar-bg dark:text-dark-text;
-}
-
-.drop-down-unordered-list {
-  @apply absolute bg-white duration-150 ease-in-out group-hover:scale-100 origin-top rounded-xl scale-0 transform transition;
-  @apply border dark-transition dark:bg-dark-navbar-bg dark:border-dark-navbar-bg;
-}
-
-.drop-down-menu-options {
-  @apply block hover:bg-indigo-100 px-4 py-2 rounded-xl text-gray-700 text-left text-sm w-full;
-  @apply dark-transition dark:hover:bg-primary dark:hover:text-dark-text dark:text-dark-text;
-}
-
-.hide-password-button {
-  @apply bg-primary flex h-10 items-center justify-center text-white w-1/12;
-}
-
-.change-password-actions {
-  @apply flex justify-evenly items-end;
-}
-
-.change-password-input-detail-container {
-  @apply flex items-center justify-center w-full;
-}
-
-.change-password-input-container {
-  @apply flex flex-col items-center w-full;
-}
-
-.change-password-input {
-  @apply border focus:outline-primary h-10 hover:outline-primary text-black text-center w-11/12;
-}
-
-.change-password-form {
-  @apply flex flex-col gap-y-5 items-center justify-center pt-6 w-full;
+.analytics-page {
+  @apply text-black;
+  @apply dark-text;
 }
 
 .arrow-button {
@@ -246,18 +49,318 @@ body {
   @apply arrow-button col-start-9 col-end-10;
 }
 
+.back-button {
+  @apply bg-white border-gray-300 common-button focus:outline-none hover:bg-gray-50 shadow-sm text-gray-700;
+}
+
+.big-tooltip {
+  @apply font-sans text-xl;
+}
+
+.calendar-page {
+  @apply min-h-full px-10 pt-8;
+  @apply bg-light-bg;
+  @apply dark-transition dark-bg;
+}
+
+.change-password-actions {
+  @apply flex justify-evenly items-end;
+}
+
+.common-button {
+  @apply border border-0 focus:outline-0 focus:outline-offset-0 font-medium inline-flex items-center justify-center px-4 py-2 ring-0 rounded-md sm:ml-3 sm:text-sm sm:w-auto text-base w-full;
+}
+
+.dark-text {
+  @apply dark:text-dark-text;
+}
+
+.dark-bg {
+  @apply dark:bg-dark-bg;
+}
+
+.dashboard-page {
+  @apply h-full;
+  @apply dark-transition dark-bg;
+}
+
+.day-commons {
+  @apply flex flex-col h-[10rem] items-center justify-center py-1 rounded-xl;
+  @apply dark-text;
+}
+
+.day-info-panel {
+  @apply flex flex-col px-2;
+}
+
+.delete-button {
+  @apply bg-red-600 border-transparent common-button hover:bg-red-400 shadow-sm text-white;
+  @apply disabled;
+}
+
+.dialog-close {
+  @apply flex items-center;
+}
+
+.dialog-title {
+  @apply text-4xl text-center;
+}
+
+.disabled {
+  @apply disabled:bg-slate-50 disabled:text-slate-500 disabled:border-slate-200 disabled:shadow-none disabled:hover:bg-slate-50;
+}
+
+.drop-down-main-button {
+  @apply bg-white border flex focus:outline-none items-center outline-none px-3 py-1 rounded-xl;
+  @apply dark-transition dark-bg dark:border-dark-navbar-bg dark-text;
+}
+
+.drop-down-menu-options {
+  @apply block hover:bg-indigo-100 px-4 py-2 rounded-xl text-gray-700 text-left text-sm;
+  @apply dark-transition dark:hover:bg-primary dark:hover:text-dark-text dark-text;
+}
+
+.drop-down-unordered-list {
+  @apply absolute bg-white duration-150 ease-in-out group-hover:scale-100 origin-top rounded-xl scale-0 transform transition;
+  @apply border dark-transition dark:bg-dark-navbar-bg dark:border-dark-navbar-bg;
+}
+
+.edit-user-actions {
+  @apply flex items-end justify-evenly;
+}
+
+.edit-user-dialog-container {
+  @apply dark-bg dark-text;
+}
+
+.edit-user-double-input-container {
+  @apply flex gap-x-5;
+}
+
+.edit-user-single-input-container {
+  @apply flex flex-col;
+}
+
+.edit-workday-actions-container {
+  @apply absolute bottom-0 gap-14 grid grid-cols-3 left-0 right-0;
+}
+
+.edit-workday-add-button {
+  @apply bg-green-600 border border-transparent flex font-medium hover:bg-green-400 items-center justify-center px-4 py-2 rounded-md shadow-sm sm:ml-3 sm:text-sm sm:w-auto text-base text-white;
+}
+
+.edit-workday-body {
+  @apply flex flex-col h-full justify-between;
+}
+
+.edit-workday-cancel-button {
+  @apply hover:text-red-500 ml-auto text-red-400;
+}
+
+.edit-workday-dialog-container {
+  @apply min-h-[30rem] relative text-black;
+  @apply dark-text;
+}
+
+.edit-workday-optional-field {
+  @apply flex items-center pt-5;
+}
+
+.edit-workday-textarea {
+  @apply border focus:outline-primary hover:outline-primary p-3 text-black;
+}
+
+.field {
+  @apply bg-transparent h-10 ml-2 outline-0 text-primary text-xl ;
+}
+
+.field-container {
+  @apply border-b-2 border-primary border-solid flex h-10 items-center;
+}
+
+.form {
+  @apply bg-white border-2 border-blue-300 flex flex-1 flex-col h-full items-center justify-evenly rounded-xl text-primary;
+  @apply dark-bg;
+}
+
+.form-1 {
+  @apply flex flex-col gap-y-5 items-center justify-center pt-6;
+}
+
+.generic-input {
+  @apply border focus:outline-primary h-10 hover:outline-primary text-black text-center;
+}
+
+.hide-password-button {
+  @apply bg-primary flex h-10 items-center justify-center text-white;
+}
+
+.info-container-label {
+  @apply flex justify-end;
+}
+
+.info-container-value {
+  @apply flex gap-x-1;
+  @apply dark-text;
+}
+
+.info-summary {
+  @apply flex flex-col gap-y-10 p-4;
+}
+
+.info-text-label {
+  @apply font-bold mr-4;
+}
+
+.input-container {
+  @apply flex mt-10 rounded;
+  height: 50%;
+  width: 100%;
+}
+
+.logged-day {
+  @apply bg-blue-50 cursor-pointer day-commons;
+  @apply dark-transition dark:bg-dark-logged-bg;
+}
+
+.login-button {
+  @apply bg-transparent duration-300 ease-in-out font-bold outline outline-2 outline-primary px-12 py-3 rounded-xl text-primary transition;
+  @apply hover:text-primary hover:scale-125;
+  @apply disabled:transform-none disabled:opacity-30 disabled:transition disabled:cursor-not-allowed;
+  letter-spacing: 1px;
+}
+
+.main-container {
+  @apply flex flex-col items-center;
+}
+
+.mat-dialog-container {
+  @apply dark-bg;
+}
+
+.mat-stepper-container {
+  @apply border-2 border-primary h-1/4 mt-10 rounded-2xl;
+}
+
+.missing-hours-actions {
+  @apply flex flex-col h-full justify-end;
+}
+
+.missing-hours-body-container {
+  @apply flex flex-col gap-y-5 h-full text-red-500;
+}
+
+.missing-hours-body-message-container {
+  @apply flex flex-col font-bold gap-y-5 h-full items-center justify-center;
+}
+
+.missing-hours-dialog-container {
+  @apply flex flex-col h-full;
+}
+
+.missing-hours-dont-show-button {
+  @apply bg-green-500 common-button hover:bg-green-400 text-white;
+}
+
+.missing-hours-warning-title {
+  @apply font-black text-4xl text-6xl text-center text-red-500;
+}
+
 .month-switch {
-  @apply bg-white grid grid-cols-10 mt-4 pb-2 w-full;
-  @apply dark-transition dark:bg-dark-bg;
+  @apply bg-white grid grid-cols-10 mt-4 pb-2;
+  @apply dark-transition dark-bg;
+}
+
+.month-switch-action-bar {
+  @apply bg-primary flex gap-x-5 items-center justify-evenly m-auto py-4 rounded-2xl text-white;
+  @apply dark-transition dark:bg-dark-primary dark-text;
 }
 
 .month-switch-title {
   @apply col-end-9 col-start-3 flex items-center justify-center lg:text-5xl sm:text-6xl text-xl xl:text-7xl;
 }
 
-.month-switch-action-bar {
-  @apply bg-primary flex gap-x-5 items-center justify-evenly m-auto py-4 rounded-2xl text-white w-3/12;
-  @apply dark-transition dark:bg-dark-primary dark:text-dark-text;
+.nav-bar {
+  @apply flex flex-wrap items-center justify-between py-1 relative shadow-lg;
+  @apply bg-navbar-bg focus:text-navbar-hover hover:text-navbar-hover text-navbar-text;
+  @apply dark-transition dark:bg-dark-navbar-bg dark:focus:text-dark-navbar-hover dark:hover:text-dark-navbar-hover dark-text;
+}
+
+.nav-bar-container {
+  @apply flex items-center justify-between px-6;
+}
+
+.nav-bar-sub-container {
+  @apply flex justify-between;
+}
+
+.non-working-day-log-warning-message-container {
+  @apply flex flex-col font-bold gap-y-10 h-full items-center justify-center;
+}
+
+.not-working-day {
+  @apply bg-red-50 cursor-pointer day-commons text-red-300;
+  @apply dark-transition dark:bg-dark-not-working-bg;
+}
+
+.outer-months-day {
+  @apply bg-gray-50 day-commons text-gray-300;
+  @apply dark-transition dark:bg-dark-outer-bg;
+}
+
+.over-the-top-position {
+  z-index: 1001;
+}
+
+.page {
+  @apply bg-gray-50 h-screen;
+}
+
+.page {
+  @apply bg-white flex items-center justify-center;
+  @apply dark-bg;
+}
+
+.reset-password-container {
+  @apply flex flex-col h-full items-center justify-center;
+}
+
+.send-mail-form {
+  @apply flex flex-col gap-y-5;
+}
+
+.send-mail-form-body-container {
+  @apply flex flex-col gap-y-5 h-full items-center pt-5;
+}
+
+.send-mail-input {
+  @apply border focus:outline-0 h-10 text-black text-center;
+}
+
+.send-mail-input-container {
+  @apply flex font-bold gap-x-4 items-center justify-center text-sm;
+}
+
+.special-day {
+  @apply bg-emerald-500 cursor-pointer day-commons text-white;
+  @apply dark-transition dark:bg-dark-special-bg;
+}
+
+.sub-container {
+  @apply flex items-center justify-center;
+}
+
+.sub-page-title {
+  @apply text-5xl text-center;
+}
+
+.submit-button {
+  @apply bg-primary border-transparent common-button hover:bg-blue-400 shadow-sm text-white;
+  @apply disabled;
+}
+
+.today-cell {
+  @apply border-t-2 border-t-primary rounded-2xl;
 }
 
 .top-menu-button {
@@ -268,160 +371,11 @@ body {
   @apply top-menu-button;
 }
 
-.nav-bar {
-  @apply flex flex-wrap items-center justify-between py-1 relative shadow-lg w-full;
-  @apply bg-navbar-bg focus:text-navbar-hover hover:text-navbar-hover text-navbar-text;
-  @apply dark-transition dark:bg-dark-navbar-bg dark:focus:text-dark-navbar-hover dark:hover:text-dark-navbar-hover dark:text-dark-text;
-}
-
-.nav-bar-container {
-  @apply flex items-center justify-between px-6 w-full;
-}
-
-.nav-bar-sub-container {
-  @apply flex justify-between w-full;
-}
-
-.dashboard-page {
-  @apply h-full;
-  @apply dark-transition dark:bg-dark-bg;
-}
-
-.day-commons {
-  @apply py-1 justify-center items-center rounded-xl flex flex-col h-[10rem];
-  @apply dark:text-dark-text;
-}
-
-.not-working-day {
-  @apply bg-red-50 cursor-pointer day-commons text-red-300;
-  @apply dark-transition dark:bg-dark-not-working-bg;
+.ts-backdrop {
+  @apply backdrop-blur-lg;
 }
 
 .working-day {
   @apply bg-amber-50 cursor-pointer day-commons;
   @apply dark-transition dark:bg-dark-working-bg;
-}
-
-.outer-months-day {
-  @apply bg-gray-50 day-commons text-gray-300;
-  @apply dark-transition dark:bg-dark-outer-bg;
-}
-
-.special-day {
-  @apply bg-emerald-500 cursor-pointer day-commons text-white;
-  @apply dark-transition dark:bg-dark-special-bg;
-}
-
-.logged-day {
-  @apply bg-blue-50 cursor-pointer day-commons;
-  @apply dark-transition dark:bg-dark-logged-bg;
-}
-
-.day-info-panel {
-  @apply flex flex-col px-2;
-}
-
-.today-cell {
-  @apply border-t-2 border-t-primary rounded-2xl;
-}
-
-.calendar-page {
-  @apply min-h-full px-10 pt-8;
-  @apply bg-light-bg;
-  @apply dark-transition dark:bg-dark-bg;
-}
-
-.reset-password-container {
-  @apply flex flex-col h-full items-center justify-center;
-}
-
-.mat-stepper-container {
-  @apply border-2 border-primary h-1/4 mt-10 rounded-2xl w-1/2;
-}
-
-.mat-stepper-form {
-  @apply flex flex-col items-center text-center;
-}
-
-.mat-stepper-message-container {
-  @apply flex flex-col items-center justify-center;
-}
-
-::placeholder {
-  @apply text-blue-300;
-  opacity: 1;
-}
-
-.field {
-  @apply bg-transparent h-10 ml-2 outline-0 text-primary text-xl w-full;
-}
-
-.field-container {
-  @apply border-b-2 border-primary border-solid flex h-10 items-center w-2/3;
-}
-
-.form {
-  @apply bg-white border-2 border-blue-300 flex flex-1 flex-col h-full items-center justify-evenly rounded-xl text-primary;
-  @apply dark:bg-dark-bg;
-}
-
-.input-container {
-  @apply flex mt-10 rounded;
-  height: 50%;
-  width: 100%;
-}
-
-.login-button {
-  @apply bg-transparent duration-300 ease-in-out font-bold outline outline-2 outline-primary px-12 py-3 rounded-xl text-primary transition;
-  @apply hover:text-primary hover:scale-125;
-  @apply disabled:transform-none disabled:opacity-30 disabled:transition disabled:cursor-not-allowed;
-  letter-spacing: 1px;
-}
-
-.icon {
-  @apply drop-shadow-lg h-5 w-5;
-}
-
-.page {
-  @apply bg-white flex items-center justify-center;
-  @apply dark:bg-dark-bg;
-}
-
-.analytics-page {
-  @apply text-black;
-  @apply dark:text-dark-text;
-}
-
-.info-card {
-  @apply flex flex-col items-center justify-center;
-}
-
-.info-container-label {
-  @apply flex justify-end;
-}
-
-.info-text-label {
-  @apply font-bold mr-4;
-}
-
-.info-container-value {
-  @apply flex gap-x-1;
-  @apply dark:text-dark-text;
-}
-
-.info-summary {
-  @apply flex flex-col gap-y-10 p-4;
-}
-
-.analytics-title {
-  @apply text-5xl text-center;
-}
-
-.analytics-body {
-  @apply flex flex-col gap-y-6 mt-4 w-full;
-}
-
-.analytics-days-to-month-end {
-  @apply text-4xl font-black text-black;
-  @apply dark:text-dark-text;
 }

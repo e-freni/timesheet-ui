@@ -5,9 +5,9 @@
   </div>
   <h1 class='dialog-title'>{{isEdit ? "Modifica utente" : "Aggiungi nuovo utente"}}</h1>
   <form (ngSubmit)='addUserRequest()' [formGroup]='userForm'
-        class='edit-user-form' role='form'>
+        class='w-full form-1' role='form'>
     <!-- role field -->
-    <div *ngIf='!isEdit' class='edit-user-select-container'>
+    <div *ngIf='!isEdit' class='main-container w-10/12'>
       <p>Ruolo</p>
       <ng-select
         [clearable]='false'
@@ -16,13 +16,13 @@
         class='w-1/3 items-center justify-center'
         type='text'></ng-select>
     </div>
-    <div class='edit-user-double-input-container'>
+    <div class='edit-user-double-input-container w-full w-10/12'>
       <!-- firstname field -->
       <div class='edit-user-single-input-container'>
         <p>Nome</p>
         <input
           [formControlName]="'firstName'"
-          class='edit-user-input'
+          class='generic-input'
           type='text' />
       </div>
       <!-- lastname field -->
@@ -30,17 +30,17 @@
         <p>Cognome</p>
         <input
           [formControlName]="'lastName'"
-          class='edit-user-input'
+          class='generic-input'
           type='text' />
       </div>
     </div>
-    <div class='edit-user-double-input-container'>
+    <div class='edit-user-double-input-container w-full w-10/12'>
       <div class='edit-user-single-input-container'>
         <!-- username field -->
         <p>Username</p>
         <input
           [formControlName]="'username'"
-          class='edit-user-input'
+          class='generic-input'
           type='text' />
       </div>
       <!-- email field -->
@@ -48,7 +48,7 @@
         <p>Email</p>
         <input
           [formControlName]="'email'"
-          class='edit-user-input'
+          class='generic-input'
           type='text' />
       </div>
     </div>

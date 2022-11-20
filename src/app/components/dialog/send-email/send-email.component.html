@@ -1,5 +1,5 @@
 <!-- Title and close -->
-<div class='send-mail-dialog-container'>
+<div class='dark-text'>
   <div class='dialog-close'>
     <icon-close (click)='back()' [height]='10' [width]='10' class='ml-auto cursor-pointer'></icon-close>
   </div>
@@ -13,7 +13,7 @@
         class='flex w-10/12 items-center justify-center gap-x-5'>
         <input
           [formControlName]='i'
-          class='send-mail-input'
+          class='send-mail-input w-full'
           type='email' />
         <button
           (click)='trashRecipient(i)'
@@ -30,7 +30,7 @@
         class='text-primary'></icon-add>
     </div>
     <!-- invia a te stesso -->
-    <div class='send-mail-input-container-2'>
+    <div class='send-mail-input-container'>
       <p>Invia una copia al mio indirizzo email</p>
       <input [formControlName]="'sendYourself'" class='h-5 border' type='checkbox' />
     </div>

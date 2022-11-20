@@ -6,17 +6,17 @@
       <!-- input container -->
       <div class='input-container'>
         <form (submit)='login()' [formGroup]='loginForm' class='form'>
-          <div class='field-container'>
-            <icon-user [height]='5' [width]='5' class='icon'></icon-user>
+          <div class='field-container w-2/3'>
+            <icon-user [height]='5' [width]='5' class='drop-shadow-lg h-5 w-5'></icon-user>
             <!-- user -->
-            <input class='field' formControlName='username' placeholder='Username' />
+            <input class='field w-full' formControlName='username' placeholder='Username' />
           </div>
-          <div class='field-container'>
-            <icon-finger-print [height]='5' [width]='5' class='icon'></icon-finger-print>
+          <div class='field-container w-2/3'>
+            <icon-finger-print [height]='5' [width]='5' class='drop-shadow-lg h-5 w-5'></icon-finger-print>
             <!-- password -->
             <input
               [type]="hidePassword ? 'password' : 'text'"
-              class='field'
+              class='field w-full'
               formControlName='password'
               placeholder='Password' />
             <app-password-eye (passwordStatus)='changeHidePassword($event)'

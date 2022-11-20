@@ -3,7 +3,7 @@
   <div class='dialog-close'>
     <icon-close (click)='back()' [height]='10' [width]='10' class='ml-auto cursor-pointer'></icon-close>
   </div>
-  <h1 class='edit-workday-title'>
+  <h1 class='sub-page-title'>
     {{ calendarDate.getDate() }}/{{ calendarDate.getMonth() + 1 }}/{{ calendarDate.getFullYear() }}
   </h1>
   <div class='edit-workday-body'>
@@ -29,7 +29,7 @@
           (change)='decreaseWorkingHours()'
           [defaultValue]='1'
           [formControlName]="'workPermitHours'"
-          class='w-2/12 edit-workday-input'
+          class='w-2/12 generic-input'
           max='8'
           min='1'
           type='number' />
@@ -43,7 +43,7 @@
         <input
           [defaultValue]='1'
           [formControlName]="'extraHours'"
-          class='w-2/12 edit-workday-input'
+          class='w-2/12 generic-input'
           max='10'
           min='1'
           type='number' />
@@ -57,7 +57,7 @@
         <input
           [defaultValue]='1'
           [formControlName]="'nightWorkingHours'"
-          class='w-2/12 edit-workday-input'
+          class='w-2/12 generic-input'
           max='5'
           min='1'
           type='number' />
@@ -76,7 +76,7 @@
       <div *ngIf='addedHours.length < 3 && checkWorkingDay() && hourFilled' class='flex w-full justify-center'>
         <button
           (click)='addHours()'
-          class='edit-workday-add-button'>
+          class='edit-workday-add-button w-full'>
           <icon-plus></icon-plus>
           <p class='pl-2'>Aggiungi altre ore</p>
         </button>
