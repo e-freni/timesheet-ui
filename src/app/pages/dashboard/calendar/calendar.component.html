@@ -85,12 +85,12 @@
           </div>
           <!-- Notes -->
           <p *ngIf='!isSpecialDay(day) && !day.outerMonths'
-             class='w-5/6 font-bold text-center text-sm truncate hover:text-ellipsis'>
+             class='w-5/6 font-bold text-center text-sm hover:text-ellipsis truncate'>
             {{ day.workday?.notes }}
           </p>
           <!-- Special day annotation -->
           <p *ngIf='isSpecialDay(day) && !day.outerMonths'
-             class='w-5/6 font-bold text-center text-sm break-words hover:text-ellipsis'>
+             class='w-5/6 font-bold text-center text-sm hover:text-ellipsis break-words'>
             {{ getSpecialDayName(day) }}
           </p>
         </div>

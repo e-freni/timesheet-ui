@@ -16,7 +16,6 @@ import { NonWorkingDayLogWarning } from 'app/components/dialog/non-working-day-l
 @Component({
   selector: 'app-calendar',
   templateUrl: './calendar.component.html',
-  styleUrls: ['./calendar.component.css'],
   encapsulation: ViewEncapsulation.None,
 })
 export class CalendarComponent implements OnInit, OnDestroy {

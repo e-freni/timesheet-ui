@@ -1,12 +1,12 @@
-<div class='min-h-[30rem] relative text-black dark:text-dark-text'>
+<div class='edit-workday-dialog-container'>
   <!-- Title and close -->
   <div class='dialog-close'>
     <icon-close (click)='back()' [height]='10' [width]='10' class='ml-auto cursor-pointer'></icon-close>
   </div>
-  <h1 class='text-center text-5xl pb-5'>
+  <h1 class='edit-workday-title'>
     {{ calendarDate.getDate() }}/{{ calendarDate.getMonth() + 1 }}/{{ calendarDate.getFullYear() }}
   </h1>
-  <div class='flex flex-col justify-between h-full'>
+  <div class='edit-workday-body'>
     <!-- Day type Selection -->
     <ng-select
       (change)='setBeginningWorkdayType($event)'
@@ -23,45 +23,45 @@
 
     <!-- normal day work log use cases -->
     <form (ngSubmit)='logWorkDay()' [formGroup]='workDayForm' role='form'>
-      <div *ngIf="this.workDayForm.get('workPermitHours')!.value" class='flex items-center pt-5'>
+      <div *ngIf="this.workDayForm.get('workPermitHours')!.value" class='edit-workday-optional-field'>
         <p class='w-8/12'>Ore di permesso</p>
         <input
           (change)='decreaseWorkingHours()'
           [defaultValue]='1'
           [formControlName]="'workPermitHours'"
-          class='w-2/12 h-10 border text-center focus:outline-primary hover:outline-primary text-black'
+          class='w-2/12 edit-workday-input'
           max='8'
           min='1'
           type='number' />
-        <button (click)="trashHoursType('workPermitHours')" class='ml-auto text-red-400 hover:text-red-500'>
+        <button (click)="trashHoursType('workPermitHours')" class='edit-workday-cancel-button'>
           <icon-delete [height]='10' [width]='10' class='w-1/12 h-10 ml-auto'></icon-delete>
         </button>
       </div>
 
-      <div *ngIf="this.workDayForm.get('extraHours')!.value" class='flex items-center pt-5'>
+      <div *ngIf="this.workDayForm.get('extraHours')!.value" class='edit-workday-optional-field'>
         <p class='w-8/12'>Ore di straordinario</p>
         <input
           [defaultValue]='1'
           [formControlName]="'extraHours'"
-          class='w-2/12 h-10 border text-center focus:outline-primary hover:outline-primary text-black'
+          class='w-2/12 edit-workday-input'
           max='10'
           min='1'
           type='number' />
-        <button (click)="trashHoursType('extraHours')" class='ml-auto text-red-400 hover:text-red-500'>
+        <button (click)="trashHoursType('extraHours')" class='edit-workday-cancel-button'>
           <icon-delete [height]='10' [width]='10' class='w-1/12 h-10 ml-auto'></icon-delete>
         </button>
       </div>
 
-      <div *ngIf="this.workDayForm.get('nightWorkingHours')!.value" class='flex items-center pt-5'>
+      <div *ngIf="this.workDayForm.get('nightWorkingHours')!.value" class='edit-workday-optional-field'>
         <p class='w-8/12'>Ore di lavoro notturno</p>
         <input
           [defaultValue]='1'
           [formControlName]="'nightWorkingHours'"
-          class='w-2/12 h-10 border text-center focus:outline-primary hover:outline-primary text-black'
+          class='w-2/12 edit-workday-input'
           max='5'
           min='1'
           type='number' />
-        <button (click)="trashHoursType('nightWorkingHours')" class='ml-auto text-red-400 hover:text-red-500'>
+        <button (click)="trashHoursType('nightWorkingHours')" class='edit-workday-cancel-button'>
           <icon-delete [height]='10' [width]='10' class='w-1/12 h-10 ml-auto'></icon-delete>
         </button>
       </div>
@@ -76,7 +76,7 @@
       <div *ngIf='addedHours.length < 3 && checkWorkingDay() && hourFilled' class='flex w-full justify-center'>
         <button
           (click)='addHours()'
-          class='flex items-center w-full justify-center rounded-md border border-transparent bg-green-600 px-4 py-2 text-base font-medium text-white shadow-sm hover:bg-green-400 sm:ml-3 sm:w-auto sm:text-sm'>
+          class='edit-workday-add-button'>
           <icon-plus></icon-plus>
           <p class='pl-2'>Aggiungi altre ore</p>
         </button>
@@ -85,10 +85,10 @@
       <div class='flex flex-col pb-24'>
         <label>Note:</label>
         <textarea [formControlName]="'notes'"
-                  class='p-3 border focus:outline-primary hover:outline-primary text-black'></textarea>
+                  class='edit-workday-textarea'></textarea>
       </div>
       <!-- Actions -->
-      <div class='grid grid-cols-3 gap-14 absolute bottom-0 left-0 right-0'>
+      <div class='edit-workday-actions-container'>
         <button [disabled]='this.workDayForm.invalid || isLoading' class='submit-button' type='submit'>
           Registra giornata
           <app-spinning-circle *ngIf='isLoading' [color]="'blue'"></app-spinning-circle>

@@ -4,7 +4,6 @@ import { DropDownOption } from 'app/components/menu-elements/dropdown/dropdown-o
 @Component({
   selector: 'app-dropdown',
   templateUrl: './dropdown.component.html',
-  styleUrls: ['./dropdown.component.css'],
   encapsulation: ViewEncapsulation.None,
 })
 export class DropdownComponent {

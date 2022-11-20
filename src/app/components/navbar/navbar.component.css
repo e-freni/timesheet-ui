@@ -1,7 +1,0 @@
-@import '../../../dark-mode.css';
-
-.nav-bar {
-  @apply relative w-full flex flex-wrap items-center justify-between py-1 shadow-lg;
-  @apply bg-navbar-bg text-navbar-text hover:text-navbar-hover focus:text-navbar-hover;
-  @apply dark-transition dark:bg-dark-navbar-bg dark:text-dark-text dark:hover:text-dark-navbar-hover dark:focus:text-dark-navbar-hover;
-}

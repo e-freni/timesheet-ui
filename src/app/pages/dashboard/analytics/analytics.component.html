@@ -1,17 +1,17 @@
 <div class='pt-8 analytics-page'>
   <!-- header -->
   <div>
-    <p class='text-5xl text-center'>Statistiche del mese</p>
+    <p class='analytics-title'>Statistiche del mese</p>
   </div>
   <!-- body -->
-  <div class='w-full flex flex-col gap-y-6 mt-4'>
+  <div class='analytics-body'>
     <!-- remaining days to month end -->
     <div *ngIf='currentMonth == showedMonth' class='info-card flex flex-col gap-y-2'>
       <div class='flex justify-center items-center'>
         <p class='w-[98%] font-bold mr-4 text-xl'>Giorni rimanenti alla fine del
                                                   mese:</p>
         <div [ngClass]="this.daysToMonthsEnd <= 7 ? 'text-red-500' : 'text-black'">
-          <p class='info-text-value text-4xl font-black  text-black dark:text-dark-text'>{{ this.daysToMonthsEnd }}</p>
+          <p class='analytics-days-to-month-end'>{{ this.daysToMonthsEnd }}</p>
         </div>
       </div>
     </div>

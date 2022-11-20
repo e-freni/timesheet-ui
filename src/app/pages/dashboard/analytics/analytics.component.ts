@@ -10,7 +10,6 @@ import { Subscription } from 'rxjs';
 @Component({
   selector: 'app-analytics',
   templateUrl: './analytics.component.html',
-  styleUrls: ['./analytics.component.css'],
   encapsulation: ViewEncapsulation.None,
 })
 export class AnalyticsComponent implements OnInit, OnDestroy {

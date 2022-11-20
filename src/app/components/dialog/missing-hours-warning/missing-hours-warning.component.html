@@ -1,20 +1,20 @@
 <!-- Title and close -->
-<div class='flex flex-col h-full'>
-  <div class='dialog-close dark:text-white'>
+<div class='missing-hours-dialog-container'>
+  <div class='dialog-close dark-text'>
     <icon-close (click)='back()' [height]='10' [width]='10' class='ml-auto cursor-pointer'></icon-close>
   </div>
-  <div class='text-red-500 flex flex-col h-full gap-y-5'>
-    <p class='text-6xl font-black text-center text-red-500 text-4xl'>ATTENZIONE</p>
-    <div class='flex font-bold flex-col h-full items-center justify-center gap-y-5'>
+  <div class='missing-hours-body-container'>
+    <p class='missing-hours-warning-title'>ATTENZIONE</p>
+    <div class='missing-hours-body-message-container'>
       <p>Mancano {{missingDaysToMonthEnd - 1}} giorni alla fine del mese</p>
       <p>Devi ancora registrare <span class='font-black'>{{getHoursInDaysFormat(toLogHours)}}</span>.</p>
       <p>Per favore registra le giornate mancanti e invia il foglio a Valeriano.</p>
     </div>
-    <div class='h-full flex flex-col justify-end'>
+    <div class='missing-hours-actions'>
       <div class='flex justify-end'>
         <button (click)='back()' class='submit-button' type='submit'>Ok</button>
         <button (click)='dontShowForThisMonth()'
-                class='common-button bg-green-500 text-white hover:bg-green-400'
+                class='missing-hours-dont-show-button'
                 type='button'>Non mostrare più per questo mese
         </button>
       </div>

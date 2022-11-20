@@ -1,23 +1,24 @@
 <!-- Title and close -->
-<div class='dark:text-dark-text'>
+<div class='send-mail-dialog-container'>
   <div class='dialog-close'>
     <icon-close (click)='back()' [height]='10' [width]='10' class='ml-auto cursor-pointer'></icon-close>
   </div>
   <h1 class='dialog-title'>Invio per email</h1>
-  <form (ngSubmit)='sendEmailRequest()' [formGroup]='emailForm' class='flex flex-col gap-y-5' role='form'>
+  <form (ngSubmit)='sendEmailRequest()' [formGroup]='emailForm'
+        class='send-mail-form' role='form'>
     <!-- email field -->
-    <div class='pt-5 flex flex-col items-center h-full gap-y-5' formArrayName='emailAddresses'>
+    <div class='send-mail-form-body-container' formArrayName='emailAddresses'>
       <div
         *ngFor='let email of emailAddresses.controls; let i = index'
         class='flex w-10/12 items-center justify-center gap-x-5'>
         <input
           [formControlName]='i'
-          class='w-full h-10 border text-center focus:outline-0 text-black'
+          class='send-mail-input'
           type='email' />
         <button
           (click)='trashRecipient(i)'
           *ngIf='emailAddresses.controls.length > 1'
-          class='text-red-400 hover:text-red-500'>
+          class='edit-workday-cancel-button'>
           <icon-delete [height]='10' [width]='10' class='w-2/12 ml-auto '></icon-delete>
         </button>
       </div>
@@ -29,12 +30,12 @@
         class='text-primary'></icon-add>
     </div>
     <!-- invia a te stesso -->
-    <div class='flex text-sm items-center justify-center gap-x-4 font-bold'>
+    <div class='send-mail-input-container-2'>
       <p>Invia una copia al mio indirizzo email</p>
       <input [formControlName]="'sendYourself'" class='h-5 border' type='checkbox' />
     </div>
     <!-- Actions -->
-    <div class='flex justify-evenly items-end'>
+    <div class='edit-user-actions'>
       <button [disabled]='this.emailForm.invalid || isLoading' class='submit-button' type='submit'>
         Invia per email
         <app-spinning-circle *ngIf='isLoading' [color]="'blue'"></app-spinning-circle>

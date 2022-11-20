@@ -1,16 +1,16 @@
-<div class='month-switch dark:text-dark-text'>
+<div class='month-switch send-mail-dialog-container'>
   <!-- left arrow -->
-  <button (click)='previousMonth()' class='arrow-button col-start-2 col-end-3'>
+  <button (click)='previousMonth()' class='arrow-button-left'>
     <icon-leftarrow [height]='12' [width]='12'></icon-leftarrow>
   </button>
   <!-- formatted date = "month - year" -->
   <div
-    class='flex justify-center items-center xl:text-7xl lg:text-5xl sm:text-6xl text-xl col-start-3 col-end-9'
+    class='month-switch-title'
     id='month-year'>
     <h1>{{ (month | uppercase) + ' - ' + year }}</h1>
   </div>
   <!-- right arrow -->
-  <button (click)='nextMonth()' class='arrow-button col-start-9 col-end-10'>
+  <button (click)='nextMonth()' class='arrow-button-right'>
     <icon-rightarrow [height]='12' [width]='12'></icon-rightarrow>
   </button>
 </div>

@@ -8,7 +8,6 @@ import { AccountService } from 'app/services/rest/account.service';
 @Component({
   selector: 'app-edit-password',
   templateUrl: './change-password.component.html',
-  styleUrls: ['./change-password.component.css'],
 })
 export class ChangePasswordComponent {
   isLoading: boolean = false;

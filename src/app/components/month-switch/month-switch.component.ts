@@ -12,7 +12,6 @@ import { ExportService } from 'app/services/rest/export.service';
 @Component({
   selector: 'app-month-switch',
   templateUrl: './month-switch.component.html',
-  styleUrls: ['./month-switch.component.css'],
   encapsulation: ViewEncapsulation.None,
 })
 export class MonthSwitchComponent implements OnInit {
