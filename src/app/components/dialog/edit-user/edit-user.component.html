@@ -1,9 +1,9 @@
 <!-- Title and close -->
 <div class='dark:bg-dark-bg dark:text-white'>
-  <div class='flex items-center'>
+  <div class='dialog-close'>
     <icon-close (click)='back()' [height]='10' [width]='10' class='ml-auto cursor-pointer'></icon-close>
   </div>
-  <h1 class='text-center text-4xl'>{{isEdit ? "Modifica utente" : "Aggiungi nuovo utente"}}</h1>
+  <h1 class='dialog-title'>{{isEdit ? "Modifica utente" : "Aggiungi nuovo utente"}}</h1>
   <form (ngSubmit)='addUserRequest()' [formGroup]='userForm'
         class='flex flex-col gap-y-5 w-full items-center justify-center pt-6' role='form'>
     <!-- role field -->

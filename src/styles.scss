@@ -58,3 +58,11 @@ body {
 .mat-dialog-container {
   @apply dark:bg-dark-bg;
 }
+
+.dialog-title {
+  @apply text-center text-4xl;
+}
+
+.dialog-close {
+  @apply flex items-center;
+}
