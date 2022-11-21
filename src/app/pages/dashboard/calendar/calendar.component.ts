@@ -12,6 +12,7 @@ import { DateService } from 'app/services/date.service';
 import { Subscription } from 'rxjs';
 import { SpecialDay } from 'app/models/special-days';
 import { NonWorkingDayLogWarning } from 'app/components/dialog/non-working-day-log-warning/non-working-day-log-working.component';
+import { getStandardModalsWidth } from 'app/utils/screen-utilities';
 
 @Component({
   selector: 'app-calendar',
@@ -111,7 +112,7 @@ export class CalendarComponent implements OnInit, OnDestroy {
     if (this.isSpecialDay(day) || this.isStandardNotWorkingDay(day)) {
       this.matDialog
         .open(NonWorkingDayLogWarning, {
-          width: '50%',
+          width: getStandardModalsWidth(),
           disableClose: true,
           backdropClass: 'ts-backdrop',
           enterAnimationDuration: '100ms',
@@ -139,7 +140,7 @@ export class CalendarComponent implements OnInit, OnDestroy {
   private logDay(day: Day) {
     this.matDialog
       .open(EditWorkdayComponent, {
-        width: '50%',
+        width: getStandardModalsWidth(),
         disableClose: true,
         backdropClass: 'ts-backdrop',
         enterAnimationDuration: '100ms',

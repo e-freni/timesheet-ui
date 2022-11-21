@@ -8,6 +8,7 @@ import { saveAs } from 'file-saver-es';
 import { MatDialog } from '@angular/material/dialog';
 import { SendEmailComponent } from 'app/components/dialog/send-email/send-email.component';
 import { ExportService } from 'app/services/rest/export.service';
+import { getSmallModalsWidth } from 'app/utils/screen-utilities';
 
 @Component({
   selector: 'app-month-switch',
@@ -82,7 +83,7 @@ export class MonthSwitchComponent implements OnInit {
 
   sendExportByEmail() {
     this.matDialog.open(SendEmailComponent, {
-      width: '25%',
+      width: getSmallModalsWidth(),
       disableClose: true,
       backdropClass: 'ts-backdrop',
       enterAnimationDuration: '100ms',

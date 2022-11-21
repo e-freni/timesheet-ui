@@ -8,6 +8,7 @@ import { MatDialog } from '@angular/material/dialog';
 import { EditUserComponent } from 'app/components/dialog/edit-user/edit-user.component';
 import { ChangePasswordComponent } from 'app/components/dialog/edit-password/change-password.component';
 import { LocalStorageService } from 'ngx-webstorage';
+import { getStandardModalsWidth } from 'app/utils/screen-utilities';
 
 @Component({
   selector: 'app-navbar',
@@ -33,7 +34,7 @@ export class NavbarComponent implements OnInit {
     this.accountSubscription = this.accountService.getAccount().subscribe({
       next: (account: Account | null) => {
         this.account = account;
-        if (isAdmin(this.account?.role)) {
+        if (this.account && isAdmin(this.account?.role)) {
           this.dropdownOptions.push({ text: 'Aggiungi utente', operation: () => this.openAddUserDialog() });
         }
         this.dropdownOptions.push({ text: 'Modifica dati', operation: () => this.openEditUserDialog() });
@@ -50,7 +51,7 @@ export class NavbarComponent implements OnInit {
 
   private openAddUserDialog() {
     this.matDialog.open(EditUserComponent, {
-      width: '40%',
+      width: getStandardModalsWidth(),
       disableClose: true,
       backdropClass: 'ts-backdrop',
       enterAnimationDuration: '100ms',
@@ -60,7 +61,7 @@ export class NavbarComponent implements OnInit {
 
   private openChangePasswordDialog() {
     this.matDialog.open(ChangePasswordComponent, {
-      width: '40%',
+      width: getStandardModalsWidth(),
       disableClose: true,
       backdropClass: 'ts-backdrop',
       enterAnimationDuration: '100ms',
@@ -71,7 +72,7 @@ export class NavbarComponent implements OnInit {
 
   private openEditUserDialog() {
     this.matDialog.open(EditUserComponent, {
-      width: '40%',
+      width: getStandardModalsWidth(),
       disableClose: true,
       backdropClass: 'ts-backdrop',
       enterAnimationDuration: '100ms',

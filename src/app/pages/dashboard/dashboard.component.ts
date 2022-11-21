@@ -11,6 +11,7 @@ import { getTodaysDate } from 'app/utils/date-utilities';
 import { Subscription } from 'rxjs';
 import { LocalStorageService } from 'ngx-webstorage';
 import { SKIP_MONTH_KEY } from 'app.constants';
+import { getStandardModalsWidth } from 'app/utils/screen-utilities';
 
 @Component({
   selector: 'app-dashboard',
@@ -26,10 +27,6 @@ export class DashboardComponent implements OnInit, OnDestroy {
   private accountSubscription: Subscription;
   private dateSubscription: Subscription;
   private date: Date;
-
-  //TODO put all css in style classes and optimize it
-  //TODO make a mobile view
-  //TODO (maybe) massive normal working days log
 
   constructor(
     private workdayService: WorkdayService,
@@ -96,7 +93,7 @@ export class DashboardComponent implements OnInit, OnDestroy {
     let isTheEndOfTheMonth = today.isAfter(alertPeriod) && today.isBefore(moment().endOf('month'));
     if (isTheEndOfTheMonth && this.summary.toLogHours > 0 && this.isCurrentMonth() && this.isWarningNotChecked()) {
       this.matDialog.open(MissingHoursWarning, {
-        width: '50%',
+        width: getStandardModalsWidth(),
         height: '50%',
         disableClose: true,
         backdropClass: 'ts-backdrop',

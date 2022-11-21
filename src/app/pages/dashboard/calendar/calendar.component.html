@@ -1,7 +1,7 @@
 <div class='calendar-page'>
   <div class='w-full' id='calendar-container'>
     <!-- Calendar cells -->
-    <div class='grid grid-cols-7 gap-2' id='calendar-body'>
+    <div class='grid md:grid-cols-7 grid-cols-2 gap-2' id='calendar-body'>
       <div *ngFor='let day of this.monthDays' [ngClass]='isToday(day) ? "today-cell" : "" '>
         <!-- Single day cell -->
         <div
