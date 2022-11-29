@@ -9,6 +9,8 @@ import { WorkdayService } from 'app/services/rest/workday.service';
 import { DateService } from 'app/services/date.service';
 import { getTodaysDate } from 'app/utils/date-utilities';
 import { Subscription } from 'rxjs';
+import { LocalStorageService } from 'ngx-webstorage';
+import { SKIP_MONTH_KEY } from 'app.constants';
 
 @Component({
   selector: 'app-dashboard',
@@ -23,7 +25,6 @@ export class DashboardComponent implements OnInit, OnDestroy {
   private dateSubscription: Subscription;
   private date: Date;
 
-  //TODO finish alert of missing hours (skip month)
   //TODO alert when logging in special days (like Christmas!)
   //TODO user edit details (es. email)
   //TODO put all css in style classes and optimize it
@@ -35,6 +36,7 @@ export class DashboardComponent implements OnInit, OnDestroy {
     private workdayService: WorkdayService,
     private dateService: DateService,
     private accountService: AccountService,
+    private localStorageService: LocalStorageService,
     private matDialog: MatDialog
   ) {}
 
@@ -51,10 +53,11 @@ export class DashboardComponent implements OnInit, OnDestroy {
       this.dateSubscription = this.dateService.getDate().subscribe((date: Date) => {
         this.date = date;
 
+        this.clearSkipMonth();
         if (!this.isCurrentMonth()) {
           return;
         }
-        
+
         this.workdayService
           .getMonthSummaryData(date.getFullYear(), getTodaysDate().getMonth() + 1, account.id)
           .subscribe({
@@ -75,9 +78,12 @@ export class DashboardComponent implements OnInit, OnDestroy {
     this.selectedTab = this.CALENDAR;
   }
 
-  private isCurrentMonth() {
-    console.log(this.date.getFullYear().toString());
+  private clearSkipMonth() {
+    if (this.localStorageService.retrieve(SKIP_MONTH_KEY) != getTodaysDate().getMonth())
+      this.localStorageService.clear(SKIP_MONTH_KEY);
+  }
 
+  private isCurrentMonth() {
     return (
       moment().format('M') === (this.date.getMonth() + 1).toString() &&
       moment().format('YYYY') === this.date.getFullYear().toString()
@@ -89,8 +95,7 @@ export class DashboardComponent implements OnInit, OnDestroy {
     const endOfMonth = moment().endOf('month');
     const alertPeriod = moment().endOf('month').subtract(3, 'days');
     let isTheEndOfTheMonth = today.isAfter(alertPeriod) && today.isBefore(moment().endOf('month'));
-
-    if (isTheEndOfTheMonth && this.summary.toLogHours > 0 && this.isCurrentMonth() && this.warningIsNotChecked()) {
+    if (isTheEndOfTheMonth && this.summary.toLogHours > 0 && this.isCurrentMonth() && this.isWarningNotChecked()) {
       this.matDialog.open(MissingHoursWarning, {
         width: '50%',
         height: '50%',
@@ -107,7 +112,7 @@ export class DashboardComponent implements OnInit, OnDestroy {
     }
   }
 
-  private warningIsNotChecked() {
-    return true; //TODO save in localstorage and clean if todaysMonth != Localstorage skip saved
+  private isWarningNotChecked() {
+    return this.localStorageService.retrieve(SKIP_MONTH_KEY) != this.date.getMonth();
   }
 }

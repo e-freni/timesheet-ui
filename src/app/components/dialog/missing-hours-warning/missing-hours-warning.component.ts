@@ -33,6 +33,7 @@ export class MissingHoursWarning {
 
   dontShowForThisMonth() {
     this.localStorageService.store(SKIP_MONTH_KEY, this.currentMonth);
+    this.close();
   }
 
   getHoursInDaysFormat(hours: number): string {
