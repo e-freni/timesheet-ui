@@ -48,9 +48,13 @@ export class DashboardComponent implements OnInit, OnDestroy {
       if (!account) {
         return;
       }
-
       this.dateSubscription = this.dateService.getDate().subscribe((date: Date) => {
         this.date = date;
+
+        if (!this.isCurrentMonth()) {
+          return;
+        }
+        
         this.workdayService
           .getMonthSummaryData(date.getFullYear(), getTodaysDate().getMonth() + 1, account.id)
           .subscribe({
@@ -72,6 +76,8 @@ export class DashboardComponent implements OnInit, OnDestroy {
   }
 
   private isCurrentMonth() {
+    console.log(this.date.getFullYear().toString());
+
     return (
       moment().format('M') === (this.date.getMonth() + 1).toString() &&
       moment().format('YYYY') === this.date.getFullYear().toString()
