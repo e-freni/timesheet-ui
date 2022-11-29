@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { JWT_STORAGE_KEY, SERVER_API_URL } from 'app.constants';
 import { HttpClient, HttpResponse } from '@angular/common/http';
-import { Observable, ReplaySubject } from 'rxjs';
+import { Observable, ReplaySubject, Subject } from 'rxjs';
 import { LocalStorageService } from 'ngx-webstorage';
 import { Account } from 'app/models/account.model';
 import { Login } from 'app/models/login.model';
@@ -34,8 +34,8 @@ export class AccountService {
     this.accountSubject.next(null);
   }
 
-  getObservableAccount(): Observable<Account | null> {
-    return this.accountSubject.asObservable();
+  getAccount(): Subject<Account> {
+    return this.accountSubject;
   }
 
   public load(): void {

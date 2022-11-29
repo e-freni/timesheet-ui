@@ -21,7 +21,7 @@ export class NavbarComponent implements OnInit {
   constructor(private accountService: AccountService, private matDialog: MatDialog) {}
 
   ngOnInit(): void {
-    this.accountSubscription = this.accountService.getObservableAccount().subscribe({
+    this.accountSubscription = this.accountService.getAccount().subscribe({
       next: (account: Account | null) => {
         this.account = account;
         if (isAdmin(this.account?.role)) {

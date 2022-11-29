@@ -1,22 +1,27 @@
-import { Component, Inject, OnInit } from '@angular/core';
+import { Component, Inject } from '@angular/core';
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
 import { getHoursInDaysFormatter } from 'app/utils/date-utilities';
+import { LocalStorageService } from 'ngx-webstorage';
+import { SKIP_MONTH_KEY } from 'app.constants';
 
 @Component({
   selector: 'app-add-eye',
   templateUrl: './missing-hours-warning.component.html',
 })
-export class MissingHoursWarning implements OnInit {
+export class MissingHoursWarning {
   missingDaysToMonthEnd: number;
   toLogHours: any;
-  private account: any;
+  private readonly currentMonth: number;
 
-  constructor(public dialogRef: MatDialogRef<MissingHoursWarning>, @Inject(MAT_DIALOG_DATA) data: any) {
+  constructor(
+    public dialogRef: MatDialogRef<MissingHoursWarning>,
+    private localStorageService: LocalStorageService,
+    @Inject(MAT_DIALOG_DATA) data: any
+  ) {
     this.missingDaysToMonthEnd = data.missingDaysToMonthEnd;
     this.toLogHours = data.toLogHours;
+    this.currentMonth = data.currentMonth;
   }
-
-  ngOnInit(): void {}
 
   back() {
     this.close();
@@ -26,7 +31,9 @@ export class MissingHoursWarning implements OnInit {
     this.dialogRef.close();
   }
 
-  dontShowForThisMonth() {}
+  dontShowForThisMonth() {
+    this.localStorageService.store(SKIP_MONTH_KEY, this.currentMonth);
+  }
 
   getHoursInDaysFormat(hours: number): string {
     return getHoursInDaysFormatter(hours).replace('(', '').replace(')', '');

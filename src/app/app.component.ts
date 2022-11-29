@@ -18,7 +18,7 @@ export class AppComponent implements OnInit {
   constructor(private accountService: AccountService, private dateService: DateService, private router: Router) {}
 
   ngOnInit(): void {
-    this.accountService.getObservableAccount().subscribe((account: Account | null) => {
+    this.accountService.getAccount().subscribe((account: Account | null) => {
       this.loggedIn = account !== null;
 
       // redirect al login se non sono loggato

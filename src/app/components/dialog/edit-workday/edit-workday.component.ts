@@ -72,7 +72,7 @@ export class EditWorkdayComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.accountService.getObservableAccount().subscribe((account: Account | null) => {
+    this.accountService.getAccount().subscribe((account: Account | null) => {
       this.account = account;
       this.isCreation = !this.day.workday?.id;
       if (this.isCreation) {

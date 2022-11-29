@@ -38,11 +38,11 @@ export class MonthSwitchComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.accountService.getObservableAccount().subscribe((account: Account | null) => {
+    this.accountService.getAccount().subscribe((account: Account | null) => {
       if (!account) {
         return;
       }
-      this.dateService.getObservableDate().subscribe({
+      this.dateService.getDate().subscribe({
         next: date => {
           this.date = date;
           this.account = account;

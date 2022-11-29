@@ -42,11 +42,11 @@ export class CalendarComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit(): void {
-    this.accountSubscription = this.accountService.getObservableAccount().subscribe((account: Account | null) => {
+    this.accountSubscription = this.accountService.getAccount().subscribe((account: Account | null) => {
       if (!account) {
         return;
       }
-      this.dateSubscription = this.dateService.getObservableDate().subscribe({
+      this.dateSubscription = this.dateService.getDate().subscribe({
         next: (date: Date | null) => {
           this.account = account;
           this.date = date;
@@ -133,25 +133,23 @@ export class CalendarComponent implements OnInit, OnDestroy {
   }
 
   private fetchWorkdays() {
-    if (this.account) {
-      if (this.workdaySubscription) {
-        this.workdaySubscription.unsubscribe();
-      }
-
-      this.workdaySubscription = this.workdayService
-        .findWorkdaysByUsername(
-          this.account.username,
-          this.monthBeginningDate(this.date.getMonth()),
-          this.monthEndingDate(this.date.getMonth() + 1)
-        )
-        .subscribe(workdays => {
-          this.workdays = workdays;
-          const onlyWorkDays = this.monthDays.filter(d => !d.outerMonths);
-          this.workdays.forEach(
-            wd => (onlyWorkDays.find(d => d.monthDayNumber == new Date(wd.date).getDate()).workday = wd)
-          );
-        });
+    if (this.workdaySubscription) {
+      this.workdaySubscription.unsubscribe();
     }
+
+    this.workdaySubscription = this.workdayService
+      .findWorkdaysByUsername(
+        this.account.username,
+        this.monthBeginningDate(this.date.getMonth()),
+        this.monthEndingDate(this.date.getMonth() + 1)
+      )
+      .subscribe(workdays => {
+        this.workdays = workdays;
+        const onlyWorkDays = this.monthDays.filter(d => !d.outerMonths);
+        this.workdays.forEach(
+          wd => (onlyWorkDays.find(d => d.monthDayNumber == new Date(wd.date).getDate()).workday = wd)
+        );
+      });
   }
 
   private monthBeginningDate(month: number) {
