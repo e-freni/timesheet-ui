@@ -11,6 +11,7 @@ import { getMonth, getTodaysDate } from 'app/utils/date-utilities';
 import { DateService } from 'app/services/date.service';
 import { Subscription } from 'rxjs';
 import { SpecialDay } from 'app/models/special-days';
+import { NonWorkingDayLogWarning } from 'app/components/dialog/non-working-day-log-warning/non-working-day-log-working.component';
 
 @Component({
   selector: 'app-calendar',
@@ -105,6 +106,36 @@ export class CalendarComponent implements OnInit, OnDestroy {
     if (day.outerMonths) {
       return;
     }
+
+    if (this.isSpecialDay(day) || this.isStandardNotWorkingDay(day)) {
+      this.matDialog
+        .open(NonWorkingDayLogWarning, {
+          width: '50%',
+          disableClose: true,
+          backdropClass: 'ts-backdrop',
+          enterAnimationDuration: '100ms',
+          exitAnimationDuration: '100ms',
+        })
+        .afterClosed()
+        .subscribe(isItSure => {
+          if (isItSure) {
+            this.logDay(day);
+          }
+        });
+    }
+
+    if (!this.isSpecialDay(day) && !this.isStandardNotWorkingDay(day)) {
+      this.logDay(day);
+    }
+  }
+
+  isToday(day: Day) {
+    const dateToCheck = new Date(this.date);
+    dateToCheck.setDate(day.monthDayNumber);
+    return dateToCheck.getTime() == getTodaysDate().getTime();
+  }
+
+  private logDay(day: Day) {
     this.matDialog
       .open(EditWorkdayComponent, {
         width: '50%',
@@ -124,12 +155,6 @@ export class CalendarComponent implements OnInit, OnDestroy {
           this.fetchWorkdays();
         }
       });
-  }
-
-  isToday(day: Day) {
-    const dateToCheck = new Date(this.date);
-    dateToCheck.setDate(day.monthDayNumber);
-    return dateToCheck.getTime() == getTodaysDate().getTime();
   }
 
   private fetchWorkdays() {

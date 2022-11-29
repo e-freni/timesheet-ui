@@ -5,7 +5,7 @@ import { LocalStorageService } from 'ngx-webstorage';
 import { SKIP_MONTH_KEY } from 'app.constants';
 
 @Component({
-  selector: 'app-add-eye',
+  selector: 'app-missing-hours-warning',
   templateUrl: './missing-hours-warning.component.html',
 })
 export class MissingHoursWarning {

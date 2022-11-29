@@ -38,6 +38,7 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { MatIconModule } from '@angular/material/icon';
 import { MissingHoursWarning } from 'app/components/dialog/missing-hours-warning/missing-hours-warning.component';
+import { NonWorkingDayLogWarning } from 'app/components/dialog/non-working-day-log-warning/non-working-day-log-working.component';
 
 @NgModule({
   declarations: [
@@ -55,6 +56,7 @@ import { MissingHoursWarning } from 'app/components/dialog/missing-hours-warning
     MissingHoursWarning,
     MonthSwitchComponent,
     NavbarComponent,
+    NonWorkingDayLogWarning,
     PasswordEyeComponent,
     ResetPasswordComponent,
     SendEmailComponent,

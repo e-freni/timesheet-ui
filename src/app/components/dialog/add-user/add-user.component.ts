@@ -8,7 +8,7 @@ import { ApplicationUser } from 'app/models/application-user.model';
 import { AlertService } from 'app/services/alert.service';
 
 @Component({
-  selector: 'app-add-eye',
+  selector: 'app-user-component',
   templateUrl: './add-user.component.html',
 })
 export class AddUserComponent {
