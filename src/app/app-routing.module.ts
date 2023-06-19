@@ -8,7 +8,6 @@ const routes: Routes = [
   { path: '', component: LoginComponent },
   { path: 'dashboard', component: DashboardComponent },
   { path: 'reset-password', component: ResetPasswordComponent },
-  // {path: 'component/:id/new', component: AComponent},
 ];
 
 @NgModule({
