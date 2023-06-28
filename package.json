@@ -1,6 +1,10 @@
 {
   "name": "timesheet-ui",
   "version": "1.0.0",
+  "config": {
+    "registry_url": "ghcr.io",
+    "registry_path": "e-freni-developer/timesheet-ui"
+  },
   "scripts": {
     "ng": "ng",
     "start": "ng serve",
@@ -8,7 +12,9 @@
     "watch": "ng build --watch --configuration development",
     "test": "ng test",
     "package": "ng build && tar -cjf $npm_package_name-$npm_package_version-$(date +%s).tar.xz -C dist/$npm_package_name/ .",
-    "docker-build": "docker build -t $npm_package_name:$npm_package_version ."
+    "docker-build": "docker build -t $npm_package_config_registry_url/$npm_package_config_registry_path:$npm_package_version .",
+    "docker-push": "docker login $npm_package_config_registry_url && docker push $npm_package_config_registry_url/$npm_package_config_registry_path:$npm_package_version && docker rmi $npm_package_config_registry_url/$npm_package_config_registry_path:$npm_package_version",
+    "docker-deploy": "npm run build && npm run docker-build && npm run docker-push"
   },
   "dependencies": {
     "@angular/animations": "^14.2.7",
