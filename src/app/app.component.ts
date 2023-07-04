@@ -23,7 +23,7 @@ export class AppComponent implements OnInit {
 
       // redirect al login se non sono loggato
       if (!this.loggedIn) {
-        this.router.navigateByUrl('');
+        this.router.navigateByUrl('').then();
         return;
       }
 

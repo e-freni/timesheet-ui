@@ -61,7 +61,7 @@ export class ResetPasswordComponent {
         this.isLoading = false;
         stepper.next();
         setTimeout(() => {
-          this.router.navigateByUrl('');
+          this.router.navigateByUrl('').then();
         }, 5000);
       },
     });

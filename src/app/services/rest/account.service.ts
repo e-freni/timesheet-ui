@@ -78,6 +78,6 @@ export class AccountService {
     if (!this.account) {
       return;
     }
-    this.router.navigateByUrl('/dashboard');
+    this.router.navigateByUrl('/dashboard').then();
   }
 }
