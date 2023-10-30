@@ -26,6 +26,7 @@
       <div *ngIf="this.workDayForm.get('workPermitHours')!.value" class='flex items-center pt-5'>
         <p class='w-8/12'>Ore di permesso</p>
         <input
+          (input)="validateHours($event, 'workPermitHours')"
           (change)='decreaseWorkingHours()'
           [defaultValue]='1'
           [formControlName]="'workPermitHours'"
@@ -41,6 +42,7 @@
       <div *ngIf="this.workDayForm.get('extraHours')!.value" class='flex items-center pt-5'>
         <p class='w-8/12'>Ore di straordinario</p>
         <input
+          (input)="validateHours($event, 'extraHours')"
           [defaultValue]='1'
           [formControlName]="'extraHours'"
           class='w-2/12 h-10 border text-center focus:outline-primary hover:outline-primary text-black'
@@ -55,6 +57,7 @@
       <div *ngIf="this.workDayForm.get('nightWorkingHours')!.value" class='flex items-center pt-5'>
         <p class='w-8/12'>Ore di lavoro notturno</p>
         <input
+          (input)="validateHours($event, 'nightWorkingHours')"
           [defaultValue]='1'
           [formControlName]="'nightWorkingHours'"
           class='w-2/12 h-10 border text-center focus:outline-primary hover:outline-primary text-black'

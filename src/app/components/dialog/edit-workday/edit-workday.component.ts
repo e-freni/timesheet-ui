@@ -5,10 +5,10 @@ import { Account } from 'app/models/account.model';
 import { Day } from 'app/models/day';
 import { WorkdayType } from 'app/models/workday-type.model';
 import { Workday } from 'app/models/workday.model';
+import { AlertService } from 'app/services/alert.service';
 import { AccountService } from 'app/services/rest/account.service';
 import { WorkdayService } from 'app/services/rest/workday.service';
 import { getFormattedDate } from 'app/utils/date-utilities';
-import { AlertService } from 'app/services/alert.service';
 
 export type SelectValue = {
   id: number;
@@ -298,13 +298,35 @@ export class EditWorkdayComponent implements OnInit {
   }
 
   private resetFormToInitialState() {
+    this.workDayForm.patchValue({ workPermitHours: 0 });
     this.workDayForm.patchValue({ workingHours: 0 });
     this.workDayForm.patchValue({ extraHours: 0 });
     this.workDayForm.patchValue({ nightWorkingHours: 0 });
     this.workDayForm.patchValue({ funeralLeave: false });
-    this.workDayForm.patchValue({ workPermitHours: 0 });
     this.workDayForm.patchValue({ holiday: false });
     this.workDayForm.patchValue({ sick: false });
     this.workDayForm.patchValue({ accidentAtWork: false });
+    this.workDayForm.get('workingHours').setErrors(null);
+    this.workDayForm.get('workPermitHours').setErrors(null);
+    this.workDayForm.get('extraHours').setErrors(null);
+    this.workDayForm.get('nightWorkingHours').setErrors(null);
+    this.workDayForm.get('funeralLeave').setErrors(null);
+    this.workDayForm.get('holiday').setErrors(null);
+    this.workDayForm.get('sick').setErrors(null);
+    this.workDayForm.get('accidentAtWork').setErrors(null);
+  }
+
+  validateHours(input: any, hourType: string) {
+    const hoursAmount = parseFloat(input.target.value);
+    const isHoursAmountInvalid = !hoursAmount || hoursAmount <= 0
+    if (isHoursAmountInvalid && hourType === 'workPermitHours') {
+      this.workDayForm.patchValue({ workPermitHours: 1 });
+    }
+    if (isHoursAmountInvalid && hourType === 'extraHours') {
+      this.workDayForm.patchValue({ extraHours: 1 });
+    }
+    if (isHoursAmountInvalid && hourType === 'nightWorkingHours') {
+      this.workDayForm.patchValue({ nightWorkingHours: 1 });
+    }
   }
 }
