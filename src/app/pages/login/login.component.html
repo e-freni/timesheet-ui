@@ -22,7 +22,9 @@
             <app-password-eye (passwordStatus)='changeHidePassword($event)'
                               [hidePassword]='hidePassword'></app-password-eye>
           </div>
-          <button [disabled]='this.loginForm.invalid' class='login-button' disabled type='submit'>Login</button>
+          <button [disabled]='this.loginForm.invalid || isLoading' class='login-button flex' disabled type='submit'>Login
+            <app-spinning-circle *ngIf='isLoading' [color]="'#0675ff'"></app-spinning-circle>
+          </button>
           <!-- password dimenticata -->
           <p [routerLink]='"reset-password"' class='font-black text-xs cursor-pointer'>Password dimenticata?</p>
         </form>

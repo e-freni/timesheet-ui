@@ -21,6 +21,7 @@ export class LoginComponent {
   });
 
   private accountSubscription: Subscription;
+  isLoading: boolean = false;
 
   constructor(
     private formBuilder: FormBuilder,
@@ -31,6 +32,7 @@ export class LoginComponent {
   ) {}
 
   login(): void {
+    this.isLoading = true;
     this.accountSubscription = this.accountService
       .login({
         username: this.loginForm.get('username')!.value,
@@ -38,18 +40,20 @@ export class LoginComponent {
       })
       .subscribe({
         next: (jwtToken: JwtToken) => {
+          this.isLoading = false;
           this.localStorageService.store(JWT_STORAGE_KEY, jwtToken.token);
           this.accountService.load();
         },
         error: res => {
-          if (res.status == 504)
+          this.isLoading = false;
+          if (res.status == 504 || res.status === 503)
             this.alertService.addAlert({
               type: 'alert',
               msg: 'Server non trovato. Il backend è online e raggiungibile?',
             });
           if (res.status == 401)
             this.alertService.addAlert({ type: 'alert', msg: 'Login non riuscita. Utente e password sono corretti?' });
-        },
+        }
       });
   }
 
