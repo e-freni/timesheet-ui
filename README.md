@@ -1,27 +1,54 @@
-# TimesheetUi
+# timesheet-ui
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 13.3.3.
+Link to api-project: https://github.com/e-freni/timesheet-api
 
-## Development server
+This project was born out of a professional need of mine. At my current workplace, each employee has to fill out a
+timesheet at the end of the month. This, in itself, creates minor but repetitive problems over time, as well as time
+lost in adjusting the template as the days change and a fairly custom organization of the timesheet.
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The application will automatically reload if you change any of the source files.
+This wouldn't be a problem if it weren't for the fact that the payroll office receives many sheets, each done in their
+own way (some people record leaves without marking them or by putting in deficient hours, some note overtime in the
+notes section without following the template, etc.), inevitably causing discrepancies and errors.
 
-## Code scaffolding
+For my peace of mind, I decided to develop an application that makes it very easy to record workdays using an intuitive
+UI that logs all days and allows not only export in the template required by the payroll consultant but also automatic
+email sending.
 
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
+### Objective
 
-## Build
+Initially, the application was intended for the company I work for, but despite the enthusiasm during the first demo,
+the company decided not to adopt the proposed solution. However, I continue to use it with great satisfaction (and the
+payroll office continues to make errors, but at least not on my timesheets).
 
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory.
+### Architecture
 
-## Running unit tests
+- **Backend (BE)**: Developed in Java using the [Spring Boot](https://spring.io/projects/spring-boot) framework.
+- **Frontend (FE)**: Developed in JavaScript/[TypeScript](https://www.typescriptlang.org/) using
+  the [Angular](https://angular.dev/) framework.
+- **Database**: I used Postres 14, but any relational database can be used, just edit di application.properties inside
+  the project and add the driver inside pom.xml
 
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
+### Features
 
-## Running end-to-end tests
+1. **Workday Logging**: One-click day registration.
+2. **Automatic Hour Calculation**: Automatic distribution of hours according to the segments provided by the payroll
+   consultant.
+3. **Secure Login**: Encrypted passwords and a reset mechanism.
+4. **API Protection**: Role-based user permissions (implemented
+   with [Spring Security](https://spring.io/projects/spring-security)).
+5. **Holiday/Error Management**: Indication of holidays and reminders for missing hours in the last workweek.
+6. **Statistics**: Visualization of logged hours, missing hours, and used leave and permits.
+7. **Intuitive UI**: Simple and user-friendly interface.
+8. **Dark Mode**: Dark mode inspired by IntelliJ colors, implemented with [Tailwind](https://tailwindcss.com/) (I love
+   Tailwind!).
+9. **Containerization**: Use of Docker for both BE and FE (one container each).
+10. **GitHub Integration**: Integrated build, tag, and release structure (deployment to an external server is missing;
+    the application runs locally with Apache).
+11. **Technical Playgrounds**: Integration of Maven plugins for auto version bumping and jgitflow for development flow
+    management are examples of experiments I conducted to understand how to use libraries effectively.
 
-Run `ng e2e` to execute the end-to-end tests via a platform of your choice. To use this command, you need to first add a package that implements end-to-end testing capabilities.
+### Conclusion
 
-## Further help
-
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI Overview and Command Reference](https://angular.io/cli) page.
+I used this application as a learning tool to understand how to structure a complete application, covering all its
+logical components and addressing every step, until deployment through pipelines. This project effectively demonstrates
+my development skills and my ability to organize an application from start to finish. 
