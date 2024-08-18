@@ -1,6 +1,6 @@
 {
   "name": "timesheet-ui",
-  "version": "1.0.2-SNAPSHOT",
+  "version": "1.0.2",
   "config": {
     "registry_url": "ghcr.io",
     "registry_path": "e-freni-developer/timesheet-ui"
